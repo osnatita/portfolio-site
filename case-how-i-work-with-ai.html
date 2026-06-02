@@ -3,11 +3,88 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>How I work with AI, Ita Skoblinski</title>
-<meta name="description" content="How Ita Skoblinski uses AI in product design: prototyping, research synthesis, designing for trust, and building her own tools. AI as one tool in the box, not the box." />
+<title>How I work with AI, Ita Skoblinski, AI product designer</title>
+<meta name="description" content="How Ita Skoblinski designs AI products. Two shipped end to end: an agentic RAG decision-support system with grounded citations and human-in-the-loop review, and a clinical conversational AI environment. Plus how AI runs through prototyping, research synthesis, and building. AI as one tool in the box, not the box." />
 <meta name="theme-color" content="#1D4ED8" />
 <link rel="stylesheet" href="assets/site.css" />
 <link rel="stylesheet" href="assets/case.css" />
+<style>
+  .prod { margin-top: 30px; }
+  .prod-h { font-family: var(--display); font-weight: 700; font-size: calc(20px * var(--type-scale)); line-height: 1.25; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 6px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+  .prod-h .pn { color: var(--accent); }
+  .prod-tag { font-size: calc(11.5px * var(--type-scale)); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); background: var(--paper-2); border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; }
+  .prod-out { font-weight: 600; color: var(--ink); }
+  .prod-out a { color: var(--accent); text-decoration: none; font-weight: 700; white-space: nowrap; }
+  .prod-out a:hover { text-decoration: underline; }
+
+  /* shared width container for blocks between hero and case-shell */
+  .pre-shell { max-width: var(--maxw); margin: 0 auto; padding: 0 48px; }
+  @media (max-width: 720px) { .pre-shell { padding: 0 22px; } }
+
+  /* TL;DR summary */
+  .tldr { margin: 22px 0 4px; padding: 15px 18px; background: var(--paper-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 12px; }
+  .tldr .lab { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
+  .tldr p { margin: 0; font-size: calc(15px * var(--type-scale)); line-height: 1.55; color: var(--ink); }
+
+  /* compact inline process flow (click to expand) */
+  .pflow-wrap { margin: 30px 0 4px; }
+  .pflow { display: block; width: 100%; text-align: left; cursor: pointer; font: inherit; color: inherit; background: var(--paper-2); border: 1px solid var(--line); border-radius: 14px; padding: 15px 18px; transition: border-color .18s, box-shadow .18s; }
+  .pflow:hover { border-color: var(--accent); box-shadow: 0 12px 32px -20px rgba(14,26,43,.45); }
+  .pflow:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .pflow-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .pflow-kicker { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .pflow-expand { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--ink-3); }
+  .pflow-expand svg { width: 13px; height: 13px; }
+  .pflow:hover .pflow-expand { color: var(--accent); }
+  .pflow-track { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 8px; }
+  .pf-node { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .pf-dot { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+  .pf-dot.disc { background: #C2772F; } .pf-dot.des { background: #2BB3B0; }
+  .pf-dot.end { background: var(--paper); border: 2px solid #D43F38; width: 9px; height: 9px; }
+  .pf-dot.val { background: var(--paper); border: 2px solid #B7791F; width: 9px; height: 9px; }
+  .pf-sep { color: var(--ink-3); font-weight: 400; }
+
+  /* full-screen process map modal */
+  .pmv[hidden] { display: none; }
+  .pmv { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .pmv-backdrop { position: absolute; inset: 0; background: rgba(8,16,28,.55); }
+  .pmv-panel { position: relative; z-index: 1; background: var(--paper); border-radius: 16px; max-width: 760px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 40px 100px -30px rgba(8,16,28,.6); }
+  .pmv-close { position: absolute; top: 10px; right: 12px; z-index: 2; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); color: var(--ink-2); font-size: 20px; line-height: 1; cursor: pointer; }
+  .pmv-close:hover { color: var(--ink); border-color: var(--accent); }
+  .pmv-scroll { overflow-y: auto; padding: 26px 28px 24px; }
+  .pm-h { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: -.02em; margin: 0 0 2px; color: var(--ink); }
+  .pm-h .x { color: var(--accent); }
+  .pm-sub { font-size: 13.5px; line-height: 1.5; color: var(--ink-2); margin: 0 0 16px; }
+  .pm-legend { display: flex; gap: 13px; flex-wrap: wrap; margin: 0 0 16px; }
+  .pm-key { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--ink-2); }
+  .pm-kd { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .pm-kd.me { background: var(--ink); } .pm-kd.ai { background: #2563EB; }
+  .pm-kd.disc { background: #C2772F; } .pm-kd.des { background: #2BB3B0; }
+  .pm-kd.val { background: var(--paper); border: 2px solid #B7791F; width: 7px; height: 7px; }
+  .pm-kd.end { background: var(--paper); border: 2px solid #D43F38; width: 7px; height: 7px; }
+  .pm-row { display: flex; gap: 14px; align-items: stretch; }
+  .pm-rail { position: relative; width: 38px; flex: none; display: flex; justify-content: center; }
+  .pm-rail::before { content: ""; position: absolute; top: 0; bottom: 0; width: 2px; background: var(--line); }
+  .pm-row.last .pm-rail::before { bottom: auto; height: 20px; }
+  .pm-num { position: relative; z-index: 1; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 700; color: #fff; margin-top: 2px; box-shadow: 0 0 0 4px var(--paper); }
+  .pm-num.disc { background: #C2772F; } .pm-num.des { background: #2BB3B0; }
+  .pm-num.end { background: var(--paper); color: #D43F38; border: 2px solid #D43F38; }
+  .pm-num.val { background: var(--paper); color: #B7791F; border: 2px solid #B7791F; }
+  .pm-card { flex: 1; border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; }
+  .pm-name { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--ink); display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .pm-acts { font-size: 11px; font-weight: 500; color: var(--ink-3); }
+  .pm-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pm-col { border-radius: 8px; padding: 7px 9px; }
+  .pm-col.me { background: var(--paper-2); } .pm-col.ai { background: var(--paper-3); }
+  .pm-lab { display: block; font-size: 9px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 3px; }
+  .pm-col.me .pm-lab { color: var(--ink); } .pm-col.ai .pm-lab { color: var(--accent); }
+  .pm-col p { margin: 0; font-size: 12px; line-height: 1.4; color: var(--ink); }
+  .pm-loop { margin-left: 38px; padding: 6px 0; }
+  .pm-loop span { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; color: #B7791F; border: 1px solid #B7791F; border-radius: 999px; padding: 2px 10px; }
+  .pm-loop.back span { border-style: dashed; }
+  .pm-foot { margin: 14px 0 0 52px; font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.5; }
+  @media (max-width: 560px) { .pm-cols { grid-template-columns: 1fr; } }
+</style>
 <script>
   (function () {
     try {
@@ -53,33 +130,85 @@
       <span class="pill">Approach &middot; AI</span>
     </div>
     <h1>How I work with <em>AI</em>.</h1>
-    <p class="sub">I've owned complex systems for about ten years: legaltech, fintech, tax compliance, payouts moving across 200-plus countries. The through-line is making dense, high-stakes information legible for people who aren't technical. AI is the newest tool I've folded into that.</p>
-    <p class="bottomline"><b>Up front:</b> AI is not a magic solution. People keep expecting it to replace the work, and it doesn't. You still need the research, the methods, the design systems. It's one tool in the box, not the box.</p>
-    <div class="case-meta">
-      <div class="m"><div class="mk">Role</div><div class="mv">Senior Product Designer</div></div>
-      <div class="m"><div class="mk">Focus</div><div class="mv">Conversational &amp; agentic AI</div></div>
-      <div class="m"><div class="mk">Where it shows up</div><div class="mv">Pricing to prototype</div></div>
-      <div class="m"><div class="mk">Underneath it</div><div class="mv">Ten years of design</div></div>
-    </div>
+    <p class="sub">Most of my work sits on high-stakes systems, the kind where people act on what the interface tells them: payments, identity, clinical care. AI is the newest layer I've folded into that, and it changes the problem. It's fast and useful, and it adds failure modes we didn't have to design for before. The part I design is the layer in between: where the system explains itself, where people can check it, and where a bad answer gets caught before it matters.</p>
+    <p class="bottomline"><b>Up front:</b> I've shipped two AI products end to end, and AI now runs through how I prototype, synthesize research, and build. What hasn't changed is the judgment underneath it, ten years of product design: the research, the methods, the systems. One tool in the box, not the box.</p>
   </header>
+
+  <div class="pre-shell">
+  <div class="tldr">
+    <div class="lab">TL;DR</div>
+    <p>I design AI products for high-stakes work: payments, identity, clinical care. Two shipped end to end. On those, the hard part is trust, so I build it in three layers, explanation, verification, and intervention. Everywhere else, AI speeds up how I prototype, research, and build. The judgment on top is still ten years of design.</p>
+  </div>
+
+  <section class="pflow-wrap" aria-label="Process overview">
+    <button type="button" class="pflow" id="pflowBtn" aria-haspopup="dialog">
+      <span class="pflow-top">
+        <span class="pflow-kicker">My process &middot; AI at every stage</span>
+        <span class="pflow-expand">Expand
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        </span>
+      </span>
+      <span class="pflow-track">
+        <span class="pf-node"><i class="pf-dot end"></i>Concept</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot disc"></i>Discover</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot disc"></i>Research</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot disc"></i>Plan</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot des"></i>Design</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot val"></i>Validate</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot end"></i>Build</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot val"></i>Validate</span>
+      </span>
+    </button>
+  </section>
+  </div>
 
   <div class="case-shell">
     <aside class="case-nav" aria-label="Sections">
       <ol>
-        <li><a href="#prototype"><span class="n">01</span> Prototyping</a></li>
-        <li><a href="#synthesis"><span class="n">02</span> Synthesis</a></li>
-        <li><a href="#trust"><span class="n">03</span> Designing for trust</a></li>
-        <li><a href="#tools"><span class="n">04</span> Building tools</a></li>
+        <li><a href="#products"><span class="n">01</span> Two AI products</a></li>
+        <li><a href="#prototype"><span class="n">02</span> Prototyping</a></li>
+        <li><a href="#systems"><span class="n">03</span> Design systems</a></li>
+        <li><a href="#synthesis"><span class="n">04</span> Synthesis</a></li>
+        <li><a href="#tools"><span class="n">05</span> Building tools</a></li>
+        <li><a href="#itabot"><span class="n">06</span> ITA bot</a></li>
       </ol>
     </aside>
     <div class="case-body">
 
+      <section class="case-sec" id="products">
+        <div class="sec-kicker">Designing for AI</div>
+        <h2>When the AI <em>is the product.</em></h2>
+        <p class="lead">A lot of my current work is the AI being the product, not just the assistant. I've shipped two, end to end.</p>
+        <p>Both sit on high-stakes data, so the hard design problem isn't the interface, it's trust. There's real risk of a confident wrong answer on numbers people are about to act on. I design for it in three layers. <b>Explanation:</b> the system shows its reasoning and where an answer came from. <b>Verification:</b> people can check that answer against the source before they rely on it. <b>Intervention:</b> when something looks off, there's a clear way to catch it before it costs anything. Same three layers on both products, whatever the surface.</p>
+
+        <div class="prod">
+          <h3 class="prod-h"><span class="pn">01</span> An agentic RAG decision-support system <span class="prod-tag">Ask the Catalog &middot; music publishing</span></h3>
+          <p>A music publisher had fifty years of song rights buried across three systems that didn't talk to each other. I led the research and end-to-end design of a tool that answers a rights question in plain language and shows the exact contract clause it came from. Under that it runs on retrieval-augmented generation (RAG) with an agentic retrieval flow. It handles the factual lookups and the calls that sit on them, like defensible audit totals and sync licensing. A confidence check decides when the system answers on its own and when it routes to a specialist, and a person signs off before anything is written back to the record.</p>
+          <p class="prod-out">A routine rights question went from about 30 minutes across four systems to under 2, every answer links back to its source clause, and the company approved the full build after the pilot. <a href="case-ask-the-catalog.html">Read the full case study &rarr;</a></p>
+          <div class="callout"><p>A reliable data engine plus a model that can drift is a specific kind of problem, and human-in-the-loop checkpoints are usually the answer. Here, conflicting metadata had to be reconciled with a person in the loop, and that pattern transfers to almost any AI product with stakes attached.</p></div>
+        </div>
+
+        <div class="prod">
+          <h3 class="prod-h"><span class="pn">02</span> A clinical conversational AI environment <span class="prod-tag">Femtech &middot; non-public</span></h3>
+          <p>A conversational AI framework built with medical professionals and headed toward clinical use. I ran the UX research, then designed the environment around conversation: the dialogue, the voice, and how the model's behavior gets trained and evaluated, worked out with the clinical team. What someone says reshapes the inputs and updates the dashboard live, so the conversation is the input layer, not a chat window bolted on the side.</p>
+          <p>Conversation alone wasn't the answer. Open-ended chat is a weak default when people need to act, so I paired it with guided flows for the moments someone needs a specific action, not a blank prompt. It's mixed-initiative by design: people work from a structured plan and lean on the conversation when something's ambiguous, rather than making it the only way through.</p>
+          <p>The discipline was deciding where AI did <em>not</em> belong. The conversational layer had to earn its place, serving the product and working with the other features instead of running beside them. Knowing where to hold it back is the design work, and on a clinical product, where people act on what the system says, safety sets the bar.</p>
+        </div>
+      </section>
+
       <section class="case-sec" id="prototype">
         <div class="sec-kicker">Prototyping</div>
-        <h2>Going straight to <em>the wireframe.</em></h2>
-        <p class="lead">I used to open client work by sketching concepts and charting things out before anyone could touch them. I don't do that anymore.</p>
-        <p>Now the first thing I hand over is a rough wireframe. I'll move from a brief into a working proof of concept fast, using Claude Code, V0, Figma Make, or Lovable depending on what the project needs, then put it in front of the team so we're all reacting to the same thing instead of the same idea described five different ways. It collapses the distance between &ldquo;here's what I'm thinking&rdquo; and &ldquo;here's what it feels like to use.&rdquo; A design system makes this much faster, which is part of why I care about building one early rather than treating it as cleanup.</p>
-        <p>The tooling here moves weekly. I keep up by reading Reddit threads and watching what people are actually shipping, not waiting for the polished writeup. Whatever's best this month usually won't be best next month, so I stay loose about the specific tool and firm about the workflow.</p>
+        <h2>From a brief to <em>a working prototype.</em></h2>
+        <p class="lead">The first thing I hand over is often a rough but working wireframe, not a static concept everyone reads a different way.</p>
+        <p>I'll move from a brief into a working proof of concept fast, using Claude Code, V0, Figma Make, or Lovable depending on what the project needs, then put it in front of the team so we're all reacting to the same thing instead of the same idea described five different ways. It collapses the distance between &ldquo;here's what I'm thinking&rdquo; and &ldquo;here's what it feels like to use.&rdquo;</p>
+        <p>This isn't a rule, it depends on the project. For big, complex systems I still go back to drawn work and Figma to plan the structure first. The tooling moves weekly, so I stay loose about the tool and firm about the workflow, and I keep up by reading Reddit threads and watching what people actually ship, not waiting for the polished writeup.</p>
+      </section>
+
+      <section class="case-sec" id="systems">
+        <div class="sec-kicker">Design systems</div>
+        <h2>A design system is <em>documentation, not a sticker sheet.</em></h2>
+        <p>I build it in two layers. A developer-facing layer that lines up with the engineers' repo and Storybook, so they have an exact spec to build from. And a usage layer, closer to how gov.uk documents theirs, with plain guidance on when to use a pattern and when not to: when an inline validation message is the right call and when a page-level banner is, say, so two teams don't solve the same problem two different ways. That usage layer is what keeps a system from drifting, because most gaps come from people not knowing how to apply something, not from a missing component. I structure both so it scales without me having to be in every conversation.</p>
+        <p>When the documentation is that strong, AI lets me design straight in the environment and even ship from it. It's part of why I care about building the system early rather than treating it as cleanup, since a good system is what makes the fast prototyping above actually hold up.</p>
       </section>
 
       <section class="case-sec" id="synthesis">
@@ -89,27 +218,18 @@
         <p>Once the pieces exist, I'll have it pull my separate documents into one cohesive thing, same look and feel, so a client gets a single coherent artifact instead of a pile of notes. Sometimes that becomes a small website I spin up for them.</p>
       </section>
 
-      <section class="case-sec" id="trust">
-        <div class="sec-kicker">Designing for AI</div>
-        <h2>When the data is high-stakes, the hard problem is <em>trust.</em></h2>
-        <p class="lead">A lot of my current work is the AI being the product, not just the assistant.</p>
-        <p>I'm on a femtech project built around a conversational model where what someone says in the conversation reshapes the inputs and changes other features in the dashboard live. I've also done straight problem-solving on an internal pipeline using AI.</p>
-        <p>The hard design problem isn't the interface, it's trust. There's real risk of hallucination, of a confident wrong answer, of the wrong framing on numbers people are about to make decisions on. So the questions I'm actually designing around are: how do you build trust into the surface, how do you make the system's reasoning transparent, how do you give people a way to catch a mistake before it costs them.</p>
-        <div class="callout"><p>A reliable data engine plus a model that can drift is a specific kind of problem, and human-in-the-loop checkpoints are usually the answer. That came out of music-publishing work where conflicting metadata had to be reconciled with a person in the loop, and it transfers to almost any AI product with stakes attached.</p></div>
-      </section>
-
       <section class="case-sec" id="tools">
         <div class="sec-kicker">Building</div>
         <h2>I build the things <em>I use.</em></h2>
         <p>My project dashboard, the one I run my own work through, I built with Claude Code. My portfolio site is hand-built HTML I generate and deploy straight to Netlify, no Squarespace, and when I want to change something I'll regenerate the whole thing from scratch. I even built a chatbot for the portfolio, the ITA bot, so people can ask it questions about my work directly.</p>
-        <p>I'm not pointing at this to show off the tools. It's the proof that I'd rather understand a system by building it than admire it from the outside. I read GitHub repos to follow how things actually work under the hood, which is what lets me work as a real partner to engineers instead of throwing designs over a wall.</p>
+        <p>I'm not pointing at this to show off the tools. It's the proof that I'd rather understand a system by building it than admire it from the outside. Reading the actual repos, and building my own tools, means I design against real constraints instead of hypothetical ones, and work as a real partner to engineers rather than throwing designs over a wall.</p>
         <div class="callout"><p>That's the short version. AI runs through nearly every stage of how I work now, from pricing a project to shipping a prototype, but the judgment underneath it is still the ten years of design. Happy to walk through any of this live and show you the actual screens.</p></div>
       </section>
 
       <section class="case-sec" id="itabot">
         <div class="sec-kicker">Try it</div>
         <h2>Meet the <em>ITA bot.</em></h2>
-        <p>The chatbot I mentioned, embedded live below. It's trained on this portfolio, so ask it about my projects, AI work, accessibility approach or availability. It's an early beta, so it won't get everything right.</p>
+        <p>The chatbot I mentioned, embedded live below. It's grounded in this portfolio, so ask it about my projects, AI work, accessibility approach or availability. It's a small working example of how I think about AI: scoped to what it knows and tied to a real source. Still a beta, so it won't get everything right.</p>
         <div style="border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 26px 64px -30px rgba(14,26,43,.45);margin-top:14px">
           <div style="display:flex;align-items:center;gap:7px;padding:11px 16px;background:var(--paper-2);border-bottom:1px solid var(--line)">
             <span style="width:11px;height:11px;border-radius:50%;background:#FF5F56;flex:none"></span>
@@ -132,6 +252,99 @@
     </a>
   </nav>
 </main>
+
+<div class="pmv" id="pmv" hidden>
+  <div class="pmv-backdrop" data-close></div>
+  <div class="pmv-panel" role="dialog" aria-modal="true" aria-label="Product design process, where AI fits">
+    <button type="button" class="pmv-close" data-close aria-label="Close">&times;</button>
+    <div class="pmv-scroll">
+      <h2 class="pm-h">Design <span class="x">&times;</span> AI</h2>
+      <p class="pm-sub">How I run product design end to end, and where AI fits at each stage. I lead every stage; AI is the tool underneath.</p>
+      <div class="pm-legend">
+        <span class="pm-key"><i class="pm-kd me"></i>What I do</span>
+        <span class="pm-key"><i class="pm-kd ai"></i>What AI does</span>
+        <span class="pm-key"><i class="pm-kd disc"></i>Discovery</span>
+        <span class="pm-key"><i class="pm-kd des"></i>Design</span>
+        <span class="pm-key"><i class="pm-kd val"></i>Validate</span>
+        <span class="pm-key"><i class="pm-kd end"></i>Endpoints</span>
+      </div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num end">01</span></div><div class="pm-card">
+        <div class="pm-name">Concept <span class="pm-acts">Brief &middot; Concept &middot; Requirements</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">I do</span><p>Set the concept and the strategic framing</p></div><div class="pm-col ai"><span class="pm-lab">AI does</span><p>Drafts the briefing, concept and requirements docs</p></div></div>
+      </div></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num disc">02</span></div><div class="pm-card">
+        <div class="pm-name">Discover <span class="pm-acts">Interviews &middot; Analytics</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">I do</span><p>Decide the framing, run the interviews, set the analytics direction</p></div><div class="pm-col ai"><span class="pm-lab">AI does</span><p>Transcribes and synthesizes interviews, supports analytics, drafts requirements</p></div></div>
+      </div></div>
+      <div class="pm-loop"><span>&#8635; Validation</span></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num disc">03</span></div><div class="pm-card">
+        <div class="pm-name">Research <span class="pm-acts">Personas &middot; Journey mapping</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">I do</span><p>Decide which research to run, run the workshops, decide what it means</p></div><div class="pm-col ai"><span class="pm-lab">AI does</span><p>Drafts the personas and journey maps</p></div></div>
+      </div></div>
+      <div class="pm-loop"><span>&#8635; Feedback</span></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num disc">04</span></div><div class="pm-card">
+        <div class="pm-name">Plan <span class="pm-acts">Card sorting &middot; Information architecture</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">I do</span><p>Own the structure. Complex systems still planned by hand in Figma</p></div><div class="pm-col ai"><span class="pm-lab">AI does</span><p>Tests IA options and suggests groupings</p></div></div>
+      </div></div>
+      <div class="pm-loop"><span>&#8635; Feedback</span></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num des">05</span></div><div class="pm-card">
+        <div class="pm-name">Design <span class="pm-acts">UX + UI &middot; Wireframes &middot; Prototypes</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">I do</span><p>Make the interaction and visual decisions. New product? I create the design system</p></div><div class="pm-col ai"><span class="pm-lab">AI does</span><p>Prototypes from the repo with the UI in it, explores edge cases, builds screens from the system</p></div></div>
+      </div></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num val">06</span></div><div class="pm-card">
+        <div class="pm-name">Validate <span class="pm-acts">Usability testing (prototype)</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">I do</span><p>Run usability testing on the prototype</p></div><div class="pm-col ai"><span class="pm-lab">AI does</span><p>Drafts test scripts, synthesizes the results</p></div></div>
+      </div></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num end">07</span></div><div class="pm-card">
+        <div class="pm-name">Build <span class="pm-acts">Ship it</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">I do</span><p>Understand it by building, partner with engineers</p></div><div class="pm-col ai"><span class="pm-lab">AI does</span><p>Generates and deploys (Claude Code to Netlify), builds the tooling</p></div></div>
+      </div></div>
+
+      <div class="pm-row last"><div class="pm-rail"><span class="pm-num val">08</span></div><div class="pm-card">
+        <div class="pm-name">Validate <span class="pm-acts">Usability &middot; A/B &middot; Analytics &middot; Live</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">I do</span><p>Run usability and A/B testing, set up the analytics feedback loops</p></div><div class="pm-col ai"><span class="pm-lab">AI does</span><p>Synthesizes the test, A/B and analytics feedback into the next iteration</p></div></div>
+      </div></div>
+      <div class="pm-loop back"><span>&#8635; Analytics &amp; A/B feedback loop &rarr; back into Design</span></div>
+
+      <p class="pm-foot">AI is one tool in the box, not the box. The judgment on top is the ten years of design.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('pflowBtn');
+    var modal = document.getElementById('pmv');
+    if (!btn || !modal) return;
+    var lastFocus = null;
+    function open() {
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var c = modal.querySelector('.pmv-close');
+      if (c) c.focus();
+    }
+    function close() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }
+    btn.addEventListener('click', open);
+    modal.addEventListener('click', function (e) {
+      if (e.target.hasAttribute('data-close')) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) close();
+    });
+  })();
+</script>
 
 </body>
 </html>
