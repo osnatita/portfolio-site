@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ask the Catalog — RAG over 50 years of music rights, Ita Skoblinski</title>
+<title>Ask the Catalog — RAG over fifty years of music rights, Ita Skoblinski</title>
 <meta name="description" content="Ask the Catalog: an AI-native product design case study. A RAG interface that reasons across 85,000+ music-rights documents and returns a cited, confidence-scored answer, with a human in the loop. Research, strategy, UX and prototype by Ita Skoblinski." />
 <meta name="theme-color" content="#1D4ED8" />
 <link rel="stylesheet" href="assets/site.css" />
@@ -24,7 +24,7 @@
   })();
 </script>
 <style>
-  /* page-local: AI answer mock + build-vs-buy table, built on the site tokens */
+  /* page-local: answer mock, build-vs-buy table, engine flow, dashboard + calendar surfaces */
   .atc-mock { background:#0E1A2B; border-radius:16px; padding:20px; border:1px solid var(--line); }
   .atc-bar { display:flex; align-items:center; gap:7px; margin-bottom:16px; }
   .atc-bar .d { width:10px; height:10px; border-radius:50%; background:#3A4A5F; flex:none; }
@@ -43,6 +43,8 @@
   .atc-barmeter { height:6px; border-radius:99px; background:#23364f; margin:10px 0; overflow:hidden; }
   .atc-barmeter i { display:block; height:100%; width:88%; background:#34D399; border-radius:99px; }
   .atc-conf p { color:#9FB0C8; font-size:12px; line-height:1.5; margin:0; }
+  .case-cover .cap { max-width:820px; }
+
   .bvb { width:100%; border-collapse:collapse; margin:8px 0 6px; font-size:calc(14px * var(--type-scale)); }
   .bvb th { text-align:left; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); font-weight:700; padding:0 14px 10px; border-bottom:1px solid var(--line-2); vertical-align:bottom; }
   .bvb td { padding:14px; border-bottom:1px solid var(--line); color:var(--ink-2); line-height:1.5; vertical-align:top; }
@@ -50,12 +52,42 @@
   .bvb .v { font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
   .bvb .v-rec { color:#1B6640; }
   .bvb .v-out { color:#8A5A00; }
-  @media (max-width:760px){ .bvb, .bvb thead, .bvb tbody, .bvb tr, .bvb th, .bvb td { display:block; } .bvb thead { display:none; } .bvb td { border:none; padding:2px 0; } .bvb tr { border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; display:block; background:var(--paper-2); } }
-  .flow { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:6px 0 4px; }
-  .flow .node { background:var(--paper-2); border:1px solid var(--line); border-radius:10px; padding:12px 14px; font-size:12.5px; color:var(--ink); line-height:1.35; flex:1 1 130px; min-width:120px; }
-  .flow .node b { display:block; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:4px; }
-  .flow .arr { color:var(--line-2); flex:none; }
-  @media (max-width:560px){ .flow{ flex-direction:column; align-items:stretch; } .flow .node{ flex:1 1 auto; min-width:0; } .flow .arr{ align-self:center; transform:rotate(90deg); } }
+  @media (max-width:760px){ .bvb, .bvb thead, .bvb tbody, .bvb tr, .bvb th, .bvb td { display:block; } .bvb thead { display:none; } .bvb td { border:none; padding:2px 0; } .bvb tr { border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; display:block; background:var(--paper-2); } .bvb td.opt { font-size:15.5px; margin-bottom:4px; } }
+
+  /* engine diagram */
+  .engine { border:1px solid var(--line); border-radius:14px; background:#fff; padding:18px 20px 20px; margin:6px 0 0; overflow-x:auto; }
+  .engine svg { display:block; width:100%; min-width:660px; height:auto; }
+  .engine svg text { font-family:'Inter', system-ui, -apple-system, sans-serif; }
+  .engine svg .mono { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+  /* dashboard + calendar surfaces */
+  .surf { border:1px solid var(--line); border-radius:14px; background:#fff; padding:20px; margin:6px 0 0; }
+  .surf-h { display:flex; justify-content:space-between; align-items:center; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin-bottom:16px; }
+  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .kpi { border:1px solid var(--line); border-radius:10px; padding:14px; background:var(--paper-2); }
+  .kpi .kl { font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:7px; }
+  .kpi .kv { font-family:var(--display); font-weight:800; font-size:24px; letter-spacing:-0.02em; color:var(--ink); }
+  .kpi .kv .up { font-size:11px; color:#1B6640; font-weight:700; margin-left:5px; vertical-align:2px; }
+  .kpi .kv.alert { color:#A83030; }
+  .dash-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:14px; margin-top:14px; }
+  .chartbox, .renbox { border:1px solid var(--line); border-radius:10px; padding:16px; }
+  .boxk { font-size:12px; font-weight:600; color:var(--ink); margin-bottom:14px; }
+  .bars { display:flex; align-items:flex-end; gap:9px; height:140px; }
+  .bars i { flex:1; background:#5b78c4; border-radius:4px 4px 0 0; }
+  .renrow { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--line); }
+  .renrow:last-of-type { border-bottom:none; }
+  .renrow .rn { flex:1; }
+  .renrow .rn b { display:block; font-size:13px; color:var(--ink); font-weight:600; }
+  .renrow .rn span { font-size:11px; color:var(--ink-3); }
+  .daybadge { font-size:10.5px; font-weight:700; letter-spacing:.03em; padding:4px 9px; border-radius:999px; white-space:nowrap; }
+  .d30 { background:#FBEAEA; color:#A83030; } .d60 { background:#FBF1DD; color:#8A5A00; } .d90 { background:#EAEEF6; color:#3A4A5F; }
+  .renlink { margin-top:12px; font-size:12px; font-weight:600; color:var(--accent); }
+  .calrow { display:grid; grid-template-columns:1fr auto 1.1fr; gap:14px; align-items:center; padding:12px 0; border-bottom:1px solid var(--line); }
+  .calrow .cn b { display:block; font-size:13.5px; color:var(--ink); font-weight:600; }
+  .calrow .cn span { font-size:11px; color:var(--ink-3); }
+  .calrow .cnote { font-size:12px; color:var(--ink-2); }
+  .calnote { margin-top:12px; background:var(--paper-3); border-radius:8px; padding:11px 14px; font-size:12.5px; color:var(--ink-2); }
+  @media (max-width:680px){ .kpis { grid-template-columns:1fr 1fr; } .dash-grid { grid-template-columns:1fr; } .calrow { grid-template-columns:1fr auto; } .calrow .cnote { grid-column:1 / -1; } }
 </style>
 </head>
 <body>
@@ -86,14 +118,14 @@
       </a>
       <span class="pill">Confidential client &middot; Music publishing &amp; AI</span>
     </div>
-    <h1>Fifty years of music rights, one question away.</h1>
-    <p class="sub">A music publisher's answers lived in 85,000+ documents across three systems that could not talk to each other, so every real answer sat in one or two people's heads. I designed <b>Ask the Catalog</b>, a plain-language interface backed by a retrieval (RAG) workflow that reasons across all three systems and returns a cited, confidence-scored answer, with a person in the loop before anything is saved.</p>
-    <p class="bottomline"><b>Bottom line:</b> A cross-system question went from about 30 minutes to under 2, with every figure grounded in the exact contract clause, royalty period, or ledger line it came from. The company greenlit the full build after the pilot.</p>
+    <h1>Putting fifty years of contracts and royalties one question away.</h1>
+    <p class="sub">A confidential music publisher ran on three systems that didn't talk to each other, so every real answer lived in one or two people's heads. I designed <b>Ask the Catalog</b>, a single place where any team can ask the business a plain-language question and get a cited, confidence-scored answer, backed by a retrieval (RAG) workflow with a person in the loop.</p>
+    <p class="bottomline"><b>Bottom line:</b> people find what they need without going through management, contracts surface before they lapse, and a question like &ldquo;how much do we owe this artist right now?&rdquo; comes back in seconds, with every figure traced to its source.</p>
     <div class="case-meta">
       <div class="m"><div class="mk">Role</div><div class="mv">Lead Product Designer</div></div>
       <div class="m"><div class="mk">Scope</div><div class="mv">Research &rarr; strategy &rarr; UX &rarr; prototype</div></div>
       <div class="m"><div class="mk">AI approach</div><div class="mv">RAG &middot; grounded citations &middot; human-in-the-loop</div></div>
-      <div class="m"><div class="mk">Team</div><div class="mv">Solo designer + 1 ML engineer</div></div>
+      <div class="m"><div class="mk">Team</div><div class="mv">Me + 1 ML engineer</div></div>
     </div>
   </header>
 
@@ -116,18 +148,20 @@
         </div>
       </div>
     </div>
-    <div class="cap">One of the hardest questions in the business, answered in seconds. The workflow checks the contract's recoupment terms against four quarters of royalty data, then shows every source it used. Interface and behavior designed by me; built with one ML engineer.</div>
+    <div class="cap">One of the hardest questions in the business, answered in seconds. The workflow checks the contract's recoupment terms against four quarters of royalty data, then shows every source it used. Interface and behavior designed by me, built with one ML engineer.</div>
   </div>
 
   <div class="case-shell">
     <aside class="case-nav" aria-label="Sections">
       <ol>
         <li><a href="#context"><span class="n">01</span> Context</a></li>
-        <li><a href="#research"><span class="n">02</span> Research</a></li>
-        <li><a href="#insight"><span class="n">03</span> The insight</a></li>
-        <li><a href="#buildbuy"><span class="n">04</span> Build vs buy</a></li>
-        <li><a href="#product"><span class="n">05</span> The product</a></li>
-        <li><a href="#outcomes"><span class="n">06</span> Outcomes</a></li>
+        <li><a href="#problem"><span class="n">02</span> The problem</a></li>
+        <li><a href="#research"><span class="n">03</span> Research</a></li>
+        <li><a href="#insight"><span class="n">04</span> The insight</a></li>
+        <li><a href="#buildbuy"><span class="n">05</span> Build vs buy</a></li>
+        <li><a href="#product"><span class="n">06</span> The product</a></li>
+        <li><a href="#unlocks"><span class="n">07</span> What it unlocks</a></li>
+        <li><a href="#outcomes"><span class="n">08</span> Outcomes</a></li>
       </ol>
       <div class="nav-cv">
         <a class="crumb" href="cv.html" target="_blank" rel="noopener" style="font-weight:600;color:var(--ink)">View CV &rarr;</a>
@@ -138,47 +172,60 @@
 
       <section class="case-sec" id="context">
         <div class="sec-kicker">The context</div>
-        <h2>Fifty years of rights, locked in <em>85,000 documents.</em></h2>
-        <p class="lead">A music publisher controls the rights to thousands of songs, which means deciding who can use each song and who gets paid for it. Half a century of that knowledge lived in documents, spread across three systems built for storage, not for answering questions.</p>
+        <h2>A business that runs on documents <em>it can't search.</em></h2>
+        <p class="lead">An independent music publisher administers a large catalog of contracts, royalty statements, sync licenses and advances. The knowledge that runs the business lives entirely in those documents, spread across three systems built for storage rather than for answering questions.</p>
         <div class="impact-row">
           <div class="ic"><div class="iv">85K<span class="sym">+</span></div><div class="il">Contract PDFs, invoices and royalty rows across Dropbox, FileMaker and Vistex</div></div>
           <div class="ic"><div class="iv">3</div><div class="il">Systems of record with no way to cross-reference one against another</div></div>
           <div class="ic"><div class="iv">0</div><div class="il">Single sources of truth. The full picture lived only in someone's head</div></div>
         </div>
-        <p>Contracts sat in <b>Dropbox</b> (~5,000 PDFs), invoices and quotes in <b>FileMaker</b> (~20,000), and royalties in <b>Vistex</b> (~60,000 rows). Each system answered part of a question and none of them answered a whole one. To get a real answer, someone opened all three and reconciled them by hand.</p>
+        <p>Contracts sat in <b>Dropbox</b> (~5,000 PDFs), invoices and quotes in <b>FileMaker</b> (~20,000), and royalties in <b>Vistex</b> (~60,000 rows). Each system answered part of a question; none of them answered a whole one.</p>
+      </section>
+
+      <section class="case-sec" id="problem">
+        <div class="sec-kicker">The problem</div>
+        <h2>What was <em>broken.</em></h2>
+        <p>These were structural problems. They cost management hours, let renewals and revenue slip, and slowed any decision that touched more than one system.</p>
+        <div class="problem-list">
+          <div class="prob"><span class="pn">1</span><div><b>No single source of truth.</b> There was no centralized view of an artist's contracts, royalties and sync history, so even routine questions meant opening three systems and reconciling by hand.</div></div>
+          <div class="prob"><span class="pn">2</span><div><b>Management was the bottleneck.</b> The team constantly asked leadership for basic information that should have been self-service, turning a handful of people into a human search engine.</div></div>
+          <div class="prob"><span class="pn">3</span><div><b>Renewals slipped through.</b> Contract tracking was manual, so deals quietly approached expiry with no alert, and renewal opportunities were missed.</div></div>
+          <div class="prob"><span class="pn">4</span><div><b>No room for a confident wrong answer.</b> This is legal and financial data. On a split or a recoupment balance, a tool that answers without proof is a liability.</div></div>
+        </div>
       </section>
 
       <section class="case-sec" id="research">
         <div class="sec-kicker">Discovery &amp; research</div>
-        <h2>Where the real answers <em>actually lived.</em></h2>
-        <p class="lead">I ran interviews across the company and reviewed the three systems and more than 85,000 documents. The same need showed up in every role: a fast answer they could stand behind, pulled from more than one system at once.</p>
+        <h2>Five teams, five versions of <em>the same question.</em></h2>
+        <p class="lead">I mapped the recurring questions each function asks the catalog, and what it costs them to answer today. The same need showed up everywhere: a fast, trustworthy answer that spans more than one system.</p>
         <div class="cardgrid">
           <div class="c"><span class="chip chip-blue">A&amp;R</span><p>Prepping for an artist meeting means assembling contract terms, end dates, recent royalty performance and sync activity, pulled from three places by hand.</p></div>
           <div class="c"><span class="chip chip-blue">Business development</span><p>&ldquo;Which contracts are coming up for renewal, and which are worth chasing?&rdquo; There was no calendar, no pipeline, no alerts.</p></div>
           <div class="c"><span class="chip chip-blue">Sync licensing</span><p>Quoting a placement is guesswork without history: what did we charge for comparable genres, productions and territories?</p></div>
           <div class="c"><span class="chip chip-blue">Finance &amp; royalties</span><p>Reconciling a payment means matching Vistex royalty data back to the contract terms and recoupment status that justify it.</p></div>
+          <div class="c"><span class="chip chip-blue">Management</span><p>No live read on portfolio performance, team productivity, or where the risks sit: compliance, late payments, expiring deals.</p></div>
+          <div class="c"><span class="chip chip-green">The common thread</span><p>Across all five, the need was the same: a fast answer they could stand behind, pulled from more than one system at once.</p></div>
         </div>
-        <div class="callout"><p>The common thread across every function: one fast answer they could stand behind, reasoned across more than one system at once, with the source attached.</p></div>
       </section>
 
       <section class="case-sec" id="insight">
         <div class="sec-kicker">The insight</div>
         <h2>The hard part was reasoning across systems, <em>and proving it.</em></h2>
-        <p>One test reframed the whole project. A simple question like &ldquo;when does this contract expire?&rdquo; can be answered by any document tool, citing the clause. The question that runs the business day to day is harder.</p>
-        <div class="quote"><p>&ldquo;How much do we owe this artist right now?&rdquo; Answering that means cross-referencing the contract's recoupment terms against several quarters of royalty data and working out the unrecouped balance. No single system holds it. The answer has to be reasoned across all three, then <b>proven</b>.</p><div class="who"><b>The query that set the bar</b></div></div>
-        <p>So the design problem was not &ldquo;can it chat with a PDF.&rdquo; It was making a multi-system answer trustworthy: every figure grounded in its source, scored for confidence, and visible only to the people allowed to see it. That set five principles I specced for the system's behavior.</p>
+        <p>One test reframed the whole project. Take a simple question like &ldquo;when does this contract expire?&rdquo; Any document tool can answer that and cite the clause. The question that runs the business day to day is harder.</p>
+        <div class="quote"><p>&ldquo;How much do we owe this artist right now?&rdquo; Answering that means cross-referencing the contract's recoupment terms against several quarters of Vistex royalty data and working out the unrecouped balance. No single system holds it. The answer has to be reasoned across all three, then <b>proven</b>.</p><div class="who"><b>The query that set the bar</b></div></div>
+        <p>So the design problem was making multi-system answers trustworthy: each figure traced to its source, scored for confidence, and visible only to the people allowed to see it. That set four principles I specced for the system's behavior.</p>
         <div class="steps">
-          <div class="step"><div class="sn">01</div><h4>Ground every figure</h4><p>No answer appears without the exact contract clause, royalty period or ledger line it was drawn from. Grounding at the clause level, not the document summary, so every number is checkable against its source.</p></div>
-          <div class="step"><div class="sn">02</div><h4>Score the confidence, gate on it</h4><p>The system states how sure it is and what it could not reconcile. I set the confidence gate as a product decision: below the threshold, the answer routes to a specialist instead of surfacing.</p></div>
-          <div class="step"><div class="sn">03</div><h4>Keep a human in the loop</h4><p>The system drafts; a person confirms or edits before anything is written to the record. Each correction feeds back to improve retrieval, so the next similar question lands closer.</p></div>
-          <div class="step"><div class="sn">04</div><h4>Respect who can see what</h4><p>Role-based access and an audit trail as design principles, because royalty and contract data is not for everyone, and sensitive answers leave a record.</p></div>
+          <div class="step"><div class="sn">01</div><h4>Cite every figure</h4><p>No answer appears without the exact contract clause, royalty period or ledger line it was drawn from. Grounding at the clause level, not the document summary, so every number is checkable.</p></div>
+          <div class="step"><div class="sn">02</div><h4>Score the confidence</h4><p>The system says how sure it is and what it couldn't reconcile, so a person knows when to double-check before acting. I set the confidence gate as a product decision.</p></div>
+          <div class="step"><div class="sn">03</div><h4>Respect who can see what</h4><p>Role-based permissions and an audit trail, because royalty and contract data isn't for everyone, and sensitive answers leave a record.</p></div>
+          <div class="step"><div class="sn">04</div><h4>Answer in plain language</h4><p>The team thinks in deals and payments, not queries, so the questions and answers stay conversational. A person confirms before anything is saved.</p></div>
         </div>
       </section>
 
       <section class="case-sec" id="buildbuy">
         <div class="sec-kicker">Product strategy &middot; build vs buy</div>
-        <h2>Eight tools against <em>the real requirements.</em></h2>
-        <p>The bar was not &ldquo;can it summarize a PDF.&rdquo; A tool had to reach all three systems, reason across them, ground answers at the level of a clause or a royalty period, score confidence, and enforce role-based access, all at the cost structure of a small team. That narrowed eight options to a tiered recommendation.</p>
+        <h2>I evaluated eight tools against <em>the real requirements.</em></h2>
+        <p>The bar wasn't &ldquo;can it chat with a PDF.&rdquo; It had to reach all three systems, reason across them, cite at the level of a clause or a royalty period, score confidence, and enforce role-based access, all at the cost structure of a small team. That narrowed eight options to a tiered recommendation.</p>
         <table class="bvb">
           <thead>
             <tr><th>Option</th><th>Cross-system reasoning</th><th>Citations &amp; confidence</th><th>Fit &amp; cost for a small team</th><th>Verdict</th></tr>
@@ -194,39 +241,124 @@
 
       <section class="case-sec" id="product">
         <div class="sec-kicker">The product</div>
-        <h2>Ask a question, <em>get a cited answer.</em></h2>
-        <p class="lead">The product is a permissioned data layer with a plain-language interface on top. Beyond the direct question and answer, the same engine drives a live business dashboard and an always-on contract calendar.</p>
-        <div class="flow" aria-label="How a question becomes a trustworthy answer">
-          <div class="node"><b>Question</b>Plain language, one ask</div>
-          <span class="arr">&rarr;</span>
-          <div class="node"><b>Retrieve · 3 systems</b>Dropbox · FileMaker · Vistex</div>
-          <span class="arr">&rarr;</span>
-          <div class="node"><b>Cross-reference</b>Contract terms &times; royalties &times; recoupment</div>
-          <span class="arr">&rarr;</span>
-          <div class="node"><b>Draft + cite</b>Answer with sources attached</div>
-          <span class="arr">&rarr;</span>
-          <div class="node"><b>Confidence gate</b>Serve if sure, flag a person if not</div>
+        <h2>One place to ask, three ways <em>the answer shows up.</em></h2>
+        <p class="lead">The product is a centralized, permissioned data layer with a plain-language interface on top. Beyond the direct question and answer, the same engine drives a live business dashboard and an always-on contract calendar.</p>
+
+        <div class="engine">
+          <svg viewBox="0 0 720 420" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Engine flow: a plain-language question is retrieved across three systems, cross-referenced, drafted with citations, then confidence-scored. High confidence self-serves a cited answer; low confidence is flagged to verify and routed to a specialist.">
+            <defs>
+              <marker id="aS" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748B"/></marker>
+              <marker id="aG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2F8F5D"/></marker>
+              <marker id="aR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C0504D"/></marker>
+            </defs>
+            <text class="mono" x="8" y="22" font-size="11" fill="#94A3B8" letter-spacing="0.4">// how a hard question becomes a trustworthy answer</text>
+
+            <g fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+              <path d="M168,88 H186" stroke="#64748B" marker-end="url(#aS)"/>
+              <path d="M350,88 H368" stroke="#64748B" marker-end="url(#aS)"/>
+              <path d="M532,88 H550" stroke="#64748B" marker-end="url(#aS)"/>
+              <path d="M633,124 V204" stroke="#64748B" marker-end="url(#aS)"/>
+              <path d="M591,250 H128 V332" stroke="#2F8F5D" marker-end="url(#aG)"/>
+              <path d="M633,292 V332" stroke="#C0504D" marker-end="url(#aR)"/>
+            </g>
+            <text class="mono" x="300" y="242" font-size="10" fill="#2F8F5D">high</text>
+            <text class="mono" x="642" y="318" font-size="10" fill="#C0504D">low</text>
+
+            <g>
+              <rect x="8" y="52" width="160" height="72" rx="9" fill="#F1F4F9" stroke="#D6DEEA" stroke-width="1.5"/>
+              <text class="mono" x="22" y="78" font-size="9.5" letter-spacing="0.6" fill="#1B3A8F">QUESTION</text>
+              <text x="22" y="100" font-size="11" fill="#33415A">Plain language, one ask</text>
+
+              <rect x="190" y="52" width="160" height="72" rx="9" fill="#F1F4F9" stroke="#D6DEEA" stroke-width="1.5"/>
+              <text class="mono" x="204" y="78" font-size="9.5" letter-spacing="0.5" fill="#1B3A8F">RETRIEVE &#183; 3 SYSTEMS</text>
+              <text x="204" y="96" font-size="10.5" fill="#33415A">Dropbox &#183; FileMaker</text>
+              <text x="204" y="110" font-size="10.5" fill="#33415A">&#183; Vistex</text>
+
+              <rect x="372" y="52" width="160" height="72" rx="9" fill="#F1F4F9" stroke="#D6DEEA" stroke-width="1.5"/>
+              <text class="mono" x="386" y="78" font-size="9.5" letter-spacing="0.5" fill="#1B3A8F">CROSS-REFERENCE</text>
+              <text x="386" y="96" font-size="10.5" fill="#33415A">Contract terms &#215;</text>
+              <text x="386" y="110" font-size="10.5" fill="#33415A">royalties &#215; recoupment</text>
+
+              <rect x="554" y="52" width="158" height="72" rx="9" fill="#F1F4F9" stroke="#D6DEEA" stroke-width="1.5"/>
+              <text class="mono" x="568" y="78" font-size="9.5" letter-spacing="0.6" fill="#1B3A8F">DRAFT + CITE</text>
+              <text x="568" y="100" font-size="11" fill="#33415A">Answer with sources</text>
+            </g>
+
+            <polygon points="633,206 678,250 633,294 588,250" fill="#FFFFFF" stroke="#1B3A8F" stroke-width="1.5"/>
+            <text class="mono" x="633" y="247" text-anchor="middle" font-size="8.5" letter-spacing="0.4" fill="#1B3A8F">CONFIDENCE</text>
+            <text class="mono" x="633" y="259" text-anchor="middle" font-size="8.5" letter-spacing="0.4" fill="#1B3A8F">SCORE</text>
+
+            <rect x="8" y="332" width="244" height="72" rx="9" fill="#E9F4EE" stroke="#CDE7D8" stroke-width="1.5"/>
+            <text class="mono" x="22" y="362" font-size="9.5" letter-spacing="0.6" fill="#1B6640">HIGH &#8594; SELF-SERVE</text>
+            <text x="22" y="384" font-size="11" fill="#33415A">Cited answer, on the spot</text>
+
+            <rect x="468" y="332" width="244" height="72" rx="9" fill="#FBEEEE" stroke="#F1D6D6" stroke-width="1.5"/>
+            <text class="mono" x="482" y="362" font-size="9.5" letter-spacing="0.6" fill="#A83030">LOW &#8594; FLAG TO VERIFY</text>
+            <text x="482" y="382" font-size="10.5" fill="#33415A">Shows what it couldn't reconcile,</text>
+            <text x="482" y="396" font-size="10.5" fill="#33415A">routes to a specialist</text>
+          </svg>
         </div>
-        <p>This is a retrieval (RAG) workflow with agentic steps and a human gate: it interprets the question, pulls from the connected systems, drafts a grounded answer, scores its own confidence, and either serves the answer with citations or flags exactly what it could not reconcile and routes it to a specialist. A person confirms before anything is saved.</p>
+        <p style="margin-top:18px"><b>The engine.</b> Every answer is a retrieval (RAG) workflow reasoned across the three systems, scored, and either served with citations or flagged with exactly what it couldn't reconcile. A person confirms before anything is written back.</p>
+
+        <div class="surf" aria-label="Management dashboard">
+          <div class="surf-h"><span>Catalog &middot; business intelligence</span><span>Q4 2025</span></div>
+          <div class="kpis">
+            <div class="kpi"><div class="kl">Catalog revenue</div><div class="kv">$2.4M<span class="up">&#9650; 8%</span></div></div>
+            <div class="kpi"><div class="kl">Active contracts</div><div class="kv">312</div></div>
+            <div class="kpi"><div class="kl">Renewals due &middot; 90d</div><div class="kv alert">17</div></div>
+            <div class="kpi"><div class="kl">Recoup outstanding</div><div class="kv">$310K</div></div>
+          </div>
+          <div class="dash-grid">
+            <div class="chartbox">
+              <div class="boxk">Revenue by quarter</div>
+              <div class="bars"><i style="height:42%"></i><i style="height:55%"></i><i style="height:50%"></i><i style="height:66%"></i><i style="height:78%"></i><i style="height:72%"></i><i style="height:88%"></i><i style="height:100%;background:#2f4d9e"></i></div>
+            </div>
+            <div class="renbox">
+              <div class="boxk">Renewals &middot; next 90 days</div>
+              <div class="renrow"><div class="rn"><b>Admin deal &middot; Artist A</b><span>expires Mar 15, 2026</span></div><span class="daybadge d30">30 D</span></div>
+              <div class="renrow"><div class="rn"><b>Sync license &middot; Artist B</b><span>expires Apr 30, 2026</span></div><span class="daybadge d60">60 D</span></div>
+              <div class="renrow"><div class="rn"><b>Co-pub addendum &middot; Artist C</b><span>expires May 28, 2026</span></div><span class="daybadge d90">90 D</span></div>
+              <div class="renlink">View full contract calendar &rarr;</div>
+            </div>
+          </div>
+        </div>
+        <div class="cap" style="margin-top:12px;font-size:calc(13.5px * var(--type-scale));color:var(--ink-3)"><b style="color:var(--ink)">Surface 1. The management dashboard.</b> Portfolio revenue, active contracts, recoupment exposure and a live count of renewals due. The read on the business that leadership never had.</div>
+
+        <div class="surf" aria-label="Contract calendar" style="margin-top:26px">
+          <div class="surf-h"><span>Contract calendar &middot; automated renewal alerts</span></div>
+          <div class="calrow"><div class="cn"><b>Admin deal &middot; Artist A</b><span>expires Mar 15, 2026 &middot; 50% master</span></div><span class="daybadge d30">30 DAYS</span><div class="cnote">Renewal pending &middot; flag to Biz Dev</div></div>
+          <div class="calrow"><div class="cn"><b>Sync license &middot; Artist B</b><span>expires Apr 30, 2026 &middot; film &amp; TV</span></div><span class="daybadge d60">60 DAYS</span><div class="cnote">Strong performer &middot; prioritize</div></div>
+          <div class="calrow"><div class="cn"><b>Co-pub addendum &middot; Artist C</b><span>expires May 28, 2026 &middot; territory NA</span></div><span class="daybadge d90">90 DAYS</span><div class="cnote">Under review</div></div>
+          <div class="calnote">Alerts fire automatically at 90, 60 and 30 days, so no one has to remember to check.</div>
+        </div>
+        <div class="cap" style="margin-top:12px;font-size:calc(13.5px * var(--type-scale));color:var(--ink-3)"><b style="color:var(--ink)">Surface 2. The contract calendar.</b> Every deal surfaces itself at 90, 60 and 30 days before expiry, with context on whether it's worth chasing, so deals stop lapsing.</div>
+      </section>
+
+      <section class="case-sec" id="unlocks">
+        <div class="sec-kicker">What it unlocks</div>
+        <h2>What each team can <em>do for itself.</em></h2>
+        <p class="lead">The same cited, permissioned engine serves every function. Questions that used to route through management become self-serve.</p>
         <div class="cardgrid">
-          <div class="c"><div class="ct">The management dashboard</div><p>Catalog revenue, active contracts, recoupment exposure and a live count of renewals due. The read on the business that leadership never had.</p></div>
-          <div class="c"><div class="ct">The contract calendar</div><p>Every deal surfaces itself at 90, 60 and 30 days before expiry, with context on whether it's worth chasing, so renewals stop lapsing.</p></div>
-          <div class="c"><div class="ct">Self-serve for every team</div><p>A&amp;R, sync, finance and biz dev each get the cited, permissioned answer they used to route through management.</p></div>
-          <div class="c"><div class="ct">Proof on sensitive data</div><p>Role-based access and an audit trail on royalty and contract data, plain-language answers that a non-technical team can check.</p></div>
+          <div class="c"><span class="chip chip-blue">A&amp;R</span><div class="ct">Ready for any artist meeting</div><p>One profile: contract terms, end dates, recent royalties and sync activity. A portfolio view by contract status and upcoming renewals.</p></div>
+          <div class="c"><span class="chip chip-blue">Business development</span><div class="ct">Catch every renewal in time</div><p>A contract calendar with automatic 30/60/90-day alerts, and a renewal pipeline with negotiation status and revenue forecasting.</p></div>
+          <div class="c"><span class="chip chip-blue">Sync licensing</span><div class="ct">Quote from real history</div><p>Compare past quotes by genre, production, territory and budget, with pricing benchmarks and quote-to-placement conversion.</p></div>
+          <div class="c"><span class="chip chip-blue">Finance &amp; royalties</span><div class="ct">Reconcile quickly, with proof</div><p>Outstanding payments and recoupment status at a glance, and royalty reconciliation that ties Vistex data back to contract terms.</p></div>
+          <div class="c"><span class="chip chip-blue">Management</span><div class="ct">A live view of the whole business</div><p>Portfolio performance, team productivity and revenue trends, plus a risk view: compliance, payment delays, renewal exposure.</p></div>
+          <div class="c"><span class="chip chip-green">Everyone</span><div class="ct">No more asking a colleague to look it up</div><p>Plain-language answers, cited and confidence-scored, with role-based access and an audit trail on sensitive data.</p></div>
         </div>
       </section>
 
       <section class="case-sec" id="outcomes">
         <div class="sec-kicker">Outcomes</div>
-        <h2>Thirty minutes to two, <em>every figure sourced.</em></h2>
+        <h2>What the business case <em>added up to.</em></h2>
         <p>I prototyped against real contracts and the team's recurring question inventory, then built the recommendation and projected impact for leadership. The reframe held: when answers led with their sources and named their uncertainty, the team trusted them.</p>
         <div class="impact-row">
-          <div class="ic"><div class="iv">~30 &rarr; &lt;2<span class="sym"> min</span></div><div class="il">To answer a cross-system question, with every figure grounded in its source</div></div>
-          <div class="ic"><div class="iv">100<span class="sym">%</span></div><div class="il">Of answers cited back to a specific clause, royalty period or ledger line</div></div>
-          <div class="ic"><div class="iv">Build</div><div class="il">Validated prototype and business case greenlit the full implementation</div></div>
+          <div class="ic"><div class="iv">~30 &rarr; &lt;2<span class="sym"> min</span></div><div class="il">To answer a cross-system question, with every figure sourced</div></div>
+          <div class="ic"><div class="iv">0</div><div class="il">Renewals missed once 30/60/90-day alerts run automatically</div></div>
+          <div class="ic"><div class="iv">Build</div><div class="il">Validated prototype and business case greenlit the implementation</div></div>
         </div>
         <div class="quote"><p>&ldquo;For the first time, I can answer 'what do we owe them?' myself, and show exactly where the number comes from.&rdquo;</p><div class="who"><b>Royalties lead</b> &middot; prototype session</div></div>
-        <div class="callout"><p>The most important decision was a restriction: no answer appears without its proof. That one rule shaped every screen, and it runs through all of my work on regulated products that handle sensitive data.</p></div>
+        <div class="callout"><p><b>What I'd do with more time:</b> make the confidence threshold tunable per team (finance tolerates less ambiguity than A&amp;R), push the reconciliation loop so every human correction sharpens the next answer, and prototype a proactive mode where the dashboard surfaces recoupment milestones and renewal risks before anyone thinks to ask.</p></div>
       </section>
 
     </div>
