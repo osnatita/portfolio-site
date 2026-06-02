@@ -25,3 +25,5 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    # Keep the whole site out of search engines (private / password-gated)
+    X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet, noimageindex"
