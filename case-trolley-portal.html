@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Redesigning how 4 million people get paid, Ita Skoblinski</title>
+<link rel="stylesheet" href="assets/site.css" />
+<link rel="stylesheet" href="assets/case.css" />
+<script>
+  (function () {
+    try {
+      var t = JSON.parse(localStorage.getItem('jr:tweaks') || '{}');
+      var r = document.documentElement;
+      if (t.typeScale) r.style.setProperty('--type-scale', t.typeScale);
+      var dmap = { compact: 0.82, regular: 1, comfy: 1.22 };
+      if (t.density && dmap[t.density]) r.style.setProperty('--density', dmap[t.density]);
+      if (t.showMetrics === false) r.setAttribute('data-no-metrics', '1');
+      var pal = { sapphire:['#1B3A8F','#142A63'], indigo:['#4338CA','#312E81'], teal:['#0E7490','#115E59'], violet:['#6D28D9','#4C1D95'], emerald:['#146B47','#0E4E34'] };
+      var a = localStorage.getItem('ita:accent');
+      if (a && pal[a]) { r.style.setProperty('--accent', pal[a][0]); r.style.setProperty('--accent-strong', pal[a][1]); }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<script>if (document.documentElement.getAttribute('data-no-metrics')) document.body.classList.add('no-metrics');</script>
+<div class="wrap" id="top">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Ita Skoblinski, home">
+        <span class="name">Ita Skoblinski</span>
+        <span class="role">Senior Product Designer</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#work" class="hide-sm">All work</a>
+        <a href="index.html#about" class="hide-sm">About</a>
+        <a href="ai-bot.html" class="hide-sm">AI&nbsp;bot <span style="font-size:.6em;font-weight:700;letter-spacing:.08em;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;vertical-align:2px">BETA</span></a>
+        <a class="nav-cta" href="mailto:sosnat@gmail.com">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="case-hero" data-screen-label="Case 01 / hero">
+    <div class="case-kicker">
+      <a class="crumb" href="index.html#work">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        Selected work
+      </a>
+      <span class="pill">Trolley · Fintech</span>
+    </div>
+    <h1>Redesigning how 4 million people get paid</h1>
+    <p class="sub">Trolley’s recipient-facing portal was a single scrollable widget with no hierarchy, no home, and no context. This is the research-led redesign that changed that.</p>
+    
+
+    <p class="bottomline"><b>Bottom line:</b> Fewer support tickets, fewer silent payment failures, and one consistent experience across portal, widget, and iframe.</p>
+    <div class="case-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">Senior Product Designer</div></div>
+      <div class="m"><div class="mk">Scope</div><div class="mv">End-to-end ownership</div></div>
+      <div class="m"><div class="mk">Timeline</div><div class="mv">2024–2025</div></div>
+      <div class="m"><div class="mk">Reach</div><div class="mv">4M+ recipients · 210 countries</div></div>
+    </div>
+  </header>
+
+  <div class="case-cover" data-screen-label="Case 01 / live prototype">
+    <div class="proto-frame">
+      <div class="proto-bar">
+        <span class="proto-dot"></span><span class="proto-dot"></span><span class="proto-dot"></span>
+        <span class="proto-title">Trolley Recipient Portal — live prototype</span>
+        <a class="proto-open" href="trolley/trolley-portal-prototype.html" target="_blank" rel="noopener">Open in new tab &#8599;</a>
+      </div>
+      <iframe class="proto-iframe" src="trolley/trolley-portal-prototype.html" title="Trolley Recipient Portal — interactive prototype" loading="lazy"></iframe>
+    </div>
+    <div class="cap">From a single-scroll widget to a portal with a home, history, and context at every step. This is the actual interactive prototype — scroll and click around, or open it full-screen.</div>
+  </div>
+
+  <div class="case-shell">
+    <aside class="case-nav" aria-label="Sections">
+      <ol>
+        <li><a href="#research"><span class="n">01</span> Research</a></li>
+        <li><a href="#problems"><span class="n">02</span> Problems</a></li>
+        <li><a href="#decisions"><span class="n">03</span> Decisions</a></li>
+        <li><a href="#beforeafter"><span class="n">04</span> Before/After</a></li>
+        <li><a href="#prototype"><span class="n">05</span> Prototype</a></li>
+        <li><a href="#outcomes"><span class="n">06</span> Outcomes</a></li>
+      </ol>
+      <div class="nav-cv">
+        <a class="crumb" href="cv.html" target="_blank" rel="noopener" style="font-weight:600;color:var(--ink)">View CV &rarr;</a>
+      </div>
+    </aside>
+
+    <div class="case-body">
+      <section class="case-sec" id="research">
+        <div class="sec-kicker">Discovery &amp; Research</div>
+        <h2>Five merchant types. <em>One broken experience.</em></h2>
+        <p class="lead">Research spanned five distinct merchant categories, each with different recipient profiles, payout preferences and failure modes. Every one of them shared the same complaints about the portal.</p>
+        <div class="impact-row">
+          <div class="ic"><div class="iv">5</div><div class="il">Merchant types researched across gaming, creative, contractor, developer and creator economy</div></div>
+          <div class="ic"><div class="iv">4M<span class="sym">+</span></div><div class="il">Recipients across 210+ countries relying on the portal for payouts</div></div>
+          <div class="ic"><div class="iv">3</div><div class="il">Primary failure categories: tax confusion, verification friction, missing context</div></div>
+        </div>
+        <div class="persona-grid">
+          <div class="persona"><div class="pk">01 · Gaming Platform</div><p>&ldquo;Our recipients expect a mobile-first experience, they're used to Cash App and Venmo. A complex web form doesn't match their mental model at all.&rdquo;</p><div class="pm">30K recipients · US · 18–30 · Bank transfer</div></div>
+          <div class="persona"><div class="pk">02 · Digital Art Marketplace</div><p>&ldquo;Artists don't know where their money went. They submit bank details and then nothing, no confirmation, no timeline, just silence.&rdquo;</p><div class="pm">25K recipients · Global · 22–45 · Mixed PayPal/Bank</div></div>
+          <div class="persona"><div class="pk">03 · EU Contractor Platform</div><p>&ldquo;Our users are sophisticated policy professionals. But the form reads like it was designed for US tax lawyers, not European contractors.&rdquo;</p><div class="pm">12K recipients · EU · 30–55 · Bi-weekly</div></div>
+          <div class="persona"><div class="pk">04 · Developer Tools Company</div><p>&ldquo;A contractor switched account type and payments stopped, they had no idea changing that field would invalidate their tax form.&rdquo;</p><div class="pm">79K recipients · 50+ countries · 25–44</div></div>
+          <div class="persona"><div class="pk">05 · Influencer Marketing</div><p>&ldquo;Our creators are money-savvy with zero tolerance for friction. They want fast, direct bank transfers, no intermediaries.&rdquo;</p><div class="pm">51K recipients · US · 18–34 · $1B+ paid</div></div>
+        </div>
+        <p>Across all five, six cross-cutting patterns held: <strong>mobile-first always</strong>, <strong>global &ne; US tax literacy</strong>, <strong>trust is fragile</strong>, <strong>bank transfer is winning</strong>, <strong>every support ticket is a design failure</strong>, and <strong>context was missing everywhere</strong>.</p>
+      </section>
+
+      <section class="case-sec" id="problems">
+        <div class="sec-kicker">Problem Definition</div>
+        <h2>What was <em>actually broken</em></h2>
+        <p>Research surfaced a clear gap between what the portal provided and what recipients needed. These weren't aesthetic issues, they were structural failures causing real payment delays and support burden.</p>
+        <div class="problem-list">
+          <div class="prob"><span class="pn">1</span><div><b>Everything in one screen, no hierarchy.</b> General info, payout method, bank details, verification, errors and legal disclaimers crammed into one scrollable form. Users didn't know what needed action.</div></div>
+          <div class="prob"><span class="pn">2</span><div><b>Multiple simultaneous errors, no recovery path.</b> Name mismatch, wrong account type and unverified status appeared together with no priority, and &ldquo;Add &amp; Activate&rdquo; CTAs showed even in error states.</div></div>
+          <div class="prob"><span class="pn">3</span><div><b>Tax flows with no guidance for non-US users.</b> W-8BEN and W-9 forms appeared with minimal explanation. Global recipients, the majority, had no context for withholding or why they needed a TIN.</div></div>
+          <div class="prob"><span class="pn">4</span><div><b>No portal beyond the widget.</b> No home, no payment history, no notification center. Every interaction started from scratch with no continuity.</div></div>
+          <div class="prob"><span class="pn">5</span><div><b>&ldquo;Delivered&rdquo; with no explanation.</b> Status showed &ldquo;Delivered&rdquo; but recipients hadn't received funds, driving thousands of support tickets monthly.</div></div>
+          <div class="prob"><span class="pn">6</span><div><b>Account type changes had no impact assessment.</b> Switching Individual&rarr;Business silently invalidated tax forms. Users discovered it only when payments stopped.</div></div>
+        </div>
+      </section>
+
+      <section class="case-sec" id="decisions">
+        <div class="sec-kicker">Design Decisions</div>
+        <h2>How research <em>shaped the design</em></h2>
+        <p>Each structural decision traces directly to a research finding, not aesthetic preference.</p>
+        <div class="steps">
+          <div class="step"><div class="sn">01</div><h4>From widget → full portal</h4><p>Finding: recipients had no home. Decision: a full wallet home with payment summary, alert state, notifications and quick actions, and a responsive sidebar that collapses to a thumb-reachable bottom nav.</p></div>
+          <div class="step"><div class="sn">02</div><h4>Progressive disclosure for account edits</h4><p>Finding: switching account type silently broke everything. Decision: a 7-step guided edit flow with an explicit impact warning showing exactly what will change before you commit.</p></div>
+          <div class="step"><div class="sn">03</div><h4>One error, one fix</h4><p>Finding: the old widget showed three errors at once and users froze. Decision: each verification step surfaces a single issue, with an inline FAQ answering &ldquo;why do I have withholding?&rdquo; next to the field.</p></div>
+          <div class="step"><div class="sn">04</div><h4>Context everywhere</h4><p>Finding: artists didn’t know why forms were voided; EU contractors didn’t understand withholding. Decision: every form shows status, rate and why, in plain language, not IRS terminology.</p></div>
+        </div>
+      </section>
+
+      <section class="case-sec" id="beforeafter">
+        <div class="sec-kicker">Before / After</div>
+        <h2>The old widget vs. <em>the new portal</em></h2>
+        <p>The before reflects the actual 2024 widget, a single-scroll form with no error hierarchy. The after shows the redesigned step-by-step flows — explore both in the <a href="#prototype" style="color:var(--accent-bright);font-weight:600">live prototype below</a>.</p>
+        <div class="twocol">
+          <div><div class="lbl">Before</div><ul><li>Single scrollable form, all sections, all errors at once</li><li>Up to 4 conflicting error messages, no hierarchy</li><li>&ldquo;Add &amp; Activate&rdquo; visible even in error states</li><li>No step indicator, no sense of progress</li><li>Legal disclaimer always visible, visual noise</li></ul></div>
+          <div><div class="lbl">After</div><ul><li>Step indicator shows exactly where the user is</li><li>One status message per screen, clear colour coding</li><li>Single CTA: Fix &amp; Retry or Add &amp; Activate</li><li>Account type handled separately with impact assessment</li><li>Mobile-first: thumb-reachable primary actions</li></ul></div>
+        </div>
+      </section>
+
+      <section class="case-sec" id="prototype">
+        <div class="sec-kicker">Interactive Prototype</div>
+        <h2>The full portal &mdash; <em>built and navigable</em></h2>
+        <p>All sections are navigable in the working prototype. The Pay Profile edit flow walks through all 7 steps; verification shows both approved and failed states; the experience adapts across standalone portal, embedded widget and iframe.</p>
+        <div class="proto-frame">
+          <div class="proto-bar">
+            <span class="proto-dot"></span><span class="proto-dot"></span><span class="proto-dot"></span>
+            <span class="proto-title">Trolley Recipient Portal — full interactive prototype</span>
+            <a class="proto-open" href="trolley/trolley-portal-prototype.html" target="_blank" rel="noopener">Open in new tab &#8599;</a>
+          </div>
+          <iframe class="proto-iframe tall" src="trolley/trolley-portal-prototype.html" title="Trolley Recipient Portal — full interactive prototype" loading="lazy"></iframe>
+        </div>
+      </section>
+
+      <section class="case-sec" id="outcomes">
+        <div class="sec-kicker">Outcomes</div>
+        <h2>What changed <em>for recipients</em></h2>
+        <div class="impact-row">
+          <div class="ic"><div class="iv">&darr; Tax support</div><div class="il">Tickets dropped after inline FAQ and contextual error states reduced confusion about withholding and voided forms</div></div>
+          <div class="ic"><div class="iv">&uarr; Completion</div><div class="il">Step-by-step account-type edit flow surfaced impact warnings before destructive changes, fewer silent failures</div></div>
+          <div class="ic"><div class="iv">3 surfaces</div><div class="il">Consistent experience across standalone portal, embedded widget and iframe, same logic, adapted layout</div></div>
+        </div>
+        <p>The redesign moved from a widget-first to a portal-first model, with research-validated priorities for the flows that caused the most friction.</p>
+        <div class="callout"><p><b>What I'd do with more time:</b> usability testing with hourly workers and international recipients on the tax flow; an A/B test of the step-by-step edit vs. the old single form; longitudinal tracking of support volume by category; and proactive &ldquo;your tax form expires in 30 days&rdquo; notifications before a payment is blocked.</p></div>
+      </section>
+    </div>
+  </div>
+
+  <nav class="case-next">
+    <a href="case-ask-the-catalog.html">
+      <div><div class="nk">Next case</div><div class="nt">Ask the Catalog &middot; Music publishing &amp; AI</div></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
+  </nav>
+
+</div>
+
+<script src="assets/case-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,2128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trolley Recipient Portal — Case Study Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#1D4ED8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F6F8FC;
+    --surface: #FFFFFF;
+    --surface2: #EAF0FA;
+    --border: #D5DEEC;
+    --border-light: #C3D0E4;
+    --text: #102C66;
+    --text-muted: #5B6473;
+    --text-dim: #616B7B;
+    --accent: #1D4ED8;
+    --accent-soft: rgba(37,99,235,0.10);
+    --green: #146E47;
+    --green-soft: rgba(20,110,71,0.12);
+    --amber: #8A5A00;
+    --amber-soft: rgba(138,90,0,0.12);
+    --red: #C9342B;
+    --red-soft: rgba(201,52,43,0.12);
+    --mono: 'Inter', ui-monospace, 'SF Mono', Menlo, monospace;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── CASE STUDY WRAPPER ── */
+  .cs-header {
+    background: linear-gradient(135deg, #FFFFFF 0%, #EAF0FA 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .cs-header-left { display: flex; align-items: center; gap: 16px; }
+  .cs-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    background: var(--accent-soft);
+    border: 1px solid rgba(79,127,255,0.3);
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+  .cs-title { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+  .cs-title strong { color: var(--text); font-weight: 600; }
+  .cs-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    background: var(--green-soft);
+    border: 1px solid rgba(61,214,140,0.25);
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .app-shell {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* ── CASE STUDY SIDEBAR ── */
+  .cs-sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  .cs-sidebar-label {
+    font-size: 10px;
+    font-family: var(--mono);
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    padding: 0 8px 8px;
+    margin-top: 4px;
+  }
+  .cs-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1px solid transparent;
+  }
+  .cs-nav-item:hover { background: var(--surface2); }
+  .cs-nav-item.active {
+    background: var(--accent-soft);
+    border-color: rgba(79,127,255,0.3);
+  }
+  .cs-nav-item.active .nav-label { color: var(--accent); }
+  .nav-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    background: var(--surface2);
+    flex-shrink: 0;
+  }
+  .cs-nav-item.active .nav-icon { background: var(--accent-soft); }
+  .nav-label { font-size: 13px; font-weight: 500; color: var(--text-muted); }
+  .nav-sub {
+    display: flex; flex-direction: column; gap: 2px;
+    padding-left: 52px; margin-top: -4px; margin-bottom: 4px;
+  }
+  .nav-sub-item {
+    font-size: 12px; color: var(--text-dim);
+    padding: 5px 8px; border-radius: 6px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .nav-sub-item:hover { color: var(--text-muted); background: var(--surface2); }
+  .nav-sub-item.active { color: var(--accent); font-weight: 500; }
+
+  .cs-meta {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .cs-meta strong { color: var(--text-muted); display: block; margin-bottom: 6px; font-size: 10px; letter-spacing: 0.1em; font-family: var(--mono); text-transform: uppercase; }
+
+  /* ── DEVICE FRAME ── */
+  .device-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: radial-gradient(ellipse at 60% 40%, rgba(79,127,255,0.04) 0%, transparent 70%),
+                var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .device-area::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(79,127,255,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .device-frame {
+    width: 390px;
+    height: 720px;
+    background: var(--surface);
+    border-radius: 40px;
+    border: 2px solid var(--border-light);
+    box-shadow:
+      0 0 0 6px #1B2A4A, 0 30px 70px rgba(16,44,102,0.28);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .device-notch {
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 34px;
+    background: #0d1117;
+    border-radius: 0 0 20px 20px;
+    z-index: 10;
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px;
+  }
+  .notch-cam { width: 10px; height: 10px; border-radius: 50%; background: #1e2530; border: 1px solid #2a3140; }
+  .notch-speaker { width: 36px; height: 4px; border-radius: 2px; background: #1e2530; }
+
+  /* ── SCREEN CONTENT ── */
+  .screen {
+    flex: 1;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    padding-top: 34px; /* notch */
+    animation: screenIn 0.25s ease;
+  }
+  .screen.active { display: flex; }
+
+  @keyframes screenIn {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* STATUS BAR */
+  .status-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 20px 4px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* TOP NAV */
+  .top-nav {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 20px;
+  }
+  .back-btn {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 12px; color: var(--text-muted);
+    transition: all 0.15s; flex-shrink: 0;
+  }
+  .back-btn:hover { background: var(--border); color: var(--text); }
+  .top-nav-title { font-size: 15px; font-weight: 600; flex: 1; }
+  .top-nav-action { font-size: 12px; color: var(--accent); cursor: pointer; font-weight: 500; }
+
+  /* SCROLL CONTENT */
+  .scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px 100px;
+    scrollbar-width: none;
+  }
+  .scroll-content::-webkit-scrollbar { display: none; }
+
+  /* BOTTOM NAV */
+  .bottom-nav {
+    display: flex;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    padding: 8px 0 16px;
+    position: sticky; bottom: 0;
+  }
+  .bottom-nav-item {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    cursor: pointer; padding: 6px 4px;
+    transition: all 0.15s;
+  }
+  .bottom-nav-item .bn-icon { font-size: 18px; line-height: 1; }
+  .bottom-nav-item .bn-label { font-size: 10px; color: var(--text-dim); font-weight: 500; }
+  .bottom-nav-item.active .bn-label { color: var(--accent); }
+  .bottom-nav-item.active .bn-icon { filter: none; }
+
+  /* ── COMPONENTS ── */
+
+  /* Alert banner */
+  .alert-banner {
+    margin: 12px 20px;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 12px; line-height: 1.5;
+  }
+  .alert-banner.warning {
+    background: var(--amber-soft);
+    border: 1px solid rgba(240,164,41,0.3);
+    color: var(--amber);
+  }
+  .alert-banner.error {
+    background: var(--red-soft);
+    border: 1px solid rgba(248,81,73,0.3);
+    color: var(--red);
+  }
+  .alert-banner .alert-icon { font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+  .alert-banner .alert-link {
+    display: block; margin-top: 4px;
+    font-weight: 600; text-decoration: underline; cursor: pointer;
+  }
+
+  /* Section header */
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 0 8px;
+  }
+  .section-title { font-size: 11px; font-family: var(--mono); letter-spacing: 0.1em; color: var(--text-dim); text-transform: uppercase; }
+  .section-link { font-size: 12px; color: var(--accent); cursor: pointer; }
+
+  /* Card */
+  .card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 10px;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: var(--border-light); }
+
+  /* Amount display */
+  .amount-display {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .amount-meta { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+  /* Status pill */
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    font-family: var(--mono);
+  }
+  .status-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
+  .status-pill.approved { background: var(--green-soft); color: var(--green); border: 1px solid rgba(61,214,140,0.25); }
+  .status-pill.approved::before { background: var(--green); }
+  .status-pill.incomplete { background: var(--amber-soft); color: var(--amber); border: 1px solid rgba(240,164,41,0.25); }
+  .status-pill.incomplete::before { background: var(--amber); }
+  .status-pill.failed { background: var(--red-soft); color: var(--red); border: 1px solid rgba(248,81,73,0.25); }
+  .status-pill.failed::before { background: var(--red); }
+  .status-pill.voided { background: rgba(125,143,163,0.12); color: var(--text-muted); border: 1px solid rgba(125,143,163,0.2); }
+  .status-pill.voided::before { background: var(--text-muted); }
+  .status-pill.current { background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(79,127,255,0.25); }
+  .status-pill.current::before { background: var(--accent); }
+
+  /* List item */
+  .list-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .list-item:last-child { border-bottom: none; }
+  .list-item-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .list-item-main { flex: 1; min-width: 0; }
+  .list-item-title { font-size: 13px; font-weight: 500; }
+  .list-item-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .list-item-right { text-align: right; flex-shrink: 0; }
+  .list-item-amount { font-family: var(--mono); font-size: 13px; font-weight: 500; }
+  .list-item-arrow { color: var(--text-dim); font-size: 14px; }
+
+  /* Quick action row */
+  .quick-actions { display: flex; gap: 8px; margin: 4px 0 8px; }
+  .qa-btn {
+    flex: 1; padding: 12px 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    cursor: pointer; transition: all 0.15s;
+    font-size: 11px; color: var(--text-muted); font-weight: 500;
+  }
+  .qa-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .qa-btn .qa-icon { font-size: 18px; }
+
+  /* Form elements */
+  .form-label { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; display: block; }
+  .form-input {
+    width: 100%; padding: 11px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: 14px;
+    font-family: var(--sans);
+    outline: none;
+    transition: border-color 0.15s;
+    margin-bottom: 14px;
+  }
+  .form-input:focus { border-color: var(--accent); }
+  .form-input.filled { border-color: var(--border-light); }
+  .form-select {
+    width: 100%;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%237d8fa3' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+
+  /* Radio option */
+  .radio-option {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .radio-option:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .radio-option.selected { border-color: var(--accent); background: var(--accent-soft); }
+  .radio-dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--border-light);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .radio-option.selected .radio-dot { border-color: var(--accent); }
+  .radio-option.selected .radio-dot::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .radio-label { font-size: 14px; font-weight: 500; }
+  .radio-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* CTA button */
+  .btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: all 0.15s;
+    margin-top: 8px;
+  }
+  .btn-primary:hover { background: #1E40AF; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(79,127,255,0.3); }
+  .btn-secondary {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: all 0.15s;
+    margin-top: 6px;
+  }
+  .btn-secondary:hover { border-color: var(--border-light); color: var(--text); }
+
+  /* Progress steps */
+  .step-progress {
+    display: flex; align-items: center; gap: 0;
+    margin: 12px 0 20px;
+  }
+  .step-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--border-light);
+    transition: all 0.3s;
+  }
+  .step-dot.done { background: var(--green); }
+  .step-dot.active { background: var(--accent); width: 20px; border-radius: 4px; }
+  .step-line { flex: 1; height: 1px; background: var(--border); }
+  .step-line.done { background: var(--green); }
+
+  /* Info row */
+  .info-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-key { color: var(--text-muted); }
+  .info-val { font-weight: 500; text-align: right; max-width: 60%; }
+  .info-val.missing { color: var(--amber); font-style: italic; font-weight: 400; }
+  .info-val.error-flag { color: var(--red); display: flex; align-items: center; gap: 4px; }
+
+  /* Timeline */
+  .timeline { padding: 8px 0; }
+  .timeline-item { display: flex; gap: 12px; padding-bottom: 16px; position: relative; }
+  .timeline-item:not(:last-child)::before {
+    content: ''; position: absolute; left: 11px; top: 24px;
+    width: 1px; height: calc(100% - 8px);
+    background: var(--border);
+  }
+  .timeline-dot {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--surface2); border: 2px solid var(--border);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+  }
+  .timeline-dot.success { background: var(--green-soft); border-color: var(--green); color: var(--green); }
+  .timeline-dot.fail { background: var(--red-soft); border-color: var(--red); color: var(--red); }
+  .timeline-text .t-label { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+  .timeline-text .t-date { font-size: 11px; color: var(--text-muted); font-family: var(--mono); }
+
+  /* Tax form row */
+  .tax-form-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .tax-form-row:last-child { border-bottom: none; }
+  .tax-form-icon {
+    width: 32px; height: 32px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; flex-shrink: 0;
+    font-family: var(--mono); color: var(--text-muted); font-size: 9px; font-weight: 600;
+  }
+  .tax-form-main { flex: 1; }
+  .tax-form-name { font-size: 13px; font-weight: 500; }
+  .tax-form-meta { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .tax-form-actions { display: flex; gap: 6px; }
+  .icon-btn {
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 11px;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: all 0.15s;
+  }
+  .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .icon-btn.danger:hover { border-color: var(--red); color: var(--red); }
+
+  /* Pagination */
+  .pagination {
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    padding: 16px 0 8px;
+  }
+  .page-btn {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: var(--mono);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .page-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+  .page-btn:hover:not(.active) { border-color: var(--border-light); color: var(--text); }
+
+  /* FAQ accordion */
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .faq-question {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0;
+    font-size: 13px; font-weight: 500;
+    transition: color 0.15s;
+  }
+  .faq-question:hover { color: var(--accent); }
+  .faq-answer {
+    font-size: 12px; color: var(--text-muted); line-height: 1.6;
+    padding-bottom: 14px;
+    display: none;
+  }
+  .faq-item.open .faq-answer { display: block; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+  .faq-arrow { transition: transform 0.2s; font-size: 12px; color: var(--text-dim); }
+
+  /* Home hero */
+  .home-hero {
+    background: linear-gradient(135deg, rgba(79,127,255,0.08) 0%, rgba(61,214,140,0.04) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px;
+  }
+  .home-greeting { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+  .home-name { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+  .balance-label { font-size: 10px; font-family: var(--mono); letter-spacing: 0.1em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+  .balance-amount { font-family: var(--mono); font-size: 36px; font-weight: 500; letter-spacing: -0.02em; }
+  .balance-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+  /* Notification dot */
+  .notif-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--red);
+    position: absolute; top: -2px; right: -2px;
+  }
+
+  /* Widget iframe style */
+  .widget-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .widget-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px; font-family: var(--mono);
+    color: var(--text-dim); letter-spacing: 0.08em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .widget-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* Step info box */
+  .info-box {
+    background: var(--amber-soft);
+    border: 1px solid rgba(240,164,41,0.25);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 12px; color: var(--amber);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .info-box.info {
+    background: var(--accent-soft);
+    border-color: rgba(37,99,235,0.25); color: #1D4ED8;
+  }
+
+  /* Checklist */
+  .checklist { margin: 8px 0 12px; }
+  .checklist-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--text-muted);
+    padding: 4px 0;
+  }
+  .checklist-item::before {
+    content: '•';
+    color: var(--amber);
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  /* Payout method card */
+  .payout-card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .payout-card:hover { border-color: var(--border-light); }
+  .payout-card.default { border-color: rgba(79,127,255,0.4); }
+  .payout-card-icon {
+    width: 36px; height: 24px;
+    background: var(--border);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-family: var(--mono); color: var(--text-muted);
+  }
+  .payout-card-main { flex: 1; }
+  .payout-card-name { font-size: 13px; font-weight: 500; }
+  .payout-card-num { font-size: 11px; color: var(--text-muted); font-family: var(--mono); }
+  .default-badge {
+    font-size: 10px; font-family: var(--mono);
+    background: var(--accent-soft); color: var(--accent);
+    border: 1px solid rgba(79,127,255,0.3);
+    padding: 2px 8px; border-radius: 4px;
+  }
+
+  /* Address confirm box */
+  .address-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    margin: 12px 0;
+    font-size: 13px;
+    font-family: var(--mono);
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  /* Profile field row */
+  .profile-field {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .profile-field:last-child { border-bottom: none; }
+  .pf-left {}
+  .pf-label { font-size: 11px; color: var(--text-dim); margin-bottom: 3px; }
+  .pf-value { font-size: 14px; font-weight: 500; }
+  .pf-edit {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 12px; color: var(--accent); cursor: pointer;
+    padding: 6px 10px; border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .pf-edit:hover { background: var(--accent-soft); }
+  .error-flag-inline {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; color: var(--red);
+    background: var(--red-soft); border: 1px solid rgba(248,81,73,0.2);
+    padding: 2px 8px; border-radius: 4px;
+  }
+
+  /* Divider */
+  .divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+  /* Small text */
+  .text-sm { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .text-xs { font-size: 11px; color: var(--text-dim); }
+
+  .mt-4 { margin-top: 16px; }
+  .mt-2 { margin-top: 8px; }
+  .mb-2 { margin-bottom: 8px; }
+
+  /* ── RIGHT PANEL: Case study notes ── */
+  .cs-notes {
+    width: 300px;
+    min-width: 300px;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    padding: 28px 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .note-label {
+    font-size: 10px; font-family: var(--mono);
+    letter-spacing: 0.12em; color: var(--text-dim);
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .note-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    font-size: 12px; line-height: 1.6; color: var(--text-muted);
+  }
+  .note-card strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; }
+  .design-tag {
+    display: inline-block;
+    font-size: 10px; font-family: var(--mono);
+    background: var(--accent-soft); color: var(--accent);
+    border: 1px solid rgba(79,127,255,0.2);
+    padding: 3px 8px; border-radius: 4px;
+    margin: 3px 2px 0 0;
+  }
+  .design-tag.green { background: var(--green-soft); color: var(--green); border-color: rgba(61,214,140,0.2); }
+  .design-tag.amber { background: var(--amber-soft); color: var(--amber); border-color: rgba(240,164,41,0.2); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1100px) { .cs-notes { display: none; } }
+  @media (max-width: 800px) { .cs-sidebar { display: none; } }
+
+  /* WHITE+BLUE RESKIN a11y */
+  body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;}
+  :focus-visible{outline:3px solid #2563EB;outline-offset:2px;border-radius:4px;}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
+  .skip-link{position:absolute;left:16px;top:-48px;z-index:400;background:var(--accent);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:top .18s ease;}
+  .skip-link:focus{top:12px;}
+</style>
+</head>
+<body>
+<a href="#app-main" class="skip-link">Skip to prototype</a>
+
+<!-- CASE STUDY HEADER -->
+<header class="cs-header">
+  <div class="cs-header-left">
+    <div class="cs-logo">TROLLEY</div>
+    <div class="cs-title"><strong>Recipient Portal</strong> — Payout, Tax & Verification UX</div>
+  </div>
+  <div class="cs-badge">INTERACTIVE PROTOTYPE</div>
+</header>
+
+<div class="app-shell" id="app-main">
+
+  <!-- LEFT: NAV SIDEBAR -->
+  <nav class="cs-sidebar">
+    <div class="cs-sidebar-label">Flows</div>
+
+    <div class="cs-nav-item active" data-section="home" onclick="navigate('home')">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Wallet Home</div>
+    </div>
+
+    <div class="cs-nav-item" data-section="pay" onclick="navigate('pay-settings')">
+      <div class="nav-icon">💳</div>
+      <div class="nav-label">Payments</div>
+    </div>
+    <div class="nav-sub" id="sub-pay" style="display:none">
+      <div class="nav-sub-item" onclick="navigate('pay-profile')">Pay Profile</div>
+      <div class="nav-sub-item" onclick="navigate('pay-settings')">Payment Settings</div>
+      <div class="nav-sub-item" onclick="navigate('payout-methods')">Payout Methods</div>
+      <div class="nav-sub-item" onclick="navigate('payment-history')">Payment History</div>
+    </div>
+
+    <div class="cs-nav-item" data-section="tax" onclick="navigate('tax-home')">
+      <div class="nav-icon">📋</div>
+      <div class="nav-label">Tax</div>
+    </div>
+    <div class="nav-sub" id="sub-tax" style="display:none">
+      <div class="nav-sub-item" onclick="navigate('tax-home')">Tax Home</div>
+      <div class="nav-sub-item" onclick="navigate('tax-forms')">Tax Forms</div>
+      <div class="nav-sub-item" onclick="navigate('tax-faq')">Tax FAQ</div>
+    </div>
+
+    <div class="cs-nav-item" data-section="verif" onclick="navigate('verifications')">
+      <div class="nav-icon">✅</div>
+      <div class="nav-label">Verifications</div>
+    </div>
+    <div class="nav-sub" id="sub-verif" style="display:none">
+      <div class="nav-sub-item" onclick="navigate('verifications')">Overview</div>
+      <div class="nav-sub-item" onclick="navigate('verif-history')">History</div>
+      <div class="nav-sub-item" onclick="navigate('verif-approved')">Approved Detail</div>
+      <div class="nav-sub-item" onclick="navigate('verif-failed')">Failed Detail</div>
+      <div class="nav-sub-item" onclick="navigate('verif-faq')">FAQ</div>
+    </div>
+
+    <div class="cs-nav-item" data-section="edit" onclick="navigate('edit-profile-1')">
+      <div class="nav-icon">✏️</div>
+      <div class="nav-label">Edit Pay Profile</div>
+    </div>
+    <div class="nav-sub" id="sub-edit" style="display:none">
+      <div class="nav-sub-item" onclick="navigate('edit-profile-1')">1. Account Type</div>
+      <div class="nav-sub-item" onclick="navigate('edit-profile-2')">2. Impact Warning</div>
+      <div class="nav-sub-item" onclick="navigate('edit-profile-3')">3. Country ID</div>
+      <div class="nav-sub-item" onclick="navigate('edit-profile-4')">4. ID Number</div>
+      <div class="nav-sub-item" onclick="navigate('edit-profile-5')">5. Address Sync</div>
+      <div class="nav-sub-item" onclick="navigate('edit-profile-6')">6. Review Form</div>
+      <div class="nav-sub-item" onclick="navigate('edit-profile-7')">7. Confirmation</div>
+    </div>
+
+    <div class="cs-meta">
+      <strong>Project Context</strong>
+      Redesign of Trolley's recipient-facing portal — serving 4M+ payees across 200+ countries. Covers payout configuration, tax form management, identity verification, and self-serve profile editing.
+      <br><br>
+      <strong style="margin-top:8px">Role</strong>
+      Senior Product Designer · End-to-end ownership
+    </div>
+  </nav>
+
+  <!-- CENTER: DEVICE -->
+  <main class="device-area">
+    <div class="device-frame">
+      <div class="device-notch">
+        <div class="notch-speaker"></div>
+        <div class="notch-cam"></div>
+      </div>
+
+      <!-- ═══ SCREEN: HOME ═══ -->
+      <div class="screen active" id="screen-home">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="home-hero">
+          <div class="home-greeting">Good morning,</div>
+          <div class="home-name">Rita Fox 👋</div>
+          <div class="balance-label">Last Payment</div>
+          <div class="balance-amount">$1,000<span style="font-size:18px;color:var(--text-muted)">.00</span></div>
+          <div class="balance-sub">Dec 19, 2024 · <span class="status-pill approved" style="font-size:10px;padding:2px 8px">Delivered</span></div>
+        </div>
+
+        <div class="alert-banner warning">
+          <span class="alert-icon">⚠️</span>
+          <div>You need to submit a new tax form — payments are currently paused.
+            <span class="alert-link" onclick="navigate('tax-home')">Go to Tax Center →</span>
+          </div>
+        </div>
+
+        <div class="scroll-content">
+          <div class="section-header">
+            <span class="section-title">Quick Actions</span>
+          </div>
+          <div class="quick-actions">
+            <div class="qa-btn" onclick="navigate('pay-settings')"><span class="qa-icon">⚙️</span>Pay Settings</div>
+            <div class="qa-btn" onclick="navigate('edit-profile-1')"><span class="qa-icon">➕</span>Add Method</div>
+            <div class="qa-btn" onclick="navigate('verifications')"><span class="qa-icon">🔔</span>Alerts</div>
+          </div>
+
+          <div class="section-header">
+            <span class="section-title">Notifications</span>
+          </div>
+          <div class="card">
+            <div class="list-item" onclick="navigate('verifications')">
+              <div class="list-item-icon">🔔</div>
+              <div class="list-item-main">
+                <div class="list-item-title">Verification expiring soon</div>
+                <div class="list-item-sub">Renew before Jan 15, 2025</div>
+              </div>
+              <div class="list-item-arrow">›</div>
+            </div>
+            <div class="list-item" onclick="navigate('tax-home')">
+              <div class="list-item-icon">📄</div>
+              <div class="list-item-main">
+                <div class="list-item-title">New Tax Form Required</div>
+                <div class="list-item-sub">W-8BEN needs to be updated</div>
+              </div>
+              <div class="list-item-arrow">›</div>
+            </div>
+            <div class="list-item" onclick="navigate('tax-forms')">
+              <div class="list-item-icon">📊</div>
+              <div class="list-item-main">
+                <div class="list-item-title">Year-end tax statement ready</div>
+                <div class="list-item-sub">2024 1099-MISC available</div>
+              </div>
+              <div class="list-item-arrow">›</div>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <span class="section-title">Recent Payments</span>
+            <span class="section-link" onclick="navigate('payment-history')">See all</span>
+          </div>
+          <div class="card">
+            <div class="list-item">
+              <div class="list-item-icon">💸</div>
+              <div class="list-item-main">
+                <div class="list-item-title">Payment received</div>
+                <div class="list-item-sub">Dec 19, 2024</div>
+              </div>
+              <div class="list-item-right">
+                <div class="list-item-amount" style="color:var(--green)">+$1,000</div>
+                <div class="status-pill approved" style="font-size:10px;padding:2px 7px;margin-top:3px">Delivered</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-item-icon">💸</div>
+              <div class="list-item-main">
+                <div class="list-item-title">Payment received</div>
+                <div class="list-item-sub">Nov 30, 2024</div>
+              </div>
+              <div class="list-item-right">
+                <div class="list-item-amount" style="color:var(--text)">+$1,000</div>
+                <div class="status-pill current" style="font-size:10px;padding:2px 7px;margin-top:3px">Sent</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item active" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item" onclick="navigate('pay-settings')"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: PAY SETTINGS ═══ -->
+      <div class="screen" id="screen-pay-settings">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('home')">‹</div>
+          <div class="top-nav-title">Payment Settings</div>
+        </div>
+        <div class="scroll-content">
+          <div class="card" style="padding:14px 16px; margin-bottom:16px">
+            <div class="list-item" style="padding-top:0" onclick="navigate('edit-profile-1')">
+              <div class="list-item-icon">👤</div>
+              <div class="list-item-main">
+                <div class="list-item-title">Profile Information</div>
+                <div class="list-item-sub">Neil Young · neil@yahoo.com</div>
+              </div>
+              <div class="list-item-arrow">›</div>
+            </div>
+            <div class="list-item" onclick="navigate('pay-settings')">
+              <div class="list-item-icon">📍</div>
+              <div class="list-item-main">
+                <div class="list-item-title">Address</div>
+                <div class="list-item-sub">1100 Atwater, Westmount</div>
+              </div>
+              <div class="list-item-arrow">›</div>
+            </div>
+          </div>
+
+          <div class="section-header"><span class="section-title">Default Payout</span></div>
+          <div class="payout-card default">
+            <div class="payout-card-icon">VISA</div>
+            <div class="payout-card-main">
+              <div class="payout-card-name">Visa Card</div>
+              <div class="payout-card-num">•••• 1234</div>
+            </div>
+            <div class="default-badge">DEFAULT</div>
+          </div>
+
+          <div class="section-header">
+            <span class="section-title">All Methods</span>
+            <span class="section-link" onclick="navigate('payout-methods')">Manage</span>
+          </div>
+          <div class="card">
+            <div class="list-item" style="padding-top:0">
+              <div class="list-item-icon">💳</div>
+              <div class="list-item-main"><div class="list-item-title">Visa Card ••••1234</div></div>
+              <div style="display:flex;gap:6px">
+                <button class="icon-btn">Edit</button>
+                <button class="icon-btn danger">Delete</button>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-item-icon">💳</div>
+              <div class="list-item-main"><div class="list-item-title">Master Card ••••1234</div></div>
+              <div style="display:flex;gap:6px">
+                <button class="icon-btn">Edit</button>
+                <button class="icon-btn danger">Delete</button>
+              </div>
+            </div>
+            <div class="list-item" style="padding-bottom:0">
+              <div class="list-item-icon">🏦</div>
+              <div class="list-item-main"><div class="list-item-title">Digital Card ••••1234</div></div>
+              <div style="display:flex;gap:6px">
+                <button class="icon-btn">Edit</button>
+                <button class="icon-btn danger">Delete</button>
+              </div>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="navigate('payout-methods')" style="margin-top:4px">+ Add Payout Method</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: PAY PROFILE ═══ -->
+      <div class="screen" id="screen-pay-profile">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('pay-settings')">‹</div>
+          <div class="top-nav-title">Pay Profile</div>
+        </div>
+        <div class="scroll-content">
+          <div class="card">
+            <div class="profile-field">
+              <div class="pf-left">
+                <div class="pf-label">Account Type</div>
+                <div class="pf-value">Individual</div>
+              </div>
+              <div class="pf-edit" onclick="navigate('edit-profile-1')">✏️ Edit</div>
+            </div>
+            <div class="profile-field">
+              <div class="pf-left">
+                <div class="pf-label">Name</div>
+                <div class="pf-value">Rita Fox</div>
+              </div>
+              <div class="pf-edit">✏️ Edit</div>
+            </div>
+            <div class="profile-field">
+              <div class="pf-left">
+                <div class="pf-label">Email</div>
+                <div class="pf-value">go@gmail.com</div>
+              </div>
+              <div class="pf-edit">✏️ Edit</div>
+            </div>
+            <div class="profile-field">
+              <div class="pf-left">
+                <div class="pf-label">Address</div>
+                <div class="pf-value" style="font-size:13px">1350 Road, Los Angeles, CA 90210</div>
+              </div>
+              <div class="pf-edit" onclick="navigate('edit-profile-5')">✏️ Edit</div>
+            </div>
+          </div>
+          <button class="btn-secondary" onclick="navigate('home')">Done</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: PAYOUT METHODS ═══ -->
+      <div class="screen" id="screen-payout-methods">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('pay-settings')">‹</div>
+          <div class="top-nav-title">Payout Methods</div>
+          <div class="top-nav-action">Choose Default</div>
+        </div>
+        <div class="scroll-content">
+          <div class="payout-card default">
+            <div class="payout-card-icon">VISA</div>
+            <div class="payout-card-main">
+              <div class="payout-card-name">Visa Card</div>
+              <div class="payout-card-num">•••• 1234</div>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <div class="default-badge">DEFAULT</div>
+              <button class="icon-btn">Edit</button>
+              <button class="icon-btn danger">Delete</button>
+            </div>
+          </div>
+          <div class="payout-card">
+            <div class="payout-card-icon">MC</div>
+            <div class="payout-card-main">
+              <div class="payout-card-name">Master Card</div>
+              <div class="payout-card-num">•••• 1234</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button class="icon-btn">Edit</button>
+              <button class="icon-btn danger">Delete</button>
+            </div>
+          </div>
+          <div class="payout-card">
+            <div class="payout-card-icon">DC</div>
+            <div class="payout-card-main">
+              <div class="payout-card-name">Digital Card</div>
+              <div class="payout-card-num">•••• 1234</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button class="icon-btn">Edit</button>
+              <button class="icon-btn danger">Delete</button>
+            </div>
+          </div>
+          <div class="payout-card">
+            <div class="payout-card-icon">PP</div>
+            <div class="payout-card-main">
+              <div class="payout-card-name">PayPal</div>
+              <div class="payout-card-num">•••• 1234</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button class="icon-btn">Edit</button>
+              <button class="icon-btn danger">Delete</button>
+            </div>
+          </div>
+          <div class="pagination">
+            <button class="page-btn">‹</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn">›</button>
+          </div>
+          <button class="btn-primary">+ Add New Account</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: PAYMENT HISTORY ═══ -->
+      <div class="screen" id="screen-payment-history">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('home')">‹</div>
+          <div class="top-nav-title">Payment History</div>
+          <div class="top-nav-action" onclick="navigate('tax-faq')">Payment FAQ</div>
+        </div>
+        <div class="scroll-content">
+          <div class="card">
+            <div class="list-item" style="padding-top:0">
+              <div class="list-item-icon">💸</div>
+              <div class="list-item-main"><div class="list-item-title">$1,000 sent</div><div class="list-item-sub">Dec 19, 2021</div></div>
+              <div class="status-pill current">Sent</div>
+            </div>
+            <div class="list-item">
+              <div class="list-item-icon">💸</div>
+              <div class="list-item-main"><div class="list-item-title">$1,000 sent</div><div class="list-item-sub">Dec 19, 2021</div></div>
+              <div class="status-pill current">Sent</div>
+            </div>
+            <div class="list-item">
+              <div class="list-item-icon">💸</div>
+              <div class="list-item-main"><div class="list-item-title">$1,000 delivered</div><div class="list-item-sub">Dec 19, 2021</div></div>
+              <div class="status-pill approved">Delivered</div>
+            </div>
+            <div class="list-item">
+              <div class="list-item-icon">💸</div>
+              <div class="list-item-main"><div class="list-item-title">$1,000 delivered</div><div class="list-item-sub">Dec 19, 2021</div></div>
+              <div class="status-pill approved">Delivered</div>
+            </div>
+            <div class="list-item" style="padding-bottom:0">
+              <div class="list-item-icon">💸</div>
+              <div class="list-item-main"><div class="list-item-title">$1,000 delivered</div><div class="list-item-sub">Dec 19, 2021</div></div>
+              <div class="status-pill approved">Delivered</div>
+            </div>
+          </div>
+          <div class="info-box info" style="margin-top:8px">
+            <strong style="display:inline;font-size:12px">Why does it say "Delivered" but I don't see the money?</strong><br>
+            Delivery times vary by payment method. Bank transfers can take 1–3 business days to appear.
+          </div>
+          <div class="pagination">
+            <button class="page-btn">‹</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">›</button>
+          </div>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item" onclick="navigate('pay-settings')"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: TAX HOME ═══ -->
+      <div class="screen" id="screen-tax-home">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('home')">‹</div>
+          <div class="top-nav-title">Tax Center</div>
+        </div>
+        <div class="scroll-content">
+          <div class="alert-banner warning">
+            <span class="alert-icon">⚠️</span>
+            <div>Action required: Your W-8BEN needs to be updated to resume payments.
+              <span class="alert-link" onclick="navigate('tax-forms')">Update now →</span>
+            </div>
+          </div>
+          <div class="section-header"><span class="section-title">Current Tax Form</span><span class="section-link" onclick="navigate('tax-forms')">See all</span></div>
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <div style="font-size:16px;font-weight:700;font-family:var(--mono)">W-8BEN</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:3px">Withholding Rate: <strong style="color:var(--green)">0.0%</strong></div>
+              </div>
+              <span class="status-pill current">CURRENT</span>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="icon-btn" onclick="navigate('tax-forms')">✏️ Edit Tax Form</button>
+              <button class="icon-btn">➕ New Tax Form</button>
+            </div>
+          </div>
+
+          <div class="section-header"><span class="section-title">Tax Statements</span><span class="section-link" onclick="navigate('tax-forms')">See all</span></div>
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:14px;font-weight:600">2023 — 1099-MISC</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:3px">Available for download</div>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button class="icon-btn">⬇ Download</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-header"><span class="section-title">Delivery Method</span></div>
+          <div class="card" style="cursor:pointer">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-size:13px;font-weight:500">Statement Delivery</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Electronic delivery enabled</div>
+              </div>
+              <div style="color:var(--accent);font-size:13px">Change ›</div>
+            </div>
+          </div>
+
+          <div class="section-link mt-4" style="text-align:center" onclick="navigate('tax-faq')">Tax FAQ & Help →</div>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item" onclick="navigate('pay-settings')"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: TAX FORMS ═══ -->
+      <div class="screen" id="screen-tax-forms">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('tax-home')">‹</div>
+          <div class="top-nav-title">Tax Forms</div>
+          <div class="top-nav-action" onclick="navigate('tax-faq')">FAQ</div>
+        </div>
+        <div class="scroll-content">
+          <div class="card">
+            <div class="tax-form-row" style="padding-top:0">
+              <div class="tax-form-icon">W8</div>
+              <div class="tax-form-main">
+                <div class="tax-form-name">W-8BEN <span class="status-pill current" style="font-size:10px;padding:2px 7px">CURRENT</span></div>
+                <div class="tax-form-meta">Withholding: 0.0%</div>
+              </div>
+              <div class="tax-form-actions">
+                <button class="icon-btn">View</button>
+                <button class="icon-btn danger">Delete</button>
+              </div>
+            </div>
+            <div class="tax-form-row">
+              <div class="tax-form-icon">W8</div>
+              <div class="tax-form-main">
+                <div class="tax-form-name">W-8BEN</div>
+                <div class="tax-form-meta"><span class="status-pill incomplete" style="font-size:10px;padding:2px 7px">Incomplete</span></div>
+              </div>
+              <div class="tax-form-actions">
+                <button class="icon-btn">Edit</button>
+                <button class="icon-btn danger">Delete</button>
+              </div>
+            </div>
+            <div class="tax-form-row">
+              <div class="tax-form-icon">W8</div>
+              <div class="tax-form-main">
+                <div class="tax-form-name">W-8BEN</div>
+                <div class="tax-form-meta"><span class="status-pill voided" style="font-size:10px;padding:2px 7px">Voided</span></div>
+              </div>
+              <div class="tax-form-actions">
+                <button class="icon-btn danger">Delete</button>
+              </div>
+            </div>
+            <div class="tax-form-row" style="padding-bottom:0">
+              <div class="tax-form-icon">W8</div>
+              <div class="tax-form-main">
+                <div class="tax-form-name">W-8BEN</div>
+                <div class="tax-form-meta"><span class="status-pill incomplete" style="font-size:10px;padding:2px 7px">Incomplete</span></div>
+              </div>
+              <div class="tax-form-actions">
+                <button class="icon-btn">Edit</button>
+                <button class="icon-btn danger">Delete</button>
+              </div>
+            </div>
+          </div>
+          <div class="pagination">
+            <button class="page-btn">‹</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn">›</button>
+          </div>
+          <button class="btn-primary">+ Add New Tax Form</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item" onclick="navigate('pay-settings')"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: TAX FAQ ═══ -->
+      <div class="screen" id="screen-tax-faq">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('tax-home')">‹</div>
+          <div class="top-nav-title">Tax FAQ</div>
+        </div>
+        <div class="scroll-content">
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">Why was my tax form voided? <span class="faq-arrow">▾</span></div>
+            <div class="faq-answer">Tax forms are voided when information changes significantly or when a newer form supersedes the previous one. You'll need to submit a new form to resume payments.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">Why do I have withholding on my tax form? <span class="faq-arrow">▾</span></div>
+            <div class="faq-answer">This is likely because you did not provide a verified TIN from your country's tax authorities. Providing a valid TIN can reduce your withholding rate to 0.0%.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">What is a W-8BEN form? <span class="faq-arrow">▾</span></div>
+            <div class="faq-answer">A W-8BEN is a US tax form used by non-US individuals to certify their foreign status and claim tax treaty benefits, potentially reducing the amount withheld from payments.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">How often do I need to renew? <span class="faq-arrow">▾</span></div>
+            <div class="faq-answer">W-8BEN forms are valid for 3 years. You'll receive a notification before expiration so you can renew without payment interruption.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">Can I use W-9 instead of W-8BEN? <span class="faq-arrow">▾</span></div>
+            <div class="faq-answer">W-9 is for US persons only. If you are a non-US individual or entity, you must use the appropriate W-8 series form.</div>
+          </div>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item" onclick="navigate('pay-settings')"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: VERIFICATIONS ═══ -->
+      <div class="screen" id="screen-verifications">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('home')">‹</div>
+          <div class="top-nav-title">Verifications</div>
+        </div>
+        <div class="scroll-content">
+          <div class="alert-banner warning">
+            <span class="alert-icon">🔔</span>
+            <div>Your verification is about to expire. Renew to avoid payment interruption.</div>
+          </div>
+          <div class="section-header"><span class="section-title">Current Verification</span></div>
+          <div class="card" onclick="navigate('verif-approved')" style="cursor:pointer">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+              <div>
+                <div style="font-size:15px;font-weight:600">Individual Verification</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:3px;font-family:var(--mono)">Submitted Dec 19, 2021</div>
+              </div>
+              <span class="status-pill approved">APPROVED</span>
+            </div>
+            <div style="font-size:12px;color:var(--accent)">View details ›</div>
+          </div>
+          <div class="section-link mt-2 mb-2" style="text-align:center" onclick="navigate('verif-history')">See verification history ›</div>
+          <button class="btn-primary" style="margin-top:16px" onclick="navigate('verif-history')">Start New Verification</button>
+          <button class="btn-secondary" onclick="navigate('verif-faq')">Verification FAQ</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item" onclick="navigate('pay-settings')"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: VERIF HISTORY ═══ -->
+      <div class="screen" id="screen-verif-history">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('verifications')">‹</div>
+          <div class="top-nav-title">Verification Center</div>
+          <div class="top-nav-action" onclick="navigate('verif-faq')">FAQ</div>
+        </div>
+        <div class="scroll-content">
+          <div class="section-header"><span class="section-title">Verifications</span></div>
+          <div class="card">
+            <div class="tax-form-row" style="padding-top:0" onclick="navigate('verif-approved')">
+              <div class="tax-form-icon" style="font-size:14px">👤</div>
+              <div class="tax-form-main">
+                <div class="tax-form-name">Individual Verification <span class="status-pill current" style="font-size:10px;padding:2px 7px">CURRENT</span></div>
+                <div class="tax-form-meta">Withholding Rate: 0.0%</div>
+              </div>
+              <span class="list-item-arrow">›</span>
+            </div>
+            <div class="tax-form-row" onclick="navigate('verif-failed')">
+              <div class="tax-form-icon" style="font-size:10px">W8</div>
+              <div class="tax-form-main">
+                <div class="tax-form-name">W-8BEN</div>
+                <div class="tax-form-meta"><span class="status-pill incomplete" style="font-size:10px;padding:2px 7px">Incomplete</span></div>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button class="icon-btn danger" onclick="event.stopPropagation()">Delete</button>
+              </div>
+            </div>
+            <div class="tax-form-row">
+              <div class="tax-form-icon" style="font-size:10px">W8</div>
+              <div class="tax-form-main">
+                <div class="tax-form-name">W-8BEN</div>
+                <div class="tax-form-meta"><span class="status-pill voided" style="font-size:10px;padding:2px 7px">Voided</span></div>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button class="icon-btn danger">Delete</button>
+              </div>
+            </div>
+            <div class="tax-form-row" style="padding-bottom:0">
+              <div class="tax-form-icon" style="font-size:10px">W8</div>
+              <div class="tax-form-main">
+                <div class="tax-form-name">W-8BEN</div>
+                <div class="tax-form-meta"><span class="status-pill incomplete" style="font-size:10px;padding:2px 7px">Incomplete</span></div>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button class="icon-btn danger">Delete</button>
+              </div>
+            </div>
+          </div>
+          <div class="pagination">
+            <button class="page-btn">‹</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn">›</button>
+          </div>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item" onclick="navigate('pay-settings')"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: VERIF APPROVED ═══ -->
+      <div class="screen" id="screen-verif-approved">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('verif-history')">‹</div>
+          <div class="top-nav-title">Individual Verification</div>
+        </div>
+        <div class="scroll-content">
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 0 16px">
+            <span class="status-pill approved" style="font-size:13px;padding:6px 14px">APPROVED</span>
+          </div>
+          <div class="section-header"><span class="section-title">Timeline</span></div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot success">✓</div>
+              <div class="timeline-text">
+                <div class="t-label">Submitted</div>
+                <div class="t-date">9 February 2025</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot success">✓</div>
+              <div class="timeline-text">
+                <div class="t-label">Document Expiration</div>
+                <div class="t-date">9 February 2027</div>
+              </div>
+            </div>
+          </div>
+          <div class="section-header"><span class="section-title">Details</span></div>
+          <div class="card">
+            <div class="info-row">
+              <span class="info-key">Business Name</span>
+              <span class="info-val">Majoong</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Registration No.</span>
+              <span class="info-val" style="font-family:var(--mono)">1334455331</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Street Address</span>
+              <span class="info-val">3270 Saint Joseph West</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">City</span>
+              <span class="info-val">Austin</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Country</span>
+              <span class="info-val">United States</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Status</span>
+              <span class="info-val"><span class="status-pill approved" style="font-size:10px">Verified</span></span>
+            </div>
+          </div>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item" onclick="navigate('pay-settings')"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: VERIF FAILED ═══ -->
+      <div class="screen" id="screen-verif-failed">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('verif-history')">‹</div>
+          <div class="top-nav-title">Individual Verification</div>
+        </div>
+        <div class="scroll-content">
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 0 16px">
+            <span class="status-pill failed" style="font-size:13px;padding:6px 14px">FAILED — MISSING REQUIREMENTS</span>
+          </div>
+          <div class="section-header"><span class="section-title">Timeline</span></div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot success">✓</div>
+              <div class="timeline-text">
+                <div class="t-label">Submitted</div>
+                <div class="t-date">9 February 2025</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot fail">✗</div>
+              <div class="timeline-text">
+                <div class="t-label" style="color:var(--red)">Verification Failed</div>
+                <div class="t-date">9 February 2025</div>
+              </div>
+            </div>
+          </div>
+          <div class="section-header"><span class="section-title">Details</span></div>
+          <div class="card">
+            <div class="info-row">
+              <span class="info-key">Business Name</span>
+              <span class="info-val error-flag">⚠ Unverified</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Registration No.</span>
+              <span class="info-val error-flag">⚠ Unverified</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Street Address</span>
+              <span class="info-val">3270 Saint Joseph West</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">City</span>
+              <span class="info-val">Austin</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Country</span>
+              <span class="info-val">United States</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Postal Code</span>
+              <span class="info-val missing">Unverified</span>
+            </div>
+          </div>
+          <button class="btn-primary" style="margin-top:16px" onclick="navigate('verifications')">Retake Verification</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item" onclick="navigate('pay-settings')"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ SCREEN: VERIF FAQ ═══ -->
+      <div class="screen" id="screen-verif-faq">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('verifications')">‹</div>
+          <div class="top-nav-title">Verification FAQ</div>
+        </div>
+        <div class="scroll-content">
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">Why do I need to verify? <span class="faq-arrow">▾</span></div>
+            <div class="faq-answer">Verification is required to comply with anti-money laundering (AML) regulations and to confirm your identity before releasing payments.</div>
+          </div>
+          <div class="faq-item open" onclick="toggleFaq(this)">
+            <div class="faq-question">What documents are accepted? <span class="faq-arrow">▾</span></div>
+            <div class="faq-answer">We accept government-issued ID, passports, business registration documents, and utility bills for address verification. Accepted document types vary by country.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">How long does verification take? <span class="faq-arrow">▾</span></div>
+            <div class="faq-answer">Most verifications are processed within 1–2 business days. Complex cases may take up to 5 business days.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">What happens if verification fails? <span class="faq-arrow">▾</span></div>
+            <div class="faq-answer">You'll see exactly which fields failed and why. You can retake verification with corrected information at any time.</div>
+          </div>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item" onclick="navigate('pay-settings')"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- ═══ EDIT PROFILE STEPS ═══ -->
+
+      <!-- Step 1: Account Type -->
+      <div class="screen" id="screen-edit-profile-1">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('pay-profile')">‹</div>
+          <div class="top-nav-title">Pay Profile</div>
+        </div>
+        <div class="scroll-content">
+          <div class="step-progress">
+            <div class="step-dot active"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+          </div>
+          <div style="font-size:18px;font-weight:700;margin-bottom:6px">What is your account type?</div>
+          <div class="text-sm" style="margin-bottom:20px">Note: changing this may require additional information and documents.</div>
+          <div class="radio-option selected" onclick="selectRadio(this)">
+            <div class="radio-dot"></div>
+            <div>
+              <div class="radio-label">Individual</div>
+              <div class="radio-sub">Personal account for freelancers & contractors</div>
+            </div>
+          </div>
+          <div class="radio-option" onclick="selectRadio(this)">
+            <div class="radio-dot"></div>
+            <div>
+              <div class="radio-label">Registered Business</div>
+              <div class="radio-sub">Requires business registration number & documentation</div>
+            </div>
+          </div>
+          <div class="info-box" style="margin-top:16px">
+            <strong style="display:block;margin-bottom:4px;font-size:12px">Business accounts require:</strong>
+            • Business Registration Number<br>
+            • Uploading Business Documentation
+          </div>
+          <button class="btn-primary" onclick="navigate('edit-profile-2')">Continue →</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- Step 2: Impact Warning -->
+      <div class="screen" id="screen-edit-profile-2">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('edit-profile-1')">‹</div>
+          <div class="top-nav-title">W9 Substitute Form</div>
+        </div>
+        <div class="scroll-content">
+          <div class="step-progress">
+            <div class="step-dot done"></div>
+            <div class="step-line done"></div>
+            <div class="step-dot active"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+            <div class="step-line"></div>
+            <div class="step-dot"></div>
+          </div>
+          <div style="font-size:18px;font-weight:700;margin-bottom:6px">Important</div>
+          <div class="alert-banner warning" style="margin: 0 0 16px">
+            <span class="alert-icon">⚠️</span>
+            <div>This change impacts your profile. You'll need to update several data points to implement this change.</div>
+          </div>
+          <div class="text-sm" style="margin-bottom:16px">The following will need to be updated:</div>
+          <div class="checklist">
+            <div class="checklist-item">ID verification</div>
+            <div class="checklist-item">Phone Number</div>
+            <div class="checklist-item">New W9 Tax Form</div>
+            <div class="checklist-item">Address</div>
+          </div>
+          <button class="btn-primary" onclick="navigate('edit-profile-3')" style="margin-top:24px">Continue</button>
+          <button class="btn-secondary" onclick="navigate('pay-profile')">Another Time</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- Step 3: Country of ID -->
+      <div class="screen" id="screen-edit-profile-3">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('edit-profile-2')">‹</div>
+          <div class="top-nav-title">Country of ID</div>
+        </div>
+        <div class="scroll-content">
+          <div class="step-progress">
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot active"></div><div class="step-line"></div>
+            <div class="step-dot"></div><div class="step-line"></div>
+            <div class="step-dot"></div><div class="step-line"></div>
+            <div class="step-dot"></div><div class="step-line"></div>
+            <div class="step-dot"></div>
+          </div>
+          <div style="font-size:18px;font-weight:700;margin-bottom:20px">Select your country</div>
+          <label class="form-label">Country</label>
+          <select class="form-input form-select">
+            <option>Brazil</option>
+            <option>Canada</option>
+            <option>United States</option>
+            <option>United Kingdom</option>
+            <option>Germany</option>
+            <option>France</option>
+          </select>
+          <button class="btn-primary" onclick="navigate('edit-profile-4')">Continue →</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- Step 4: ID Number -->
+      <div class="screen" id="screen-edit-profile-4">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('edit-profile-3')">‹</div>
+          <div class="top-nav-title">Your ID Number</div>
+        </div>
+        <div class="scroll-content">
+          <div class="step-progress">
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot active"></div><div class="step-line"></div>
+            <div class="step-dot"></div><div class="step-line"></div>
+            <div class="step-dot"></div><div class="step-line"></div>
+            <div class="step-dot"></div>
+          </div>
+          <div style="font-size:18px;font-weight:700;margin-bottom:6px">Your ID Number</div>
+          <div class="text-sm" style="margin-bottom:20px">ID belonging to the account holder of the account being paid.</div>
+          <label class="form-label">Brazil — ID Type</label>
+          <select class="form-input form-select">
+            <option>CPF</option>
+            <option>CNPJ</option>
+            <option>Passport</option>
+            <option>Other</option>
+          </select>
+          <label class="form-label">ID Number</label>
+          <input class="form-input filled" type="text" value="90210" />
+          <div style="color:var(--accent);font-size:13px;cursor:pointer;margin-top:-8px;margin-bottom:16px">+ Add Another ID Number</div>
+          <button class="btn-primary" onclick="navigate('edit-profile-5')">Continue →</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- Step 5: Address Sync -->
+      <div class="screen" id="screen-edit-profile-5">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('edit-profile-4')">‹</div>
+          <div class="top-nav-title">Tax Form Address</div>
+        </div>
+        <div class="scroll-content">
+          <div class="step-progress">
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot active"></div><div class="step-line"></div>
+            <div class="step-dot"></div><div class="step-line"></div>
+            <div class="step-dot"></div>
+          </div>
+          <div style="font-size:18px;font-weight:700;margin-bottom:8px">Update your tax form address?</div>
+          <div class="text-sm" style="margin-bottom:16px">The address on your tax return and your tax form should match.</div>
+          <div class="address-box">Rua Visconde de Santa Isabel 1810<br>São Paulo, Brazil<br>04385-090</div>
+          <div class="radio-option selected" onclick="selectRadio(this)">
+            <div class="radio-dot"></div>
+            <div>
+              <div class="radio-label">Yes, update my tax form</div>
+              <div class="radio-sub">Keeps your tax return and form in sync</div>
+            </div>
+          </div>
+          <div class="radio-option" onclick="selectRadio(this)">
+            <div class="radio-dot"></div>
+            <div>
+              <div class="radio-label">No, keep old address on tax form</div>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="navigate('edit-profile-6')" style="margin-top:20px">Continue →</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- Step 6: Review -->
+      <div class="screen" id="screen-edit-profile-6">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('edit-profile-5')">‹</div>
+          <div class="top-nav-title">Review Updated Tax Form</div>
+        </div>
+        <div class="scroll-content">
+          <div class="step-progress">
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot active"></div><div class="step-line"></div>
+            <div class="step-dot"></div>
+          </div>
+          <div class="section-header"><span class="section-title">Tax Profile</span></div>
+          <div class="card">
+            <div class="info-row">
+              <span class="info-key">Profile Type</span>
+              <span class="info-val">Individual</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Name</span>
+              <span class="info-val">Tom Jones</span>
+            </div>
+          </div>
+          <div class="section-header"><span class="section-title">Tax Identification</span></div>
+          <div class="card">
+            <div class="info-row">
+              <span class="info-key">VAT 1</span>
+              <span class="info-val" style="font-family:var(--mono)">1331333456-7</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">VAT 2</span>
+              <span class="info-val" style="font-family:var(--mono)">1331333456-7</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">TIN</span>
+              <span class="info-val" style="font-family:var(--mono)">1331333456-7</span>
+            </div>
+          </div>
+          <div class="section-header"><span class="section-title">Individual Details</span></div>
+          <div class="card">
+            <div class="info-row">
+              <span class="info-key">Place of Birth</span>
+              <span class="info-val missing">Missing</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Date of Birth</span>
+              <span class="info-val">Feb 23, 1980</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Address</span>
+              <span class="info-val" style="font-size:12px">1800 Atwater Ave, Montreal, Canada H4C1A7</span>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="navigate('edit-profile-7')">Save Tax Form</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+      <!-- Step 7: Confirmation -->
+      <div class="screen" id="screen-edit-profile-7">
+        <div class="status-bar"><span>9:41</span><span>●●● 100%</span></div>
+        <div class="top-nav">
+          <div class="back-btn" onclick="navigate('pay-profile')">‹</div>
+          <div class="top-nav-title">Pay Profile</div>
+        </div>
+        <div class="scroll-content">
+          <div style="text-align:center;padding:32px 0 24px">
+            <div style="font-size:48px;margin-bottom:12px">✅</div>
+            <div style="font-size:20px;font-weight:700;margin-bottom:8px">Profile Updated</div>
+            <div class="text-sm" style="text-align:center">Your pay profile and tax form have been saved successfully.</div>
+          </div>
+          <div class="step-progress" style="margin-bottom:24px">
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div><div class="step-line done"></div>
+            <div class="step-dot done"></div>
+          </div>
+          <div class="card">
+            <div class="profile-field" style="padding-top:0">
+              <div class="pf-left"><div class="pf-label">Account Type</div><div class="pf-value">Individual</div></div>
+              <span class="status-pill approved" style="font-size:10px">Saved</span>
+            </div>
+            <div class="profile-field">
+              <div class="pf-left"><div class="pf-label">Name</div><div class="pf-value">Rita Fox</div></div>
+              <span class="status-pill approved" style="font-size:10px">Saved</span>
+            </div>
+            <div class="profile-field">
+              <div class="pf-left"><div class="pf-label">Address</div><div class="pf-value" style="font-size:13px">1350 Road, Los Angeles, CA</div></div>
+              <span class="status-pill approved" style="font-size:10px">Saved</span>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="navigate('home')" style="margin-top:8px">Back to Home</button>
+          <button class="btn-secondary" onclick="navigate('pay-profile')">View Profile</button>
+        </div>
+        <nav class="bottom-nav">
+          <div class="bottom-nav-item" onclick="navigate('home')"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></div>
+          <div class="bottom-nav-item" onclick="navigate('payment-history')"><span class="bn-icon">📊</span><span class="bn-label">History</span></div>
+          <div class="bottom-nav-item active"><span class="bn-icon">💳</span><span class="bn-label">Pay</span></div>
+          <div class="bottom-nav-item" onclick="navigate('tax-home')"><span class="bn-icon">📋</span><span class="bn-label">Tax</span></div>
+          <div class="bottom-nav-item" onclick="navigate('verifications')"><span class="bn-icon">✅</span><span class="bn-label">Verify</span></div>
+        </nav>
+      </div>
+
+    </div><!-- /device-frame -->
+  </main>
+
+  <!-- RIGHT: CASE STUDY NOTES -->
+  <aside class="cs-notes">
+    <div>
+      <div class="note-label">Design Decisions</div>
+      <div class="note-card" id="design-note">
+        <strong>Wallet Home</strong>
+        Alert-first hierarchy: critical compliance issues (paused payments) surface above the fold before any navigation. Notifications are grouped to reduce cognitive load — recipient doesn't have to hunt across sections to understand their status.
+        <div style="margin-top:10px">
+          <span class="design-tag">Alert hierarchy</span>
+          <span class="design-tag green">Status clarity</span>
+          <span class="design-tag amber">Compliance UX</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="note-label">Context</div>
+      <div class="note-card">
+        <strong>Trolley Recipient Portal</strong>
+        4M+ recipients across 210+ countries. Core challenge: making dense regulatory requirements (W-8/W-9/DAC7, AML verification, global payout routing) self-serve for non-expert users in varied legal jurisdictions.
+      </div>
+    </div>
+    <div>
+      <div class="note-label">My Role</div>
+      <div class="note-card">
+        End-to-end ownership of the recipient-facing portal. Led research, interaction design, accessibility audit (WCAG 2.1), and cross-functional delivery with engineering, legal, and compliance teams.
+        <div style="margin-top:10px">
+          <span class="design-tag">UX Research</span>
+          <span class="design-tag">Interaction Design</span>
+          <span class="design-tag green">WCAG 2.1</span>
+          <span class="design-tag amber">Compliance</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+const designNotes = {
+  'home': { title: 'Wallet Home', note: 'Alert-first hierarchy: critical compliance issues (paused payments) surface above the fold. Notifications grouped to reduce cognitive load — recipient sees their complete status at a glance without hunting across sections.', tags: [['Alert hierarchy',''], ['Status clarity','green'], ['Compliance UX','amber']] },
+  'pay-settings': { title: 'Payment Settings', note: 'Single-screen overview of all payment configuration — profile, default payout, and method management. Reduces clicks to common actions (add method, change default). Edit and delete inline rather than deep in a submenu.', tags: [['Reduce clicks',''], ['Inline actions','green']] },
+  'pay-profile': { title: 'Pay Profile', note: 'All profile fields visible at once with inline edit access. Users can scan their complete profile state without navigating sub-screens. Error states (verification failures) surface per-field, not as a global error.', tags: [['Scannability',''], ['Inline edit','green']] },
+  'payout-methods': { title: 'Payout Methods', note: 'Default method visually distinguished from others at a glance. Pagination keeps list manageable for recipients with many methods. Add-new CTA always visible at bottom — never buried.', tags: [['Visual hierarchy',''], ['CTA accessibility','green']] },
+  'payment-history': { title: 'Payment History', note: 'Status pills use color + label (not color alone) for accessibility. Contextual FAQ inline — the "why does it say Delivered?" question surfaces right in the list where confusion happens, not in a separate help center.', tags: [['WCAG color','green'], ['Contextual help',''], ['Accessible status','green']] },
+  'tax-home': { title: 'Tax Center', note: 'Compliance-critical: paused payments due to missing tax form shown prominently. Separates "current form" from "statement history" — two distinct user needs that often got conflated in the old UI. One-click access to edit or create new form.', tags: [['Compliance UX','amber'], ['Task separation',''], ['Information architecture','']] },
+  'tax-forms': { title: 'Tax Forms List', note: 'W-8BEN lifecycle states (current, incomplete, voided) all visible in one view. Color-coded status pills let users quickly identify which forms need action. Pagination handles recipients with long form histories.', tags: [['Status lifecycle',''], ['Visual scanning','green'], ['WCAG color','green']] },
+  'tax-faq': { title: 'Tax FAQ', note: 'Accordion pattern keeps the page scannable — users find the one answer they need without scrolling through walls of text. Questions are phrased in first person to match how recipients actually think about their situation.', tags: [['Scannability',''], ['User voice','green']] },
+  'verifications': { title: 'Verifications', note: 'Expiry alert is prominent — losing verification status pauses payments. Current status and history separated to avoid confusion. Start New Verification is always available but not forced — recipient controls timing.', tags: [['Expiry UX','amber'], ['User control',''], ['Status clarity','green']] },
+  'verif-history': { title: 'Verification History', note: 'Full audit trail of verification attempts, including incomplete and voided entries. Recipients need this to understand their verification status over time — especially when re-submitting after a failure.', tags: [['Audit trail',''], ['Re-submission UX','amber']] },
+  'verif-approved': { title: 'Approved Verification', note: 'Timeline shows the complete lifecycle of the verification — submission date and expiry date both visible. Field-by-field detail lets recipient confirm exactly what was approved, important for regulated compliance.', tags: [['Timeline clarity',''], ['Audit detail','green']] },
+  'verif-failed': { title: 'Failed Verification', note: 'Field-level error flags (not generic "verification failed") tell the recipient exactly which pieces of information couldn\'t be verified. Retake CTA is prominent — failure state leads directly to resolution, not a dead end.', tags: [['Error specificity','red'], ['Resolution path',''], ['No dead ends','green']] },
+  'verif-faq': { title: 'Verification FAQ', note: 'One FAQ item pre-opened to show there\'s content. Questions surface the most common confusions: why verify, what documents are accepted, what happens on failure.', tags: [['Contextual help',''], ['Progressive disclosure','']] },
+  'edit-profile-1': { title: 'Step 1: Account Type', note: 'Changing account type triggers a cascade of required updates (ID, tax form, verification). Step 1 sets context for what\'s coming — user commits before seeing the full complexity. Requirements listed inline, not buried in help text.', tags: [['Progressive disclosure',''], ['Informed consent','amber']] },
+  'edit-profile-2': { title: 'Step 2: Impact Warning', note: 'Explicit warning before the user proceeds — changing from Individual to Business isn\'t trivial. Lists exactly what will be affected. "Another Time" is always available — no forced commitment mid-flow.', tags: [['User control',''], ['Informed consent','amber'], ['Escape hatch','green']] },
+  'edit-profile-3': { title: 'Step 3: Country Selection', note: 'Country drives which ID types are available in step 4. Collecting it here (not at ID entry) means step 4 can show only the relevant options for that jurisdiction — no overwhelming global ID type list.', tags: [['Progressive disclosure',''], ['Conditional logic','']] },
+  'edit-profile-4': { title: 'Step 4: ID Number', note: 'ID type dropdown filters to country-specific options (CPF/CNPJ for Brazil vs. SSN for US). "Add Another ID Number" supports edge cases (recipients with multiple valid IDs) without cluttering the primary path.', tags: [['Contextual filtering',''], ['Edge case handling','green']] },
+  'edit-profile-5': { title: 'Step 5: Address Sync', note: 'Critical compliance consideration: tax return address and tax form address should match. Surfacing this as an explicit choice — not silently syncing or ignoring — keeps the recipient legally informed and in control.', tags: [['Compliance UX','amber'], ['Explicit consent',''], ['Legal clarity','green']] },
+  'edit-profile-6': { title: 'Step 6: Review', note: 'Full summary before commit — no surprises on save. "Missing" fields (Place of Birth) shown in amber to prompt completion without blocking submission. Grouped by logical category (profile, tax ID, details).', tags: [['Review before commit',''], ['Non-blocking warnings','amber']] },
+  'edit-profile-7': { title: 'Step 7: Confirmation', note: 'Progress bar fully complete — visual closure. Each saved field confirmed individually. Two CTAs: primary returns to home (most common), secondary lets user inspect the profile they just updated.', tags: [['Closure design','green'], ['Task completion',''], ['Dual CTA logic','']] },
+};
+
+function navigate(screen) {
+  // Hide all screens
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  // Show target
+  const target = document.getElementById('screen-' + screen);
+  if (target) target.classList.add('active');
+
+  // Update sidebar active state
+  document.querySelectorAll('.cs-nav-item').forEach(i => i.classList.remove('active'));
+
+  // Determine which section
+  let section = screen.split('-')[0];
+  if (screen.startsWith('pay') || screen.startsWith('payout') || screen.startsWith('payment')) section = 'pay';
+  if (screen.startsWith('tax')) section = 'tax';
+  if (screen.startsWith('verif')) section = 'verif';
+  if (screen.startsWith('edit')) section = 'edit';
+  if (screen === 'home') section = 'home';
+
+  const navItem = document.querySelector(`[data-section="${section}"]`);
+  if (navItem) navItem.classList.add('active');
+
+  // Show/hide sub-navs
+  ['pay','tax','verif','edit'].forEach(s => {
+    const sub = document.getElementById('sub-' + s);
+    if (sub) sub.style.display = (section === s) ? 'flex' : 'none';
+  });
+
+  // Update active sub-item
+  document.querySelectorAll('.nav-sub-item').forEach(i => i.classList.remove('active'));
+  // Try to find matching sub-item
+  document.querySelectorAll('.nav-sub-item').forEach(item => {
+    if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(screen)) {
+      item.classList.add('active');
+    }
+  });
+
+  // Update design note
+  const note = designNotes[screen];
+  if (note) {
+    const noteEl = document.getElementById('design-note');
+    noteEl.innerHTML = `<strong>${note.title}</strong>${note.note}<div style="margin-top:10px">${note.tags.map(([label, type]) => `<span class="design-tag ${type}">${label}</span>`).join('')}</div>`;
+  }
+}
+
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
+
+function selectRadio(el) {
+  const parent = el.closest('.scroll-content') || el.parentElement;
+  parent.querySelectorAll('.radio-option').forEach(r => r.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// Init: show pay sub-nav on load? No — just home
+</script>
+</body>
+</html>

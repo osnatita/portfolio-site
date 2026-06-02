@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CanadaVisa+, Ita Skoblinski</title>
+<link rel="stylesheet" href="assets/site.css" />
+<link rel="stylesheet" href="assets/case.css" />
+<script>
+  (function () {
+    try {
+      var t = JSON.parse(localStorage.getItem('jr:tweaks') || '{}');
+      var r = document.documentElement;
+      if (t.typeScale) r.style.setProperty('--type-scale', t.typeScale);
+      var dmap = { compact: 0.82, regular: 1, comfy: 1.22 };
+      if (t.density && dmap[t.density]) r.style.setProperty('--density', dmap[t.density]);
+      if (t.showMetrics === false) r.setAttribute('data-no-metrics', '1');
+      var pal = { sapphire:['#1B3A8F','#142A63'], indigo:['#4338CA','#312E81'], teal:['#0E7490','#115E59'], violet:['#6D28D9','#4C1D95'], emerald:['#146B47','#0E4E34'] };
+      var a = localStorage.getItem('ita:accent');
+      if (a && pal[a]) { r.style.setProperty('--accent', pal[a][0]); r.style.setProperty('--accent-strong', pal[a][1]); }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* Wireframe sizing: single column, framed, height-capped banners */
+  .case-fig img { background:#fff; box-shadow:0 4px 24px rgba(14,26,43,.07); object-fit:cover; object-position:top; max-height:540px; border-radius:12px; }
+  .case-figs { grid-template-columns:1fr; gap:24px; }
+</style>
+</head>
+<body>
+<script>if (document.documentElement.getAttribute('data-no-metrics')) document.body.classList.add('no-metrics');</script>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Ita Skoblinski, home">
+      <span class="name">Ita Skoblinski</span>
+      <span class="role hide-sm">Senior Product Designer</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#work" class="hide-sm">All work</a>
+      <a href="index.html#about" class="hide-sm">About</a>
+      <a href="ai-bot.html" class="hide-sm">AI&nbsp;bot <span style="font-size:.6em;font-weight:700;letter-spacing:.08em;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;vertical-align:2px">BETA</span></a>
+      <a href="mailto:sosnat@gmail.com" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <header class="case-hero">
+    <div class="case-kicker">
+      <a class="crumb" href="index.html#work">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        Selected work
+      </a>
+      <span class="pill">CanadaVisa · GovTech</span>
+    </div>
+    <h1>Turning &ldquo;Not eligible&rdquo; into &ldquo;Not yet.&rdquo;</h1>
+    <p class="sub">CanadaVisa.com had 28 million yearly users and a brutal funnel: you were either eligible to immigrate, or you were ignored. I designed a product to serve the majority who fell through.</p>
+    <p class="bottomline"><b>Bottom line:</b> A 0→1 product that converted ~15% of free users to premium and gave hundreds of thousands of dormant users a path back.</p>
+    <div class="case-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">UX Manager · Product Lead</div></div>
+      <div class="m"><div class="mk">Scope</div><div class="mv">0 → 1 product design</div></div>
+      <div class="m"><div class="mk">Platform</div><div class="mv">Web · Mobile-first</div></div>
+      <div class="m"><div class="mk">Users</div><div class="mv">28M yearly · global</div></div>
+    </div>
+  </header>
+
+  <div class="case-cover">
+    <div class="case-fig">
+      <img src="assets/cases/cv-1.png" alt="CanadaVisa+ landing page" loading="lazy" />
+      <figcaption>The public-facing marketing site. Direct, confident, mobile-first, &ldquo;Build your Canadian Immigration Plan Today&rdquo; reframes the product as a tool, not a test.</figcaption>
+    </div>
+  </div>
+
+  <div class="case-shell">
+    <aside class="case-nav" aria-label="Sections">
+      <ol>
+        <li><a href="#background"><span class="n">01</span> Background</a></li>
+        <li><a href="#research"><span class="n">02</span> Research</a></li>
+        <li><a href="#solution"><span class="n">03</span> Solution</a></li>
+        <li><a href="#outcomes"><span class="n">04</span> Outcomes</a></li>
+      </ol>
+      
+    </aside>
+    <div class="case-body">
+      <section class="case-sec" id="background">
+        <div class="sec-kicker">Background</div>
+        <h2>A machine built to serve <em>the eligible only.</em></h2>
+        <p class="lead">CanadaVisa.com is the world's largest Canadian immigration information platform. Its funnel was highly optimized, but binary.</p>
+        <p>Users completed an eligibility assessment; eligible users became leads for immigration lawyers; everyone else, the majority, hit a dead end and churned.</p>
+        <div class="callout"><p>&ldquo;We have hundreds of thousands of dormant users who want to immigrate but aren't eligible yet. We're ignoring them. Build something that serves them, and turns them into leads when they become eligible.&rdquo;</p></div>
+        <p>The ask was clear: a freemium self-serve tool to guide ineligible users toward eligibility across 120+ Canadian immigration programs. I led it end-to-end, stakeholder alignment, user research, IA, wireframes and handoff.</p>
+        <div class="impact-row">
+          <div class="ic"><div class="iv">28M</div><div class="il">yearly users on the CanadaVisa platform</div></div>
+          <div class="ic"><div class="iv">120<span class="sym">+</span></div><div class="il">Canadian immigration programs to navigate</div></div>
+          <div class="ic"><div class="iv">10</div><div class="il">user interviews with dormant users</div></div>
+          <div class="ic"><div class="iv">67.8<span class="sym">%</span></div><div class="il">of dormant users aged 20–35, the most motivated cohort</div></div>
+        </div>
+      </section>
+
+      <section class="case-sec" id="research">
+        <div class="sec-kicker">Discovery & Research</div>
+        <h2>The ineligible aren't <em>uninterested. They're stuck.</em></h2>
+        <p>Research combined quantitative analysis of the existing user database with 10 qualitative interviews, demographics, missing qualification types, even purchasing power by country.</p>
+        <div class="cardgrid">
+          <div class="c"><span class="chip chip-red">Quant finding</span><div class="ct">Language was the #1 blocker</div><p>The most common missing qualification was language proficiency, IELTS scores. A single CLB level improvement could unlock dozens of programs.</p></div>
+          <div class="c"><span class="chip chip-red">Quant finding</span><div class="ct">Users had the means, not the path</div><p>Most dormant users were educated professionals. The issue wasn't motivation, it was opacity. They didn't know which gap to close first.</p></div>
+          <div class="c"><span class="chip chip-red">Quant finding</span><div class="ct">The binary verdict caused churn</div><p>The funnel returned pass/fail. A &ldquo;Not eligible&rdquo; result gave no path forward and no reason to return. It treated a spectrum as a binary.</p></div>
+          <div class="c"><span class="chip chip-amber">Interview</span><div class="ct">Eligibility was entangled with family</div><p>&ldquo;My parents are looking for a husband for me. His eligibility to immigrate is one of the things we're looking for.&rdquo; Decisions are rarely individual.</p></div>
+          <div class="c"><span class="chip chip-amber">Interview</span><div class="ct">Users were self-educating in parallel</div><p>&ldquo;I'd like to understand my education options in Canada.&rdquo; People googled alongside the tool, they needed IA that could hold the whole journey.</p></div>
+          <div class="c"><span class="chip chip-amber">Interview</span><div class="ct">Trust was already earned</div><p>&ldquo;I trust CanadaVisa because of David Cohen's email and his no-BS approach.&rdquo; The opportunity was to extend that trust into the product.</p></div>
+        </div>
+        <h2 style="font-size:calc(20px * var(--type-scale));margin-top:8px">User personas</h2>
+        <p>Five user types emerged, each with different blockers, timelines and motivations.</p>
+        <div class="cardgrid">
+          <div class="c"><div class="ct">Divya Rao</div><div class="role">Software engineer, India · 30</div><p class="q">&ldquo;I'm a working engineer but my IELTS scores are low.&rdquo;</p><div class="need"><b>Key need</b>IELTS improvement path + job-finding resources in Canada</div></div>
+          <div class="c"><div class="ct">Bayo Amir</div><div class="role">Engineering student, Nigeria · 24</div><p class="q">&ldquo;I know getting my master's could help me immigrate.&rdquo;</p><div class="need"><b>Key need</b>Education pathway modelling + timeline to eligibility</div></div>
+          <div class="c"><div class="ct">Femi Ali</div><div class="role">Business owner, Nigeria · 38</div><p class="q">&ldquo;I have the means to immigrate but no work experience.&rdquo;</p><div class="need"><b>Key need</b>Business immigration routes + net-worth thresholds</div></div>
+          <div class="c"><div class="ct">Cherry G</div><div class="role">Professional, Philippines · 35</div><p class="q">&ldquo;I'm almost eligible but not sure what my next step is.&rdquo;</p><div class="need"><b>Key need</b>Near-eligibility nudge + PNP program guidance</div></div>
+        </div>
+        <h2 style="font-size:calc(20px * var(--type-scale));margin-top:8px">User journey</h2>
+        <p>Mapping the steps from discovering ineligibility to becoming an active lead revealed where the experience broke, and where we had leverage.</p>
+        <div class="steps">
+          <div class="step"><div class="sn">01</div><h4>Assessment</h4><p>The algorithm scores the user across 120 immigration programs.</p><div class="so">Problem: binary outcome, eligible or nothing</div></div>
+          <div class="step"><div class="sn">02</div><h4>Score reveal</h4><p>User sees their CRS/FSW score, where they stand, but not what would change if they acted.</p><div class="so">Problem: static snapshot, no path forward</div></div>
+          <div class="step"><div class="sn">03</div><h4>Path Finder (new)</h4><p>User adjusts sliders, language, education, experience, and sees in real time which programs open up. A &ldquo;what if&rdquo; simulator for immigration.</p><div class="so">Opportunity: turn &ldquo;no&rdquo; into &ldquo;not yet, here's how&rdquo;</div></div>
+          <div class="step"><div class="sn">04</div><h4>Personalized plan (premium)</h4><p>A detailed report, recommended programs, specific gaps, partner services (IELTS courses, job boards, legal consults).</p><div class="so">Opportunity: freemium + partner revenue</div></div>
+          <div class="step"><div class="sn">05</div><h4>Re-engagement → lead conversion</h4><p>As users improve over time, the system detects when they cross a threshold and surfaces lawyer consultations.</p><div class="so">Opportunity: automated lifecycle → business goal</div></div>
+        </div>
+      </section>
+
+      <section class="case-sec" id="solution">
+        <div class="sec-kicker">Design Solution</div>
+        <h2>The Path Finder: <em>immigration as a simulation.</em></h2>
+        <p>The core insight: eligibility isn't binary, it's a multi-variable equation. Instead of showing a score, I designed a tool that let users manipulate variables and see exactly which programs opened up.</p>
+        <div class="case-figs">
+          <div class="case-fig"><img src="assets/cases/cv-2.png" alt="Path Finder language sliders" loading="lazy" /><figcaption>Self-assessment sliders for English and French, four dimensions each. The depth-vs-accuracy trade-off is shown up front.</figcaption></div>
+          <div class="case-fig"><img src="assets/cases/cv-4.png" alt="Freemium tier design" loading="lazy" /><figcaption>Free vs. Premium. The free tier delivers real value; premium unlocks 80+ program evaluation and the lead-conversion trigger.</figcaption></div>
+        </div>
+        <div class="case-fig"><img src="assets/cases/cv-3.png" alt="Full Path Finder scenario builder" loading="lazy" /><figcaption>The complete Path Finder: language, Canadian experience, spouse profile, job offer, entrepreneurship and family, all inputs that update program eligibility in real time.</figcaption></div>
+        <h2 style="font-size:calc(20px * var(--type-scale));margin-top:8px">Key design decisions</h2>
+        <p>Each grounded in a specific research finding.</p>
+        <div class="steps">
+          <div class="step"><div class="sn">01</div><h4>Sliders over dropdowns</h4><p>Immigration variables feel like a questionnaire. Sliders make them feel like dials, inviting exploration. Closer to a game than an application.</p><div class="so">→ Users iterated on scenarios and stayed longer</div></div>
+          <div class="step"><div class="sn">02</div><h4>Show programs unlocked, not a single score</h4><p>A CRS number means nothing to most users. &ldquo;8 programs open&rdquo; vs &ldquo;24 programs open&rdquo; is immediately meaningful. I led with the programs count.</p><div class="so">→ Gave users a concrete goal to work toward</div></div>
+          <div class="step"><div class="sn">03</div><h4>Freemium gate at depth, not entry</h4><p>Gating too early kills engagement. The free tier delivers genuine value; premium reveals the specific steps and partner services.</p><div class="so">→ Higher activation before the paywall</div></div>
+          <div class="step"><div class="sn">04</div><h4>Spouse profile as a first-class feature</h4><p>Research showed immigration decisions are rarely solo. I pushed for spouse eligibility modelling from the start, a use case competitors had missed.</p><div class="so">→ Addressed a whole segment others ignored</div></div>
+        </div>
+      </section>
+
+      <section class="case-sec" id="outcomes">
+        <div class="sec-kicker">Outcomes</div>
+        <h2>A new product category <em>in immigration tech.</em></h2>
+        <p>CanadaVisa+ launched as a genuinely novel product, no direct competitor existed at the time. The challenge was making a complex, bureaucratic system feel navigable and empowering for people in high-stakes situations.</p>
+        <div class="impact-row">
+          <div class="ic"><div class="iv">120<span class="sym">+</span></div><div class="il">immigration programs surfaced, all navigable by a non-expert</div></div>
+          <div class="ic"><div class="iv">3</div><div class="il">freemium tiers with clear free / premium / advanced differentiation</div></div>
+          <div class="ic"><div class="iv">200<span class="sym">+</span></div><div class="il">assessment questions mapped into a non-intimidating flow</div></div>
+        </div>
+        <div class="callout"><p><b>What I learned.</b> Designing for emotional, high-stakes decisions means framing that reduces anxiety before it asks for input. The freemium gate works best when the free tier delivers a real &ldquo;aha&rdquo;. And cross-functional scope, lawyers, devs, marketing, UI, made the 200+ question data map as important as the wireframes. With more time: usability testing with dormant users before the UI phase.</p></div>
+      </section>
+    </div>
+  </div>
+
+  <nav class="case-next">
+    <a href="case-soundway.html">
+      <div><div class="nk">Next case</div><div class="nt">Soundway Records &middot; Music</div></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
+  </nav>
+</main>
+
+</body>
+</html>

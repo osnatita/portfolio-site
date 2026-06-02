@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI bot (beta), Ita Skoblinski</title>
+<meta name="description" content="Itabot — a chatbot trained on Ita Skoblinski's portfolio. Ask about her projects, AI work, accessibility approach, and availability." />
+<meta name="theme-color" content="#1D4ED8" />
+<link rel="stylesheet" href="assets/site.css" />
+<link rel="stylesheet" href="assets/case.css" />
+<style>
+  .bot-wrap { max-width: var(--maxw); margin: 0 auto; padding: calc(40px * var(--density)) 48px calc(56px * var(--density)); }
+  .bot-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .bot-badge { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, #fff); border: 1px solid color-mix(in srgb, var(--accent) 25%, #fff); padding: 4px 10px; border-radius: 999px; }
+  .bot-wrap h1 { font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif; font-weight: 800; letter-spacing: -.03em; line-height: 1.02; font-size: clamp(30px, 5vw, 52px); margin: 0 0 14px; text-wrap: balance; }
+  .bot-wrap h1 em { font-style: normal; color: var(--accent); }
+  .bot-sub { font-size: calc(17px * var(--type-scale)); line-height: 1.6; color: var(--ink-2, #334155); max-width: 620px; margin: 0 0 26px; }
+  .bot-frame { border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: #fff; box-shadow: 0 26px 64px -30px rgba(14,26,43,.45); }
+  .bot-bar { display: flex; align-items: center; gap: 7px; padding: 11px 16px; background: var(--paper-2); border-bottom: 1px solid var(--line); }
+  .bot-dot { width: 11px; height: 11px; border-radius: 50%; background: #CBD5E1; flex: none; }
+  .bot-bar .bot-dot:nth-of-type(1) { background: #FF5F56; }
+  .bot-bar .bot-dot:nth-of-type(2) { background: #FFBD2E; }
+  .bot-bar .bot-dot:nth-of-type(3) { background: #27C93F; }
+  .bot-url { flex: 1; font-size: 11.5px; color: var(--ink-3); margin-left: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bot-open { margin-left: auto; font-size: 11.5px; font-weight: 600; color: var(--accent); text-decoration: none; white-space: nowrap; }
+  .bot-open:hover { color: var(--accent-bright); }
+  .bot-iframe { width: 100%; height: clamp(560px, 78vh, 860px); border: 0; display: block; background: #fff; }
+  .bot-note { margin-top: 14px; font-size: 13px; color: var(--ink-3); line-height: 1.55; }
+  @media (max-width: 700px) { .bot-wrap { padding: 28px 22px 40px; } .bot-iframe { height: 76vh; } }
+</style>
+<script>
+  (function () {
+    try {
+      var t = JSON.parse(localStorage.getItem('jr:tweaks') || '{}');
+      var r = document.documentElement;
+      if (t.typeScale) r.style.setProperty('--type-scale', t.typeScale);
+      var dmap = { compact: 0.82, regular: 1, comfy: 1.22 };
+      if (t.density && dmap[t.density]) r.style.setProperty('--density', dmap[t.density]);
+      if (t.showMetrics === false) r.setAttribute('data-no-metrics', '1');
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Ita Skoblinski, home">
+      <span class="name">Ita Skoblinski</span>
+      <span class="role hide-sm">Senior Product Designer</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#work" class="hide-sm">Work</a>
+      <a href="how-i-work-with-ai.html" class="hide-sm">How I work with AI</a>
+      <a href="mailto:sosnat@gmail.com" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="bot-wrap">
+  <div class="bot-kicker">
+    <span class="bot-badge">AI bot · beta</span>
+  </div>
+  <h1>Ask me anything <em>about Ita's work.</em></h1>
+  <p class="bot-sub">Itabot is a chatbot trained on this portfolio — built by Ita as a working example of designing with AI. Ask about her projects, AI work, accessibility approach, or availability. It's early, so it won't get everything right.</p>
+
+  <div class="bot-frame">
+    <div class="bot-bar">
+      <span class="bot-dot"></span><span class="bot-dot"></span><span class="bot-dot"></span>
+      <span class="bot-url">itabot · ask about Ita Skoblinski</span>
+      <a class="bot-open" href="https://v0-itabot-portfolio-deployment.vercel.app/" target="_blank" rel="noopener">Open in new tab &#8599;</a>
+    </div>
+    <iframe class="bot-iframe" src="https://v0-itabot-portfolio-deployment.vercel.app/" title="Itabot — ask about Ita Skoblinski's work" loading="lazy"></iframe>
+  </div>
+  <p class="bot-note">Itabot runs as a separate beta service. If it doesn't load, you can <a href="https://v0-itabot-portfolio-deployment.vercel.app/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">open it in a new tab</a>.</p>
+</main>
+
+<script src="assets/case-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ita Skoblinski — CV</title>
+<meta name="theme-color" content="#0A1020" />
+<link rel="stylesheet" href="assets/home.css" />
+<style>
+  body { background: var(--paper-2); }
+
+  /* toolbar */
+  .cv-toolbar { max-width: 1040px; margin: 22px auto 0; padding: 0 24px; display: flex; justify-content: flex-end; gap: 12px; }
+  .cv-toolbar a, .cv-toolbar button { font: inherit; font-size: 14px; font-weight: 600; font-family: var(--serif); border: 1px solid var(--line-2); background: #fff; color: var(--ink); border-radius: 999px; padding: 9px 18px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: background .15s, color .15s, border-color .15s; }
+  .cv-toolbar a:hover, .cv-toolbar button:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .cv-toolbar svg { width: 15px; height: 15px; }
+
+  /* sheet */
+  .sheet { max-width: 1040px; margin: 18px auto 56px; background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px -50px rgba(14,26,43,.5); }
+
+  /* dark header band — matches the site */
+  .cv-hero { position: relative; overflow: hidden; background: var(--night); color: var(--night-text); padding: clamp(34px, 5vw, 52px) clamp(28px, 5vw, 56px); }
+  .cv-hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background:
+    radial-gradient(46% 80% at 6% 0%, color-mix(in srgb, #1D4ED8 32%, transparent) 0%, transparent 60%),
+    radial-gradient(40% 70% at 98% 20%, color-mix(in srgb, #6D28D9 26%, transparent) 0%, transparent 62%);
+    filter: blur(8px); }
+  .cv-hero > * { position: relative; z-index: 1; }
+  .cv-head { display: flex; align-items: flex-start; gap: clamp(18px, 3vw, 30px); }
+  .mono { flex: none; width: clamp(58px, 7vw, 78px); height: clamp(58px, 7vw, 78px); border-radius: 14px; border: 1.5px solid rgba(255,255,255,.3); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .mono b { font-family: var(--display); font-weight: 800; font-size: clamp(24px, 3vw, 32px); letter-spacing: -0.03em; color: #fff; line-height: 1; }
+  .mono span { font-size: 8px; font-weight: 600; letter-spacing: 0.18em; text-indent: 0.18em; text-transform: uppercase; color: #C7D2E4; margin-top: 5px; }
+  .cv-name { font-family: var(--display); font-weight: 800; font-size: clamp(34px, 5.2vw, 56px); letter-spacing: -0.035em; line-height: 0.98; color: #fff; }
+  .cv-role { margin-top: 8px; font-family: var(--display); font-weight: 600; font-size: clamp(15px, 1.7vw, 19px); letter-spacing: -0.01em; color: #8FB0FF; }
+  .cv-bio { margin-top: 14px; font-size: calc(15px * var(--type-scale)); line-height: 1.62; color: #D7DEEC; max-width: 64ch; }
+  .cv-bio b { color: #fff; font-weight: 600; }
+  .cv-contact { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px 10px; }
+  .cv-contact a { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: #fff; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 7px 14px; transition: background .15s, border-color .15s; }
+  .cv-contact a:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.4); }
+
+  /* body grid */
+  .cv-grid { display: grid; grid-template-columns: 1.85fr 1fr; gap: clamp(32px, 5vw, 60px); padding: clamp(34px, 5vw, 52px) clamp(28px, 5vw, 56px); }
+  .sec-label { font-family: var(--serif); font-weight: 700; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); padding-bottom: 12px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .side .block + .block { margin-top: 30px; }
+
+  .job { padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .job:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .job-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+  .job-co { font-family: var(--display); font-weight: 700; font-size: calc(20px * var(--type-scale)); letter-spacing: -0.02em; color: var(--ink); line-height: 1.15; }
+  .job-meta { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; text-align: right; }
+  .job-role { margin: 4px 0 8px; font-size: calc(14.5px * var(--type-scale)); font-weight: 600; color: var(--accent); }
+  .job-desc { font-size: calc(15px * var(--type-scale)); line-height: 1.62; color: var(--ink-2); }
+  .earlier { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); font-size: calc(14.5px * var(--type-scale)); line-height: 1.62; color: var(--ink-2); }
+  .earlier b { color: var(--ink); font-weight: 600; }
+
+  .body-list { font-size: calc(14.5px * var(--type-scale)); line-height: 1.66; color: var(--ink-2); }
+  .body-list .sep { color: var(--line-2); }
+  .edu-item + .edu-item { margin-top: 12px; }
+  .edu-school { font-weight: 600; font-size: calc(15px * var(--type-scale)); color: var(--ink); }
+  .edu-detail { font-size: calc(13.5px * var(--type-scale)); color: var(--ink-3); margin-top: 2px; }
+  .lang b { color: var(--ink); font-weight: 600; }
+  .lang em { font-style: normal; color: var(--ink-3); }
+
+  @media (max-width: 720px) {
+    .cv-grid { grid-template-columns: 1fr; gap: 36px; }
+    .cv-head { flex-direction: column; }
+  }
+
+  /* print: clean letter, ink on white, hide chrome */
+  @media print {
+    @page { size: Letter; margin: 0.5in 0.5in; }
+    body { background: #fff; }
+    body::after { display: none; }
+    .cv-toolbar { display: none; }
+    .sheet { max-width: none; margin: 0; border: none; border-radius: 0; box-shadow: none; }
+    .cv-hero { background: #fff; color: var(--ink); padding: 0 0 12px; border-bottom: 1.5px solid var(--ink); }
+    .cv-hero::before { display: none; }
+    .mono { border-color: var(--ink); }
+    .mono b { color: var(--ink); } .mono span { color: var(--ink-3); }
+    .cv-name { color: var(--ink); font-size: 30px; }
+    .cv-role { color: var(--accent); font-size: 13px; }
+    .cv-bio { color: var(--ink-2); font-size: 10px; }
+    .cv-contact a { color: var(--ink); border-color: var(--line-2); padding: 3px 9px; font-size: 9.5px; }
+    .cv-grid { padding: 14px 0 0; gap: 30px; }
+    .sec-label { font-size: 8.5px; color: var(--ink-3); }
+    .job-co { font-size: 13px; } .job-role { font-size: 9.6px; } .job-desc { font-size: 9.3px; line-height: 1.45; }
+    .job, .earlier { page-break-inside: avoid; }
+    .job { padding-bottom: 11px; margin-bottom: 11px; }
+    .body-list, .earlier, .edu-school { font-size: 9.2px; }
+    .edu-detail { font-size: 8.6px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="cv-toolbar">
+    <a href="index.html">&larr; Portfolio</a>
+    <button onclick="window.print()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      Save as PDF
+    </button>
+  </div>
+
+  <div class="sheet">
+
+    <!-- header band -->
+    <header class="cv-hero">
+      <div class="cv-head">
+        <div class="mono"><b>IS</b><span>Product Design</span></div>
+        <div>
+          <div class="cv-name">Ita Skoblinski</div>
+          <div class="cv-role">Senior Product Designer</div>
+          <p class="cv-bio">Montréal-based product designer with more than ten years on the hard parts of regulated products: tax compliance, identity verification, immigration, and the newer wave of AI-assisted workflows. Runs research and design end to end and stays close to the engineers and legal teams who put the work into production. Most recently <b>Senior Product Designer at Trolley</b>.</p>
+          <div class="cv-contact">
+            <a href="https://itaskoblinski.com" target="_blank" rel="noopener">itaskoblinski.com</a>
+            <a href="mailto:sosnat@gmail.com">sosnat@gmail.com</a>
+            <a href="tel:+15146608322">+1 514 660 8322</a>
+            <a href="https://www.linkedin.com/in/itaskoblinski" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- body -->
+    <div class="cv-grid">
+
+      <main class="main">
+        <div class="sec-label">Experience</div>
+
+        <div class="job">
+          <div class="job-head">
+            <div class="job-co">Independent Consulting</div>
+            <div class="job-meta">Remote · Dec 2025 – Present</div>
+          </div>
+          <div class="job-role">Product Design &amp; AI Lead</div>
+          <p class="job-desc">Advising media, professional-services, and fintech clients on AI strategy and the design of human-in-the-loop systems. With an ML engineer partner, designing the interaction patterns and audit trails for an LLM-based contract-analysis tool (RAG, LlamaIndex, LangGraph), and leading a full site redesign for Soundway Records from discovery and GA4 analysis through developer handoff. Defined the reviewer feedback loop for an AI training quality mechanism at Mercor.</p>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <div class="job-co">Trolley</div>
+            <div class="job-meta">Remote · Sep 2022 – Nov 2025</div>
+          </div>
+          <div class="job-role">Senior Product Designer · global payouts &amp; tax compliance</div>
+          <p class="job-desc">Built the design function from nothing: the component library, governance, and contribution rules now used across product and engineering. Owned merchant dashboards and recipient flows for tax onboarding (W-8, W-9, 1042-S, DAC7), identity verification, AML, payout routing, and reporting, serving 4M+ recipients across 210+ countries. Ran the WCAG 2.1 program end to end: wrote the standards, audited the product, and remediated with front-end engineers. Paired Tableau, Userpilot, and Snowflake with user interviews to set roadmap priorities.</p>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <div class="job-co">Therefore Interactive</div>
+            <div class="job-meta">Remote · Feb – Aug 2022</div>
+          </div>
+          <div class="job-role">Product Designer · civic &amp; enterprise platforms</div>
+          <p class="job-desc">Led research and design for a disaster-management platform, mapping crisis-response workflows for users working against the clock. Built an accessible care-provider search tool with layered filtering for a high-needs audience, and helped turn 100-page government audit reports into live civic dashboards.</p>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <div class="job-co">United Nations / UNDP</div>
+            <div class="job-meta">Remote · Mar – Dec 2021</div>
+          </div>
+          <div class="job-role">Digital Strategist</div>
+          <p class="job-desc">Designed a shared digital asset management system used across several UN agencies and led UX for a WHO campaign spanning multiple international markets. Ran internal workshops on digital storytelling, UX practice, and analytics for regional partners.</p>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <div class="job-co">CanadaVisa.com</div>
+            <div class="job-meta">Montréal · Jan 2019 – Apr 2021</div>
+          </div>
+          <div class="job-role">UX &amp; Content Manager · 28M+ annual users</div>
+          <p class="job-desc">Led UX and content strategy for one of the busiest immigration platforms in the country. Set the information architecture, flows, and wireframes, and turned dense legal requirements into step-by-step journeys for people going through immigration for the first time.</p>
+        </div>
+
+        <p class="earlier"><b>Earlier:</b> Digital Communications at B'Tselem (2012–2019), growing the audience to 280K+ and running campaigns past $500K. Wrote, directed, and produced an interactive documentary screened at 12 festivals worldwide. Freelance journalist for Haaretz, CBC Radio, and Bust Magazine, where the habits of research and interviewing still shape how the UX work gets done.</p>
+      </main>
+
+      <aside class="side">
+        <div class="block">
+          <div class="sec-label">Focus</div>
+          <p class="body-list">Interaction design &amp; UX architecture <span class="sep">·</span> design systems and component libraries <span class="sep">·</span> accessible design (WCAG 2.1+) <span class="sep">·</span> complex, data-heavy interfaces <span class="sep">·</span> user research and usability testing <span class="sep">·</span> information architecture <span class="sep">·</span> AI-assisted workflows <span class="sep">·</span> service design and journey mapping.</p>
+        </div>
+
+        <div class="block">
+          <div class="sec-label">Tools</div>
+          <p class="body-list">Figma <span class="sep">·</span> FigJam <span class="sep">·</span> Miro <span class="sep">·</span> v0 <span class="sep">·</span> Claude <span class="sep">·</span> Jira <span class="sep">·</span> Notion <span class="sep">·</span> Tableau <span class="sep">·</span> Userpilot <span class="sep">·</span> Snowflake <span class="sep">·</span> Adobe CC</p>
+        </div>
+
+        <div class="block">
+          <div class="sec-label">Education</div>
+          <div class="edu-item">
+            <div class="edu-school">Tel Aviv University</div>
+            <div class="edu-detail">B.A. Philosophy, 2006–2010</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-school">Université de Montréal</div>
+            <div class="edu-detail">Programme de Francisation, 2019</div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="sec-label">Selected Awards</div>
+          <p class="body-list">TO Webfest, Best Interactive Documentary <span class="sep">·</span> Boomerang Awards, Best Organization Website <span class="sep">·</span> WorldFest Houston, Remi Award <span class="sep">·</span> Harvard Bok &amp; MIT OpenDocLab, Datalore fellowship.</p>
+        </div>
+
+        <div class="block">
+          <div class="sec-label">Languages</div>
+          <p class="body-list lang"><b>English</b> <em>native</em> <span class="sep">·</span> <b>Hebrew</b> <em>native</em> <span class="sep">·</span> <b>French</b> <em>advanced</em> <span class="sep">·</span> <b>Russian</b> <em>advanced</em> <span class="sep">·</span> <b>Arabic</b> <em>basic</em></p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ask the Catalog — RAG over 50 years of music rights, Ita Skoblinski</title>
+<meta name="description" content="Ask the Catalog: an AI-native product design case study. A RAG interface that reasons across 85,000+ music-rights documents and returns a cited, confidence-scored answer, with a human in the loop. Research, strategy, UX and prototype by Ita Skoblinski." />
+<meta name="theme-color" content="#1D4ED8" />
+<link rel="stylesheet" href="assets/site.css" />
+<link rel="stylesheet" href="assets/case.css" />
+<script>
+  (function () {
+    try {
+      var t = JSON.parse(localStorage.getItem('jr:tweaks') || '{}');
+      var r = document.documentElement;
+      if (t.typeScale) r.style.setProperty('--type-scale', t.typeScale);
+      var dmap = { compact: 0.82, regular: 1, comfy: 1.22 };
+      if (t.density && dmap[t.density]) r.style.setProperty('--density', dmap[t.density]);
+      if (t.showMetrics === false) r.setAttribute('data-no-metrics', '1');
+      var pal = { sapphire:['#1B3A8F','#142A63'], indigo:['#4338CA','#312E81'], teal:['#0E7490','#115E59'], violet:['#6D28D9','#4C1D95'], emerald:['#146B47','#0E4E34'] };
+      var a = localStorage.getItem('ita:accent');
+      if (a && pal[a]) { r.style.setProperty('--accent', pal[a][0]); r.style.setProperty('--accent-strong', pal[a][1]); }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* page-local: AI answer mock + build-vs-buy table, built on the site tokens */
+  .atc-mock { background:#0E1A2B; border-radius:16px; padding:20px; border:1px solid var(--line); }
+  .atc-bar { display:flex; align-items:center; gap:7px; margin-bottom:16px; }
+  .atc-bar .d { width:10px; height:10px; border-radius:50%; background:#3A4A5F; flex:none; }
+  .atc-bar .t { margin-left:auto; margin-right:auto; font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:#7E8DA3; }
+  .atc-q { display:flex; gap:10px; background:#16243A; border:1px solid #25364f; border-radius:10px; padding:12px 14px; align-items:center; }
+  .atc-q .qt { color:#E7EDF6; font-size:14px; flex:1; }
+  .atc-q .ask { background:var(--accent-bright); color:#fff; font-size:12px; font-weight:600; padding:6px 16px; border-radius:7px; }
+  .atc-ans { display:grid; grid-template-columns:1.6fr 1fr; gap:14px; margin-top:14px; }
+  @media (max-width:640px){ .atc-ans { grid-template-columns:1fr; } }
+  .atc-card { background:#16243A; border:1px solid #25364f; border-radius:10px; padding:16px; }
+  .atc-k { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#7E8DA3; margin-bottom:8px; }
+  .atc-card .big { color:#E7EDF6; font-size:15px; line-height:1.5; }
+  .atc-src { display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+  .atc-src span { font-size:11px; color:#AFC0DA; background:#1d2f49; border:1px solid #2c405d; border-radius:6px; padding:4px 9px; }
+  .atc-conf .lvl { color:#34D399; font-size:26px; font-weight:800; letter-spacing:-0.02em; font-family:var(--display); }
+  .atc-barmeter { height:6px; border-radius:99px; background:#23364f; margin:10px 0; overflow:hidden; }
+  .atc-barmeter i { display:block; height:100%; width:88%; background:#34D399; border-radius:99px; }
+  .atc-conf p { color:#9FB0C8; font-size:12px; line-height:1.5; margin:0; }
+  .bvb { width:100%; border-collapse:collapse; margin:8px 0 6px; font-size:calc(14px * var(--type-scale)); }
+  .bvb th { text-align:left; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); font-weight:700; padding:0 14px 10px; border-bottom:1px solid var(--line-2); vertical-align:bottom; }
+  .bvb td { padding:14px; border-bottom:1px solid var(--line); color:var(--ink-2); line-height:1.5; vertical-align:top; }
+  .bvb td.opt { color:var(--ink); font-weight:600; }
+  .bvb .v { font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
+  .bvb .v-rec { color:#1B6640; }
+  .bvb .v-out { color:#8A5A00; }
+  @media (max-width:760px){ .bvb, .bvb thead, .bvb tbody, .bvb tr, .bvb th, .bvb td { display:block; } .bvb thead { display:none; } .bvb td { border:none; padding:2px 0; } .bvb tr { border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; display:block; background:var(--paper-2); } }
+  .flow { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:6px 0 4px; }
+  .flow .node { background:var(--paper-2); border:1px solid var(--line); border-radius:10px; padding:12px 14px; font-size:12.5px; color:var(--ink); line-height:1.35; flex:1 1 130px; min-width:120px; }
+  .flow .node b { display:block; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:4px; }
+  .flow .arr { color:var(--line-2); flex:none; }
+  @media (max-width:560px){ .flow{ flex-direction:column; align-items:stretch; } .flow .node{ flex:1 1 auto; min-width:0; } .flow .arr{ align-self:center; transform:rotate(90deg); } }
+</style>
+</head>
+<body>
+<script>if (document.documentElement.getAttribute('data-no-metrics')) document.body.classList.add('no-metrics');</script>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Ita Skoblinski, home">
+      <span class="name">Ita Skoblinski</span>
+      <span class="role hide-sm">Senior Product Designer</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#work" class="hide-sm">Work</a>
+      <a href="index.html#about" class="hide-sm">About</a>
+      <a href="ai-bot.html" class="hide-sm">AI&nbsp;bot <span style="font-size:.6em;font-weight:700;letter-spacing:.08em;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;vertical-align:2px">BETA</span></a>
+      <a href="mailto:sosnat@gmail.com" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <header class="case-hero" data-screen-label="Case / Ask the Catalog">
+    <div class="case-kicker">
+      <a class="crumb" href="index.html#work">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        Selected work
+      </a>
+      <span class="pill">Confidential client &middot; Music publishing &amp; AI</span>
+    </div>
+    <h1>Fifty years of music rights, one question away.</h1>
+    <p class="sub">A music publisher's answers lived in 85,000+ documents across three systems that could not talk to each other, so every real answer sat in one or two people's heads. I designed <b>Ask the Catalog</b>, a plain-language interface backed by a retrieval (RAG) workflow that reasons across all three systems and returns a cited, confidence-scored answer, with a person in the loop before anything is saved.</p>
+    <p class="bottomline"><b>Bottom line:</b> A cross-system question went from about 30 minutes to under 2, with every figure grounded in the exact contract clause, royalty period, or ledger line it came from. The company greenlit the full build after the pilot.</p>
+    <div class="case-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">Lead Product Designer</div></div>
+      <div class="m"><div class="mk">Scope</div><div class="mv">Research &rarr; strategy &rarr; UX &rarr; prototype</div></div>
+      <div class="m"><div class="mk">AI approach</div><div class="mv">RAG &middot; grounded citations &middot; human-in-the-loop</div></div>
+      <div class="m"><div class="mk">Team</div><div class="mv">Solo designer + 1 ML engineer</div></div>
+    </div>
+  </header>
+
+  <div class="case-cover" data-screen-label="Ask the Catalog / answer surface">
+    <div class="atc-mock">
+      <div class="atc-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="t">Ask the Catalog</span><span style="width:30px"></span></div>
+      <div class="atc-q"><span class="qt">How much do we currently owe this artist across the catalog?</span><span class="ask">Ask</span></div>
+      <div class="atc-ans">
+        <div class="atc-card">
+          <div class="atc-k">Answer</div>
+          <div class="big">$48,200 unrecouped as of Q4 2025. Recouped on the admin deal; the balance sits against the 2019 sync advance.</div>
+          <div class="atc-k" style="margin-top:16px">Sources &middot; 3 cross-referenced</div>
+          <div class="atc-src"><span>&#8627; Admin-2019.pdf &middot; &sect;5 recoupment</span><span>&#8627; Vistex &middot; royalties Q1&ndash;Q4 2025</span><span>&#8627; Ledger &middot; advances</span></div>
+        </div>
+        <div class="atc-card atc-conf">
+          <div class="atc-k">Confidence</div>
+          <div class="lvl">High</div>
+          <div class="atc-barmeter"><i></i></div>
+          <p>Matched contract recoupment terms to four quarters of Vistex royalty data. Nothing left unreconciled.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cap">One of the hardest questions in the business, answered in seconds. The workflow checks the contract's recoupment terms against four quarters of royalty data, then shows every source it used. Interface and behavior designed by me; built with one ML engineer.</div>
+  </div>
+
+  <div class="case-shell">
+    <aside class="case-nav" aria-label="Sections">
+      <ol>
+        <li><a href="#context"><span class="n">01</span> Context</a></li>
+        <li><a href="#research"><span class="n">02</span> Research</a></li>
+        <li><a href="#insight"><span class="n">03</span> The insight</a></li>
+        <li><a href="#buildbuy"><span class="n">04</span> Build vs buy</a></li>
+        <li><a href="#product"><span class="n">05</span> The product</a></li>
+        <li><a href="#outcomes"><span class="n">06</span> Outcomes</a></li>
+      </ol>
+      <div class="nav-cv">
+        <a class="crumb" href="cv.html" target="_blank" rel="noopener" style="font-weight:600;color:var(--ink)">View CV &rarr;</a>
+      </div>
+    </aside>
+
+    <div class="case-body">
+
+      <section class="case-sec" id="context">
+        <div class="sec-kicker">The context</div>
+        <h2>Fifty years of rights, locked in <em>85,000 documents.</em></h2>
+        <p class="lead">A music publisher controls the rights to thousands of songs, which means deciding who can use each song and who gets paid for it. Half a century of that knowledge lived in documents, spread across three systems built for storage, not for answering questions.</p>
+        <div class="impact-row">
+          <div class="ic"><div class="iv">85K<span class="sym">+</span></div><div class="il">Contract PDFs, invoices and royalty rows across Dropbox, FileMaker and Vistex</div></div>
+          <div class="ic"><div class="iv">3</div><div class="il">Systems of record with no way to cross-reference one against another</div></div>
+          <div class="ic"><div class="iv">0</div><div class="il">Single sources of truth. The full picture lived only in someone's head</div></div>
+        </div>
+        <p>Contracts sat in <b>Dropbox</b> (~5,000 PDFs), invoices and quotes in <b>FileMaker</b> (~20,000), and royalties in <b>Vistex</b> (~60,000 rows). Each system answered part of a question and none of them answered a whole one. To get a real answer, someone opened all three and reconciled them by hand.</p>
+      </section>
+
+      <section class="case-sec" id="research">
+        <div class="sec-kicker">Discovery &amp; research</div>
+        <h2>Where the real answers <em>actually lived.</em></h2>
+        <p class="lead">I ran interviews across the company and reviewed the three systems and more than 85,000 documents. The same need showed up in every role: a fast answer they could stand behind, pulled from more than one system at once.</p>
+        <div class="cardgrid">
+          <div class="c"><span class="chip chip-blue">A&amp;R</span><p>Prepping for an artist meeting means assembling contract terms, end dates, recent royalty performance and sync activity, pulled from three places by hand.</p></div>
+          <div class="c"><span class="chip chip-blue">Business development</span><p>&ldquo;Which contracts are coming up for renewal, and which are worth chasing?&rdquo; There was no calendar, no pipeline, no alerts.</p></div>
+          <div class="c"><span class="chip chip-blue">Sync licensing</span><p>Quoting a placement is guesswork without history: what did we charge for comparable genres, productions and territories?</p></div>
+          <div class="c"><span class="chip chip-blue">Finance &amp; royalties</span><p>Reconciling a payment means matching Vistex royalty data back to the contract terms and recoupment status that justify it.</p></div>
+        </div>
+        <div class="callout"><p>The common thread across every function: one fast answer they could stand behind, reasoned across more than one system at once, with the source attached.</p></div>
+      </section>
+
+      <section class="case-sec" id="insight">
+        <div class="sec-kicker">The insight</div>
+        <h2>The hard part was reasoning across systems, <em>and proving it.</em></h2>
+        <p>One test reframed the whole project. A simple question like &ldquo;when does this contract expire?&rdquo; can be answered by any document tool, citing the clause. The question that runs the business day to day is harder.</p>
+        <div class="quote"><p>&ldquo;How much do we owe this artist right now?&rdquo; Answering that means cross-referencing the contract's recoupment terms against several quarters of royalty data and working out the unrecouped balance. No single system holds it. The answer has to be reasoned across all three, then <b>proven</b>.</p><div class="who"><b>The query that set the bar</b></div></div>
+        <p>So the design problem was not &ldquo;can it chat with a PDF.&rdquo; It was making a multi-system answer trustworthy: every figure grounded in its source, scored for confidence, and visible only to the people allowed to see it. That set five principles I specced for the system's behavior.</p>
+        <div class="steps">
+          <div class="step"><div class="sn">01</div><h4>Ground every figure</h4><p>No answer appears without the exact contract clause, royalty period or ledger line it was drawn from. Grounding at the clause level, not the document summary, so every number is checkable against its source.</p></div>
+          <div class="step"><div class="sn">02</div><h4>Score the confidence, gate on it</h4><p>The system states how sure it is and what it could not reconcile. I set the confidence gate as a product decision: below the threshold, the answer routes to a specialist instead of surfacing.</p></div>
+          <div class="step"><div class="sn">03</div><h4>Keep a human in the loop</h4><p>The system drafts; a person confirms or edits before anything is written to the record. Each correction feeds back to improve retrieval, so the next similar question lands closer.</p></div>
+          <div class="step"><div class="sn">04</div><h4>Respect who can see what</h4><p>Role-based access and an audit trail as design principles, because royalty and contract data is not for everyone, and sensitive answers leave a record.</p></div>
+        </div>
+      </section>
+
+      <section class="case-sec" id="buildbuy">
+        <div class="sec-kicker">Product strategy &middot; build vs buy</div>
+        <h2>Eight tools against <em>the real requirements.</em></h2>
+        <p>The bar was not &ldquo;can it summarize a PDF.&rdquo; A tool had to reach all three systems, reason across them, ground answers at the level of a clause or a royalty period, score confidence, and enforce role-based access, all at the cost structure of a small team. That narrowed eight options to a tiered recommendation.</p>
+        <table class="bvb">
+          <thead>
+            <tr><th>Option</th><th>Cross-system reasoning</th><th>Citations &amp; confidence</th><th>Fit &amp; cost for a small team</th><th>Verdict</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="opt">Microsoft 365 Copilot</td><td>Strong once data is consolidated into the Microsoft graph</td><td>Good, improving</td><td>Best balance: fits existing tooling, predictable per-seat cost</td><td class="v v-rec">Recommended &middot; enterprise</td></tr>
+            <tr><td class="opt">Custom Claude stack</td><td>Deepest: purpose-built cross-referencing and recoupment logic</td><td>Citations and confidence designed in from day one</td><td>Higher build, music-industry-specialized</td><td class="v v-rec">Recommended &middot; premium</td></tr>
+            <tr><td class="opt">General chatbots / point tools</td><td>Shallow; can't reach or reconcile the source systems</td><td>Summarize without provenance</td><td>Cheap, but a liability on legal and financial data</td><td class="v v-out">Ruled out</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:calc(13px * var(--type-scale));color:var(--ink-3);line-height:1.6">Also weighed: data consolidation and migration effort across 85K+ documents, API pricing volatility, and how each option handles permissions and audit on sensitive royalty data.</p>
+      </section>
+
+      <section class="case-sec" id="product">
+        <div class="sec-kicker">The product</div>
+        <h2>Ask a question, <em>get a cited answer.</em></h2>
+        <p class="lead">The product is a permissioned data layer with a plain-language interface on top. Beyond the direct question and answer, the same engine drives a live business dashboard and an always-on contract calendar.</p>
+        <div class="flow" aria-label="How a question becomes a trustworthy answer">
+          <div class="node"><b>Question</b>Plain language, one ask</div>
+          <span class="arr">&rarr;</span>
+          <div class="node"><b>Retrieve · 3 systems</b>Dropbox · FileMaker · Vistex</div>
+          <span class="arr">&rarr;</span>
+          <div class="node"><b>Cross-reference</b>Contract terms &times; royalties &times; recoupment</div>
+          <span class="arr">&rarr;</span>
+          <div class="node"><b>Draft + cite</b>Answer with sources attached</div>
+          <span class="arr">&rarr;</span>
+          <div class="node"><b>Confidence gate</b>Serve if sure, flag a person if not</div>
+        </div>
+        <p>This is a retrieval (RAG) workflow with agentic steps and a human gate: it interprets the question, pulls from the connected systems, drafts a grounded answer, scores its own confidence, and either serves the answer with citations or flags exactly what it could not reconcile and routes it to a specialist. A person confirms before anything is saved.</p>
+        <div class="cardgrid">
+          <div class="c"><div class="ct">The management dashboard</div><p>Catalog revenue, active contracts, recoupment exposure and a live count of renewals due. The read on the business that leadership never had.</p></div>
+          <div class="c"><div class="ct">The contract calendar</div><p>Every deal surfaces itself at 90, 60 and 30 days before expiry, with context on whether it's worth chasing, so renewals stop lapsing.</p></div>
+          <div class="c"><div class="ct">Self-serve for every team</div><p>A&amp;R, sync, finance and biz dev each get the cited, permissioned answer they used to route through management.</p></div>
+          <div class="c"><div class="ct">Proof on sensitive data</div><p>Role-based access and an audit trail on royalty and contract data, plain-language answers that a non-technical team can check.</p></div>
+        </div>
+      </section>
+
+      <section class="case-sec" id="outcomes">
+        <div class="sec-kicker">Outcomes</div>
+        <h2>Thirty minutes to two, <em>every figure sourced.</em></h2>
+        <p>I prototyped against real contracts and the team's recurring question inventory, then built the recommendation and projected impact for leadership. The reframe held: when answers led with their sources and named their uncertainty, the team trusted them.</p>
+        <div class="impact-row">
+          <div class="ic"><div class="iv">~30 &rarr; &lt;2<span class="sym"> min</span></div><div class="il">To answer a cross-system question, with every figure grounded in its source</div></div>
+          <div class="ic"><div class="iv">100<span class="sym">%</span></div><div class="il">Of answers cited back to a specific clause, royalty period or ledger line</div></div>
+          <div class="ic"><div class="iv">Build</div><div class="il">Validated prototype and business case greenlit the full implementation</div></div>
+        </div>
+        <div class="quote"><p>&ldquo;For the first time, I can answer 'what do we owe them?' myself, and show exactly where the number comes from.&rdquo;</p><div class="who"><b>Royalties lead</b> &middot; prototype session</div></div>
+        <div class="callout"><p>The most important decision was a restriction: no answer appears without its proof. That one rule shaped every screen, and it runs through all of my work on regulated products that handle sensitive data.</p></div>
+      </section>
+
+    </div>
+  </div>
+
+  <nav class="case-next">
+    <a href="case-canada-visa.html">
+      <div><div class="nk">Next case</div><div class="nt">CanadaVisa &middot; Path Finder</div></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
+  </nav>
+</main>
+
+<script src="assets/case-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Soundway Records, Ita Skoblinski</title>
+<link rel="stylesheet" href="assets/site.css" />
+<link rel="stylesheet" href="assets/case.css" />
+<script>
+  (function () {
+    try {
+      var t = JSON.parse(localStorage.getItem('jr:tweaks') || '{}');
+      var r = document.documentElement;
+      if (t.typeScale) r.style.setProperty('--type-scale', t.typeScale);
+      var dmap = { compact: 0.82, regular: 1, comfy: 1.22 };
+      if (t.density && dmap[t.density]) r.style.setProperty('--density', dmap[t.density]);
+      if (t.showMetrics === false) r.setAttribute('data-no-metrics', '1');
+      var pal = { sapphire:['#1B3A8F','#142A63'], indigo:['#4338CA','#312E81'], teal:['#0E7490','#115E59'], violet:['#6D28D9','#4C1D95'], emerald:['#146B47','#0E4E34'] };
+      var a = localStorage.getItem('ita:accent');
+      if (a && pal[a]) { r.style.setProperty('--accent', pal[a][0]); r.style.setProperty('--accent-strong', pal[a][1]); }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* Wireframe sizing: single column, framed, height-capped banners */
+  .case-fig img { background:#fff; box-shadow:0 4px 24px rgba(14,26,43,.07); object-fit:cover; object-position:top; max-height:540px; border-radius:12px; }
+  .case-figs { grid-template-columns:1fr; gap:24px; }
+</style>
+</head>
+<body>
+<script>if (document.documentElement.getAttribute('data-no-metrics')) document.body.classList.add('no-metrics');</script>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Ita Skoblinski, home">
+      <span class="name">Ita Skoblinski</span>
+      <span class="role hide-sm">Senior Product Designer</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#work" class="hide-sm">All work</a>
+      <a href="index.html#about" class="hide-sm">About</a>
+      <a href="ai-bot.html" class="hide-sm">AI&nbsp;bot <span style="font-size:.6em;font-weight:700;letter-spacing:.08em;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;vertical-align:2px">BETA</span></a>
+      <a href="mailto:sosnat@gmail.com" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <header class="case-hero">
+    <div class="case-kicker">
+      <a class="crumb" href="index.html#work">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        Selected work
+      </a>
+      <span class="pill">Soundway Records · Brand & UX Research</span>
+    </div>
+    <h1>Closing the gap between <em>identity and perception</em></h1>
+    <p class="sub">An independent music label with a rich archival catalogue and ambitious new releases was losing ground to the algorithms. I led discovery to understand why, and what to do about it.</p>
+    <p class="bottomline"><b>Bottom line:</b> A discovery strategy and brand direction connecting streaming, retail, and editorial, drawn from 11 listener interviews.</p>
+    <div class="case-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">UX Researcher & Strategist</div></div>
+      <div class="m"><div class="mk">Duration</div><div class="mv">8 weeks · Feb 2026</div></div>
+      <div class="m"><div class="mk">Methods</div><div class="mv">Interviews · Field · Analytics</div></div>
+      <div class="m"><div class="mk">Participants</div><div class="mv">11 interviews · 4 groups</div></div>
+    </div>
+  </header>
+
+  <div class="case-cover" data-screen-label="Soundway / live prototype">
+    <div style="border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 26px 64px -30px rgba(14,26,43,.45)">
+      <div style="display:flex;align-items:center;gap:7px;padding:11px 16px;background:var(--paper-2);border-bottom:1px solid var(--line)">
+        <span style="width:11px;height:11px;border-radius:50%;background:#FF5F56;flex:none"></span>
+        <span style="width:11px;height:11px;border-radius:50%;background:#FFBD2E;flex:none"></span>
+        <span style="width:11px;height:11px;border-radius:50%;background:#27C93F;flex:none"></span>
+        <span style="flex:1;font-size:11.5px;color:var(--ink-3);margin-left:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">soundway-records.html · interactive wireframe prototype</span>
+        <a href="soundway-records.html" target="_blank" rel="noopener" style="margin-left:auto;font-size:11.5px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap">Open in new tab &#8599;</a>
+      </div>
+      <iframe src="soundway-records.html" title="Soundway Records interactive wireframe prototype" loading="lazy" style="width:100%;height:640px;border:0;display:block;background:#fff"></iframe>
+    </div>
+    <div class="cap">The redesigned site as a working prototype — scroll and click through the live wireframe, or open it full-screen. Ten pages with audio previews, filters, cart and dark mode.</div>
+  </div>
+
+  <div class="case-shell">
+    <aside class="case-nav" aria-label="Sections">
+      <ol>
+        <li><a href="#background"><span class="n">01</span> Background</a></li>
+        <li><a href="#research"><span class="n">02</span> Research</a></li>
+        <li><a href="#findings"><span class="n">03</span> Findings</a></li>
+        <li><a href="#direction"><span class="n">04</span> Direction</a></li>
+        <li><a href="#recommendations"><span class="n">05</span> Recs</a></li>
+        <li><a href="#outcomes"><span class="n">06</span> Outcomes</a></li>
+      </ol>
+      <div class="nav-cv"><a class="crumb" href="soundway-records.html" target="_blank" rel="noopener" style="font-weight:600;color:var(--accent)">Open prototype →</a></div>
+    </aside>
+    <div class="case-body">
+      <section class="case-sec" id="background">
+        <div class="sec-kicker">Background</div>
+        <h2>A label with <em>two different personalities.</em></h2>
+        <p class="lead">Soundway has spent decades unearthing forgotten West African, Latin American and Southeast Asian music, releasing ambitious new work alongside it.</p>
+        <p>But internally the team felt something was off: their archival identity dominated outside perception, while new releases struggled to cut through. No one had investigated the gap systematically. That's where this started.</p>
+        <div class="callout"><p>&ldquo;We know who we are. But when we look at how people talk about us online, it's like they only see half of what we do.&rdquo;<br><span style="color:var(--ink-3);font-weight:500">, Soundway stakeholder, internal interview</span></p></div>
+      </section>
+
+      <section class="case-sec" id="research">
+        <div class="sec-kicker">Research Design</div>
+        <h2>Talking to everyone who <em>touches the music.</em></h2>
+        <p>To understand the gap I needed perspectives from across the ecosystem, not just fans, but the people who carry and sell physical music, and the platforms where discovery happens. 11 in-depth interviews across four groups, plus a retail field visit.</p>
+        <div class="cardgrid">
+          <div class="c"><div class="ct">Retail buyers</div><div class="role">3 interviews · independent record shops</div><p class="q">&ldquo;Soundway's archival stuff practically sells itself, but their new releases, I don't always know how to pitch them.&rdquo;</p><div class="need"><b>Key need</b>A narrative they can sell across the counter</div></div>
+          <div class="c"><div class="ct">Tastemakers & influencers</div><div class="role">3 interviews · blogs, radio, playlists</div><p class="q">&ldquo;Incredible credibility in certain circles. But if you're not already in them, there's no bridge for a new listener.&rdquo;</p><div class="need"><b>Key need</b>To be partners, not just a referral source</div></div>
+          <div class="c"><div class="ct">Gen Z listeners</div><div class="role">3 interviews · streaming-native</div><p class="q">&ldquo;I found them through a TikTok sample. The website felt like a collector thing, not for me.&rdquo;</p><div class="need"><b>Key need</b>An entry point that matches where they arrived from</div></div>
+          <div class="c"><div class="ct">Internal stakeholders</div><div class="role">2 interviews · founders + A&amp;R</div><p class="q">&ldquo;We want to be known for discovery in both directions, lost gems and tomorrow's artists.&rdquo;</p><div class="need"><b>Key need</b>Public expression that matches the internal vision</div></div>
+        </div>
+        <div class="case-fig"><img src="assets/soundway/stories.png" alt="Stories index wireframe" loading="lazy" /><figcaption>The Stories section surfaced a clear problem: rich editorial existed, but no pathway helped new listeners find it. Filter tabs by type became a key recommendation.</figcaption></div>
+      </section>
+
+      <section class="case-sec" id="findings">
+        <div class="sec-kicker">Key Findings</div>
+        <h2>Six patterns across <em>every conversation.</em></h2>
+        <p>Despite interviewing very different groups, the same themes surfaced again and again. The gap wasn't a mystery, it was systematic.</p>
+        <div class="cardgrid">
+          <div class="c"><span class="chip chip-red">Finding 01 · Critical</span><div class="ct">The archival identity overshadows everything</div><p>Every external participant associated Soundway primarily with reissues. New releases lived in a perceptual blind spot, often undiscovered even by engaged fans.</p></div>
+          <div class="c"><span class="chip chip-blue">Finding 02</span><div class="ct">Digital touchpoints don't bridge the two identities</div><p>Website, social and streaming were built around the archival aesthetic. New releases were present but felt like guests rather than headliners.</p></div>
+          <div class="c"><span class="chip chip-blue">Finding 03</span><div class="ct">Retail buyers need a pitch, not just a catalogue</div><p>Shops stocked reissues reliably, the story is clear. For new releases, buyers had no comparable story, so they under-ordered and under-displayed.</p></div>
+          <div class="c"><span class="chip chip-blue">Finding 04</span><div class="ct">Gen Z discovered via algorithm, then hit a wall</div><p>Listeners arrived via samples, TikTok and playlists, then found an aesthetic aimed at a different audience, and disengaged.</p></div>
+          <div class="c"><span class="chip chip-blue">Finding 05</span><div class="ct">Tastemakers see the label as a referral source</div><p>Curators respected Soundway's taste but weren't in the loop on new releases. Outreach was reactive, at release, not before.</p></div>
+          <div class="c"><span class="chip chip-blue">Finding 06</span><div class="ct">Internal vision is ahead of external expression</div><p>Stakeholders articulated a clear dual mandate, lost gems AND tomorrow's artists. The website told only half the story.</p></div>
+        </div>
+        <div class="case-fig"><img src="assets/soundway/store.png" alt="Store page wireframe with filters" loading="lazy" /><figcaption>Without filters for &ldquo;New Releases&rdquo; vs. archival, algorithm-arrivals had no way to separate contemporary from historical. The left-rail Format / Genre / Era / Region system answered Findings 01 and 04.</figcaption></div>
+      </section>
+
+      <section class="case-sec" id="direction">
+        <div class="sec-kicker">Visual Audit + Design Direction</div>
+        <h2>Two aesthetics <em>sharing one face.</em></h2>
+        <p>I audited the visual language across website, social, packaging and press. The pattern was consistent: archival releases had a defined, compelling aesthetic, new releases were expressed through the same lens, creating friction.</p>
+        <div class="cardgrid">
+          <div class="c"><span class="chip chip-amber">Well-defined</span><div class="ct">Archival aesthetic</div><p>Warm, sepia photography; worn textures; editorial liner notes; collector vocabulary. <b>Strength:</b> instantly communicates authority and care.</p></div>
+          <div class="c"><span class="chip chip-blue">Underdefined</span><div class="ct">New-release aesthetic</div><p>The same archival treatment applied uniformly; new artists shown in &ldquo;catalogue&rdquo; format with no distinct signal. <b>Gap:</b> new releases feel like additions to an archive, not events.</p></div>
+        </div>
+        <div class="case-figs">
+        <div class="case-fig"><img src="assets/soundway/artist.png" alt="Artist page wireframe" loading="lazy" /><figcaption>Artist pages now lead with the latest release, new work as the first thing a visitor sees, not a historical discography list.</figcaption></div>
+        <div class="case-fig"><img src="assets/soundway/album.png" alt="Album detail wireframe" loading="lazy" /><figcaption>The album page connects commerce to editorial, &ldquo;Related Stories&rdquo; beneath the purchase flow give a path deeper into the music's world.</figcaption></div>
+        <div class="case-fig"><img src="assets/soundway/story_page.png" alt="Story article wireframe" loading="lazy" /><figcaption>Each story ends with a &ldquo;Related Release&rdquo; callout, a direct bridge from editorial to the store, carried with every shared article.</figcaption></div>
+        <div class="case-fig"><img src="assets/soundway/artists.png" alt="Artists index wireframe" loading="lazy" /><figcaption>Archival and contemporary names share one grid, the simplest structural fix to the perception gap: equal footing for the full roster.</figcaption></div>
+        </div>
+        <div class="case-fig"><img src="assets/soundway/colombia.png" alt="Colombia Project editorial wireframe" loading="lazy" /><figcaption>The Colombia Project page is the dual visual language in practice, archival depth and contemporary energy in one editorial experience: story, music, people, geography and a shop-the-collection CTA, coexisting without conflict.</figcaption></div>
+      </section>
+
+      <section class="case-sec" id="recommendations">
+        <div class="sec-kicker">Strategic Recommendations</div>
+        <h2>Five things to <em>do differently.</em></h2>
+        <p>Sequenced by impact and effort, designed to address the gap without dismantling what's working. Not a rebrand; giving the full picture of Soundway room to exist.</p>
+        <div class="steps">
+          <div class="step"><div class="sn">01</div><h4>A distinct visual register for new releases</h4><p>A complementary system, not a rebrand: bolder type, higher-contrast colour, photography that reads as alive. Two systems coexist, each honest to its content.</p><div class="so">Brand</div></div>
+          <div class="step"><div class="sn">02</div><h4>Rebuild the website around both halves of the catalogue</h4><p>Surface new releases and the archive equally, with pathways for first-time listeners and long-term collectors, and clear wayfinding between the two worlds.</p><div class="so">Digital</div></div>
+          <div class="step"><div class="sn">03</div><h4>Give retail buyers a narrative toolkit</h4><p>Simple, shareable briefs for each new release, who, why, and what connects it to the label's story, so shop staff have something to say.</p><div class="so">Retail</div></div>
+          <div class="step"><div class="sn">04</div><h4>Build tastemaker relationships before release</h4><p>Shift from transactional outreach to ongoing relationship, early listens and context, creating advocates rather than one-time press slots.</p><div class="so">Strategy</div></div>
+          <div class="step"><div class="sn">05</div><h4>A landing experience for streaming-native listeners</h4><p>Short, sensory, mobile-first entry points that match the energy that brought Gen Z there, without alienating existing fans.</p><div class="so">Digital</div></div>
+        </div>
+      </section>
+
+      <section class="case-sec" id="outcomes">
+        <div class="sec-kicker">Outcomes</div>
+        <h2>What this research <em>unlocked.</em></h2>
+        <p>The research delivered a clear strategic picture where there had been only a felt sense of misalignment. The report and wireframes became the foundation for the label's upcoming website redesign.</p>
+        <div class="impact-row">
+          <div class="ic"><div class="iv">11</div><div class="il">qualitative interviews across retailers, tastemakers, listeners and stakeholders</div></div>
+          <div class="ic"><div class="iv">5</div><div class="il">strategic recommendations adopted into the label's 2026 planning cycle</div></div>
+          <div class="ic"><div class="iv">9</div><div class="il">wireframe screens translating research into a concrete design direction</div></div>
+        </div>
+        <div class="callout"><p>&ldquo;This research gave us language for something we'd been feeling but couldn't articulate. The dual-identity framing changed how we're approaching the next 12 months.&rdquo;<br><span style="color:var(--ink-3);font-weight:500">, Soundway stakeholder, project close</span></p></div>
+        <p style="margin-top:8px"><b>A live, navigable prototype</b> of the redesigned site, 10 pages, audio previews, filters, cart and dark mode, is linked from the sidebar.</p>
+      </section>
+    </div>
+  </div>
+
+  <nav class="case-next">
+    <a href="case-trolley-portal.html">
+      <div><div class="nk">Next case</div><div class="nt">Trolley recipient portal</div></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
+  </nav>
+</main>
+
+</body>
+</html>

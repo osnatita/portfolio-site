@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How I work with AI, Ita Skoblinski</title>
+<meta name="description" content="How Ita Skoblinski uses AI in product design: prototyping, research synthesis, designing for trust, and building her own tools. AI as one tool in the box, not the box." />
+<meta name="theme-color" content="#1D4ED8" />
+<link rel="stylesheet" href="assets/site.css" />
+<link rel="stylesheet" href="assets/case.css" />
+<script>
+  (function () {
+    try {
+      var t = JSON.parse(localStorage.getItem('jr:tweaks') || '{}');
+      var r = document.documentElement;
+      if (t.typeScale) r.style.setProperty('--type-scale', t.typeScale);
+      var dmap = { compact: 0.82, regular: 1, comfy: 1.22 };
+      if (t.density && dmap[t.density]) r.style.setProperty('--density', dmap[t.density]);
+      if (t.showMetrics === false) r.setAttribute('data-no-metrics', '1');
+      var pal = { sapphire:['#1B3A8F','#142A63'], indigo:['#4338CA','#312E81'], teal:['#0E7490','#115E59'], violet:['#6D28D9','#4C1D95'], emerald:['#146B47','#0E4E34'] };
+      var a = localStorage.getItem('ita:accent');
+      if (a && pal[a]) { r.style.setProperty('--accent', pal[a][0]); r.style.setProperty('--accent-strong', pal[a][1]); }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<script>if (document.documentElement.getAttribute('data-no-metrics')) document.body.classList.add('no-metrics');</script>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Ita Skoblinski, home">
+      <span class="name">Ita Skoblinski</span>
+      <span class="role hide-sm">Senior Product Designer</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#work" class="hide-sm">Work</a>
+      <a href="index.html#about" class="hide-sm">About</a>
+      <a href="ai-bot.html" class="hide-sm">AI&nbsp;bot <span style="font-size:.6em;font-weight:700;letter-spacing:.08em;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;vertical-align:2px">BETA</span></a>
+      <a href="mailto:sosnat@gmail.com" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <header class="case-hero">
+    <div class="case-kicker">
+      <a class="crumb" href="index.html#about">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        Back home
+      </a>
+      <span class="pill">Approach &middot; AI</span>
+    </div>
+    <h1>How I work with <em>AI</em>.</h1>
+    <p class="sub">I've owned complex systems for about ten years: legaltech, fintech, tax compliance, payouts moving across 200-plus countries. The through-line is making dense, high-stakes information legible for people who aren't technical. AI is the newest tool I've folded into that.</p>
+    <p class="bottomline"><b>Up front:</b> AI is not a magic solution. People keep expecting it to replace the work, and it doesn't. You still need the research, the methods, the design systems. It's one tool in the box, not the box.</p>
+    <div class="case-meta">
+      <div class="m"><div class="mk">Role</div><div class="mv">Senior Product Designer</div></div>
+      <div class="m"><div class="mk">Focus</div><div class="mv">Conversational &amp; agentic AI</div></div>
+      <div class="m"><div class="mk">Where it shows up</div><div class="mv">Pricing to prototype</div></div>
+      <div class="m"><div class="mk">Underneath it</div><div class="mv">Ten years of design</div></div>
+    </div>
+  </header>
+
+  <div class="case-shell">
+    <aside class="case-nav" aria-label="Sections">
+      <ol>
+        <li><a href="#prototype"><span class="n">01</span> Prototyping</a></li>
+        <li><a href="#synthesis"><span class="n">02</span> Synthesis</a></li>
+        <li><a href="#trust"><span class="n">03</span> Designing for trust</a></li>
+        <li><a href="#tools"><span class="n">04</span> Building tools</a></li>
+      </ol>
+    </aside>
+    <div class="case-body">
+
+      <section class="case-sec" id="prototype">
+        <div class="sec-kicker">Prototyping</div>
+        <h2>Going straight to <em>the wireframe.</em></h2>
+        <p class="lead">I used to open client work by sketching concepts and charting things out before anyone could touch them. I don't do that anymore.</p>
+        <p>Now the first thing I hand over is a rough wireframe. I'll move from a brief into a working proof of concept fast, using Claude Code, V0, Figma Make, or Lovable depending on what the project needs, then put it in front of the team so we're all reacting to the same thing instead of the same idea described five different ways. It collapses the distance between &ldquo;here's what I'm thinking&rdquo; and &ldquo;here's what it feels like to use.&rdquo; A design system makes this much faster, which is part of why I care about building one early rather than treating it as cleanup.</p>
+        <p>The tooling here moves weekly. I keep up by reading Reddit threads and watching what people are actually shipping, not waiting for the polished writeup. Whatever's best this month usually won't be best next month, so I stay loose about the specific tool and firm about the workflow.</p>
+      </section>
+
+      <section class="case-sec" id="synthesis">
+        <div class="sec-kicker">Research &amp; synthesis</div>
+        <h2>Where I still do <em>the legwork.</em></h2>
+        <p>I recently ran about twenty interviews and used AI heavily to synthesize and organize them. The important part: it does not do the legwork for me. I do that. What it gives me is structure and a clean document to build on, and I work through it section by section rather than trusting the first pass.</p>
+        <p>Once the pieces exist, I'll have it pull my separate documents into one cohesive thing, same look and feel, so a client gets a single coherent artifact instead of a pile of notes. Sometimes that becomes a small website I spin up for them.</p>
+      </section>
+
+      <section class="case-sec" id="trust">
+        <div class="sec-kicker">Designing for AI</div>
+        <h2>When the data is high-stakes, the hard problem is <em>trust.</em></h2>
+        <p class="lead">A lot of my current work is the AI being the product, not just the assistant.</p>
+        <p>I'm on a femtech project built around a conversational model where what someone says in the conversation reshapes the inputs and changes other features in the dashboard live. I've also done straight problem-solving on an internal pipeline using AI.</p>
+        <p>The hard design problem isn't the interface, it's trust. There's real risk of hallucination, of a confident wrong answer, of the wrong framing on numbers people are about to make decisions on. So the questions I'm actually designing around are: how do you build trust into the surface, how do you make the system's reasoning transparent, how do you give people a way to catch a mistake before it costs them.</p>
+        <div class="callout"><p>A reliable data engine plus a model that can drift is a specific kind of problem, and human-in-the-loop checkpoints are usually the answer. That came out of music-publishing work where conflicting metadata had to be reconciled with a person in the loop, and it transfers to almost any AI product with stakes attached.</p></div>
+      </section>
+
+      <section class="case-sec" id="tools">
+        <div class="sec-kicker">Building</div>
+        <h2>I build the things <em>I use.</em></h2>
+        <p>My project dashboard, the one I run my own work through, I built with Claude Code. My portfolio site is hand-built HTML I generate and deploy straight to Netlify, no Squarespace, and when I want to change something I'll regenerate the whole thing from scratch. I even built a chatbot for the portfolio, the ITA bot, so people can ask it questions about my work directly.</p>
+        <p>I'm not pointing at this to show off the tools. It's the proof that I'd rather understand a system by building it than admire it from the outside. I read GitHub repos to follow how things actually work under the hood, which is what lets me work as a real partner to engineers instead of throwing designs over a wall.</p>
+        <div class="callout"><p>That's the short version. AI runs through nearly every stage of how I work now, from pricing a project to shipping a prototype, but the judgment underneath it is still the ten years of design. Happy to walk through any of this live and show you the actual screens.</p></div>
+      </section>
+
+      <section class="case-sec" id="itabot">
+        <div class="sec-kicker">Try it</div>
+        <h2>Meet the <em>ITA bot.</em></h2>
+        <p>The chatbot I mentioned, embedded live below. It's trained on this portfolio, so ask it about my projects, AI work, accessibility approach or availability. It's an early beta, so it won't get everything right.</p>
+        <div style="border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 26px 64px -30px rgba(14,26,43,.45);margin-top:14px">
+          <div style="display:flex;align-items:center;gap:7px;padding:11px 16px;background:var(--paper-2);border-bottom:1px solid var(--line)">
+            <span style="width:11px;height:11px;border-radius:50%;background:#FF5F56;flex:none"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:#FFBD2E;flex:none"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:#27C93F;flex:none"></span>
+            <span style="flex:1;font-size:11.5px;color:var(--ink-3);margin-left:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">itabot · ask about Ita Skoblinski</span>
+            <a href="ai-bot.html" style="margin-left:auto;font-size:11.5px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap">Full page &#8599;</a>
+          </div>
+          <iframe src="https://v0-itabot-portfolio-deployment.vercel.app/" title="Itabot, ask about Ita Skoblinski's work" loading="lazy" style="width:100%;height:640px;border:0;display:block;background:#fff"></iframe>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <nav class="case-next">
+    <a href="index.html#work">
+      <div><div class="nk">See it in practice</div><div class="nt">Selected work</div></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
+  </nav>
+</main>
+
+</body>
+</html>

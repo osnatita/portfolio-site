@@ -1,0 +1,27 @@
+# Ita Skoblinski portfolio — Netlify config
+# Drag-and-drop deploy: upload this folder at https://app.netlify.com/drop
+
+# Preserve the old /portfolio URL after moving the homepage to root
+[[redirects]]
+  from = "/portfolio"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/portfolio.html"
+  to = "/"
+  status = 301
+
+# Serve the merchant prototype's .jsx source as JavaScript
+[[headers]]
+  for = "/*.jsx"
+  [headers.values]
+    Content-Type = "text/javascript; charset=utf-8"
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"

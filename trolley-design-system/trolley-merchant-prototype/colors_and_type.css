@@ -1,0 +1,207 @@
+/* ──────────────────────────────────────────────────────────────────
+   Trolley Design System — Colors & Type
+   Source of truth: Figma "Design System Merchant Dashboard '24"
+   ────────────────────────────────────────────────────────────────── */
+
+/* Web font — primary */
+@import url("https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700;800&display=swap");
+/* Fallback stand-in for Proxima Nova. The real brand uses Proxima Nova (Mark Simonson Studio).
+   Mona Sans is the closest free alternative in metrics/proportions. Swap in the real TTF/OTF
+   under /fonts and update the @font-face below when available. */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap");
+
+:root {
+  /* ───────── Primary ───────── */
+  --color-primary-grey: #0C1720;   /* almost-black; primary fg, headlines, body text */
+  --color-primary-white: #FFFFFF;  /* primary surface */
+
+  /* ───────── Brand purple (sidebar / nav) ───────── */
+  --color-purple-500: #7E348E;     /* brand purple */
+  --color-purple-600: #6B2A76;
+  --color-purple-700: #58205E;
+  --color-purple-800: #441645;     /* sidebar background (dark skin) */
+  --color-purple-900: #2E0E30;
+  --color-purple-100: #F7F3F8;
+
+  /* ───────── Blue — primary accent / CTAs ───────── */
+  --color-blue-500: #0092FF;       /* primary CTA, links, focus */
+  --color-blue-600: #008AF1;
+  --color-blue-700: #0083E4;
+  --color-blue-800: #007BD6;
+  --color-blue-100: #E6F4FF;
+  --color-blue-opacity-10: rgba(0, 146, 255, 0.1);
+
+  /* ───────── Green — positive / success ───────── */
+  --color-green-500: #57AD91;      /* success fills, up-arrows */
+  --color-green-600: #4D9980;
+  --color-green-700: #43856F;
+  --color-green-dark: #35B58B;     /* darker green used in charts/positive indicator */
+  --color-green-opacity-15: rgba(87, 173, 145, 0.15);
+  --color-green-opacity-10: rgba(87, 173, 145, 0.1);
+
+  /* ───────── Yellow — warning ───────── */
+  --color-yellow-500: #FFBA08;
+  --color-yellow-600: #E0A200;
+  --color-yellow-700: #A37600;
+  --color-yellow-opacity-20: rgba(255, 186, 8, 0.2);
+
+  /* ───────── Red — destructive / error ───────── */
+  --color-red-500: #F76666;
+  --color-red-600: #D95959;
+  --color-red-700: #BA4D4D;
+  --color-red-opacity-15: rgba(247, 102, 102, 0.15);
+
+  /* ───────── Neutral greys (opacity-based on primary-grey #0C1720) ───────── */
+  --color-grey-opacity-80: rgba(12, 23, 32, 0.8);
+  --color-grey-opacity-60: rgba(12, 23, 32, 0.6);
+  --color-grey-opacity-40: rgba(12, 23, 32, 0.4);
+  --color-grey-opacity-16: rgba(12, 23, 32, 0.16);
+  --color-grey-opacity-12: rgba(12, 23, 32, 0.12);
+  --color-grey-opacity-10: rgba(12, 23, 32, 0.1);
+  --color-grey-opacity-08: rgba(12, 23, 32, 0.08);
+  --color-grey-opacity-06: rgba(12, 23, 32, 0.06);
+  --color-grey-opacity-05: rgba(12, 23, 32, 0.05);
+  --color-grey-opacity-04: rgba(12, 23, 32, 0.04);
+  --color-grey-opacity-02: rgba(12, 23, 32, 0.02);
+
+  /* ───────── White opacities (for dark sidebar) ───────── */
+  --color-white-opacity-80: rgba(255, 255, 255, 0.8);
+  --color-white-opacity-60: rgba(255, 255, 255, 0.6);
+  --color-white-opacity-40: rgba(255, 255, 255, 0.4);
+  --color-white-opacity-20: rgba(255, 255, 255, 0.2);
+  --color-white-opacity-10: rgba(255, 255, 255, 0.1);
+
+  /* ───────── Warm cream (from moodboard, used for callouts) ───────── */
+  --color-cream: #FEFCEC;
+
+  /* ───────── Semantic aliases ───────── */
+  --color-fg-1: var(--color-primary-grey);        /* headlines, primary text */
+  --color-fg-2: #191819;                           /* body text (very slightly warmer) */
+  --color-fg-muted: var(--color-grey-opacity-60); /* labels, helper, "…ago" */
+  --color-fg-faint: var(--color-grey-opacity-40);
+  --color-fg-on-dark: var(--color-primary-white);
+  --color-fg-on-dark-muted: var(--color-white-opacity-60);
+
+  --color-bg-page: var(--color-grey-opacity-05);   /* app canvas behind tiles */
+  --color-bg-surface: var(--color-primary-white);  /* cards, tiles */
+  --color-bg-sunken: var(--color-grey-opacity-05);
+  --color-bg-sidebar: var(--color-purple-800);     /* #441645 */
+  --color-bg-sidebar-hover: var(--color-purple-700);
+  --color-bg-sidebar-active: #612569;              /* active nav item fill */
+
+  --color-border-subtle: var(--color-grey-opacity-05);
+  --color-border-default: var(--color-grey-opacity-10);
+  --color-border-strong: var(--color-grey-opacity-16);
+
+  --color-accent: var(--color-blue-500);
+  --color-accent-hover: var(--color-blue-700);
+  --color-link: var(--color-blue-500);
+
+  --color-success: var(--color-green-500);
+  --color-warning: var(--color-yellow-500);
+  --color-danger: var(--color-red-500);
+
+  /* ───────── Typography — families ───────── */
+  --font-sans: "Mona Sans", "Proxima Nova", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* ───────── Typography — weights ───────── */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;   /* the workhorse — labels, buttons, table headers */
+  --fw-bold: 700;       /* display headlines only */
+
+  /* ───────── Typography — scale (Proxima Nova in the system maps approximately) ───────── */
+  /* H1 — display, used for Settings / page-top titles. 48/1.3 bold. */
+  --fs-display: 48px;   --lh-display: 1.3;   --fw-display: var(--fw-bold);
+  /* H2 — section title. 24/1.3 bold. */
+  --fs-h2: 24px;        --lh-h2: 1.3;        --fw-h2: var(--fw-bold);
+  /* H3 — tile title / subsection. 18/1.3 semibold. */
+  --fs-h3: 18px;        --lh-h3: 1.3;        --fw-h3: var(--fw-semibold);
+  /* H4 — card heading. 16/1.3 semibold. */
+  --fs-h4: 16px;        --lh-h4: 1.3;        --fw-h4: var(--fw-semibold);
+  /* H5 — small heading. 14/1.3 semibold. */
+  --fs-h5: 14px;        --lh-h5: 1.3;        --fw-h5: var(--fw-semibold);
+
+  /* Body — 16/1.4 regular */
+  --fs-body-lg: 16px;   --lh-body-lg: 1.4;
+  /* Body medium — 14/1.4, the default in-app text */
+  --fs-body: 14px;      --lh-body: 1.4;
+  /* Body small — 12/1.4 */
+  --fs-body-sm: 12px;   --lh-body-sm: 1.4;
+  /* Body xs — 10/1.3 (tiny caption) */
+  --fs-body-xs: 10px;   --lh-body-xs: 1.3;
+
+  /* Metric / big numbers (e.g. tile values) 32 bold */
+  --fs-metric: 32px;    --lh-metric: 1.1;    --fw-metric: var(--fw-bold);
+
+  --ls-default: 0;
+  --ls-caps: 0.05em;  /* small all-caps labels ("SWITCH MERCHANT ACCOUNT", etc) */
+
+  /* ───────── Spacing (Figma spacing page: 4/8/12/18/20/24 + derived) ───────── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;    /* not in Figma scale but used pervasively (card padding, icon gap) */
+  --sp-5: 18px;
+  --sp-6: 20px;
+  --sp-7: 24px;
+  --sp-8: 32px;
+  --sp-9: 40px;
+  --sp-10: 48px;
+  --sp-11: 64px;
+
+  /* ───────── Radii ───────── */
+  --radius-1: 2px;
+  --radius-2: 4px;    /* swatches, small chips */
+  --radius-3: 6px;
+  --radius-4: 8px;    /* buttons, inputs, nav items, badges */
+  --radius-5: 12px;
+  --radius-6: 16px;   /* cards / tiles */
+  --radius-7: 20px;
+  --radius-8: 24px;
+  --radius-9: 32px;
+  --radius-10: 40px;
+  --radius-pill: 999px;
+
+  /* ───────── Shadows (from /Shadows page) ───────── */
+  --shadow-border-bottom-1: inset 0 -1px 0 0 rgba(12, 23, 32, 0.05);
+  --shadow-border-bottom-2: inset 0 -1px 0 0 rgba(12, 23, 32, 0.10);
+
+  --shadow-box: 0 1px 3px 0 rgba(12, 23, 32, 0.04), 0 1px 2px 0 rgba(12, 23, 32, 0.12);
+
+  --shadow-button-1: 0 1px 2px 0 rgba(12, 23, 32, 0.08);
+  --shadow-button-2: 0 1px 2px 0 rgba(12, 23, 32, 0.08), 0 2px 4px 0 rgba(12, 23, 32, 0.04);
+  --shadow-button-3: 0 2px 4px 0 rgba(12, 23, 32, 0.08), 0 4px 8px 0 rgba(12, 23, 32, 0.04);
+  --shadow-button-3-blue: 0 1px 2px 0 rgba(0, 146, 255, 0.20), 0 2px 4px 0 rgba(0, 146, 255, 0.16);
+  --shadow-button-4-green: 0 4px 12px 0 rgba(0, 35, 11, 0.2);
+  --shadow-button-4-blue: 0 4px 12px 0 rgba(0, 146, 255, 0.28);
+
+  --shadow-input-1: inset 0 2px 1px 0 rgba(12, 23, 32, 0.05);
+  --shadow-input-2: inset 0 2px 1px 0 rgba(12, 23, 32, 0.08), inset 0 2px 3px 0 rgba(12, 23, 32, 0.04);
+
+  --shadow-tooltip-1: 0 4px 8px 0 rgba(12, 23, 32, 0.08);
+  --shadow-popover: 0 8px 24px 0 rgba(12, 23, 32, 0.12), 0 2px 4px 0 rgba(12, 23, 32, 0.04);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Semantic element styles — drop these on tags directly via class
+   ────────────────────────────────────────────────────────────────── */
+
+.ts-display { font-family: var(--font-sans); font-weight: var(--fw-display); font-size: var(--fs-display); line-height: var(--lh-display); color: var(--color-fg-1); letter-spacing: -0.01em; }
+.ts-h2      { font-family: var(--font-sans); font-weight: var(--fw-h2);      font-size: var(--fs-h2);      line-height: var(--lh-h2);      color: var(--color-fg-1); }
+.ts-h3      { font-family: var(--font-sans); font-weight: var(--fw-h3);      font-size: var(--fs-h3);      line-height: var(--lh-h3);      color: var(--color-fg-1); }
+.ts-h4      { font-family: var(--font-sans); font-weight: var(--fw-h4);      font-size: var(--fs-h4);      line-height: var(--lh-h4);      color: var(--color-fg-1); }
+.ts-h5      { font-family: var(--font-sans); font-weight: var(--fw-h5);      font-size: var(--fs-h5);      line-height: var(--lh-h5);      color: var(--color-fg-1); }
+
+.ts-body-lg { font-family: var(--font-sans); font-weight: var(--fw-regular); font-size: var(--fs-body-lg); line-height: var(--lh-body-lg); color: var(--color-fg-2); }
+.ts-body    { font-family: var(--font-sans); font-weight: var(--fw-regular); font-size: var(--fs-body);    line-height: var(--lh-body);    color: var(--color-fg-2); }
+.ts-body-sb { font-family: var(--font-sans); font-weight: var(--fw-semibold); font-size: var(--fs-body);   line-height: var(--lh-body);    color: var(--color-fg-1); }
+.ts-body-sm { font-family: var(--font-sans); font-weight: var(--fw-regular); font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); color: var(--color-fg-muted); }
+.ts-body-xs { font-family: var(--font-sans); font-weight: var(--fw-semibold); font-size: var(--fs-body-xs); line-height: var(--lh-body-xs); color: var(--color-fg-muted); letter-spacing: var(--ls-caps); text-transform: uppercase; }
+
+.ts-metric  { font-family: var(--font-sans); font-weight: var(--fw-metric); font-size: var(--fs-metric); line-height: var(--lh-metric); color: var(--color-fg-1); }
+
+.ts-link    { color: var(--color-link); text-decoration: underline; text-underline-offset: 2px; }
+
+.ts-mono    { font-family: var(--font-mono); font-size: 12px; }
