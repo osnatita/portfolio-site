@@ -27,3 +27,10 @@
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
     # Keep the whole site out of search engines (private / password-gated)
     X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet, noimageindex"
+
+# Force every file to revalidate so returning visitors never see a stale (old) version.
+# ETag makes this cheap: unchanged files return a tiny 304, changed files are re-fetched.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
