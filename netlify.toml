@@ -2,9 +2,9 @@
 # Deploys from GitHub (osnatita/portfolio-site) to the "portfolioevolved" site:
 # pushing to main publishes, and a pull request gets its own deploy preview.
 
-# Serve the French 404 for misses under /fr/. Netlify does not pick up a
-# subdirectory 404.html on its own, and without this rule /fr/anything-missing
-# falls back to the English page at the root.
+# Serve the French 404 for misses under /fr/. Verified on a deploy preview:
+# without this rule, /fr/anything-missing returned the English page from the
+# root, so the subdirectory 404.html was not being picked up on its own here.
 # The rule is not forced, so real files under /fr/ still win over it.
 [[redirects]]
   from = "/fr/*"

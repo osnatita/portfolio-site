@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ask the Catalog, du RAG sur cinquante ans de droits musicaux, Ita Skoblinski</title>
-<meta name="description" content="Ask the Catalog: an AI-native product design case study. A RAG interface that reasons across 85,000+ music-rights documents and returns a cited, confidence-scored answer, with a human in the loop. Research, strategy, UX and prototype by Ita Skoblinski." />
+<meta name="description" content="Ask the Catalog : une étude de cas en design de produit d’IA. Une interface RAG qui raisonne sur plus de 85 000 documents de droits musicaux et rend une réponse sourcée, assortie d’un indice de confiance, avec validation humaine. Recherche, stratégie, UX et prototype par Ita Skoblinski." />
 <meta name="theme-color" content="#1D4ED8" />
 <link rel="stylesheet" href="../assets/site.css" />
 <link rel="alternate" hreflang="en" href="../case-ask-the-catalog.html" />
@@ -110,7 +110,7 @@
       <a href="mailto:sosnat@gmail.com" class="nav-cta">Contact</a>
       <span class="lang-switch" role="group" aria-label="Langue">
         <a hreflang="en" lang="en" href="../case-ask-the-catalog.html">EN</a>
-        <a hreflang="fr" class="is-active" aria-current="true" href="case-ask-the-catalog.html">FR</a>
+        <a hreflang="fr" class="is-active" aria-current="page" href="case-ask-the-catalog.html">FR</a>
       </span>
     </nav>
   </div>
@@ -126,7 +126,7 @@
       <span class="pill">Client confidentiel &middot; Édition musicale et IA</span>
     </div>
     <h1>Cinquante ans de contrats et de redevances à une question de distance.</h1>
-    <p class="sub">Un éditeur musical confidentiel fonctionnait avec trois systèmes qui ne se parlaient pas : toutes les vraies réponses tenaient dans la tête d’une ou deux personnes. J’ai conçu <b>Ask the Catalog</b>, un endroit unique où n’importe quelle équipe pose une question en langage courant et reçoit une réponse sourcée, assortie d’un indice de confiance, appuyée par un processus de récupération d’information (RAG) avec une personne dans la boucle.</p>
+    <p class="sub">Un éditeur musical confidentiel fonctionnait avec trois systèmes qui ne se parlaient pas : toutes les vraies réponses tenaient dans la tête d’une ou deux personnes. J’ai conçu <b>Ask the Catalog</b>, un endroit unique où n’importe quelle équipe pose une question en langage courant et reçoit une réponse sourcée, assortie d’un indice de confiance, appuyée par un processus de génération augmentée par récupération (RAG) avec une personne dans la boucle.</p>
     <p class="bottomline"><b>En résumé :</b> les gens trouvent ce qu’il leur faut sans passer par la direction, les contrats remontent avant d’expirer, et une question comme &laquo;&nbsp;combien devons-nous à cet artiste en ce moment ?&nbsp;&raquo; revient en quelques secondes, chaque chiffre étant rattaché à sa source.</p>
     <div class="case-meta">
       <div class="m"><div class="mk">Rôle</div><div class="mv">Designer de produit principale</div></div>
@@ -182,7 +182,7 @@
         <h2>Une entreprise qui carbure à des documents <em>qu’elle ne peut pas fouiller.</em></h2>
         <p class="lead">Un éditeur musical indépendant administre un vaste catalogue de contrats, d’états de redevances, de licences de synchronisation et d’avances. Le savoir qui fait tourner l’entreprise vit entièrement dans ces documents, répartis sur trois systèmes bâtis pour entreposer, pas pour répondre.</p>
         <div class="impact-row">
-          <div class="ic"><div class="iv">85K<span class="sym">+</span></div><div class="il">PDF de contrats, factures et lignes de redevances répartis entre Dropbox, FileMaker et Vistex</div></div>
+          <div class="ic"><div class="iv">85 k<span class="sym">+</span></div><div class="il">PDF de contrats, factures et lignes de redevances répartis entre Dropbox, FileMaker et Vistex</div></div>
           <div class="ic"><div class="iv">3</div><div class="il">Systèmes de référence, sans aucun moyen de les croiser entre eux</div></div>
           <div class="ic"><div class="iv">0</div><div class="il">Source unique de vérité. L’image complète n’existait que dans la tête de quelqu’un</div></div>
         </div>
@@ -195,8 +195,8 @@
         <p>C’étaient des problèmes structurels. Ils coûtaient des heures à la direction, laissaient filer des renouvellements et des revenus, et ralentissaient toute décision qui touchait à plus d’un système.</p>
         <div class="problem-list">
           <div class="prob"><span class="pn">1</span><div><b>Aucune source unique de vérité.</b> Il n’existait pas de vue centralisée des contrats, des redevances et de l’historique de synchro d’un artiste : même les questions courantes obligeaient à ouvrir trois systèmes et à concilier à la main.</div></div>
-          <div class="prob"><span class="pn">2</span><div><b>La direction faisait goulot d’étranglement.</b> L’équipe demandait sans cesse à la direction des renseignements de base qui auraient dû être en libre-service, ce qui transformait quelques personnes en moteur de recherche humain.</div></div>
-          <div class="prob"><span class="pn">3</span><div><b>Des renouvellements passaient à travers.</b> Le suivi des contrats était manuel : les ententes approchaient de leur échéance sans que rien ne sonne, et des occasions de renouvellement étaient manquées.</div></div>
+          <div class="prob"><span class="pn">2</span><div><b>La direction était le goulot d’étranglement.</b> L’équipe demandait sans cesse à la direction des renseignements de base qui auraient dû être en libre-service, ce qui transformait quelques personnes en moteur de recherche humain.</div></div>
+          <div class="prob"><span class="pn">3</span><div><b>Des renouvellements nous filaient entre les doigts.</b> Le suivi des contrats était manuel : les ententes approchaient de leur échéance sans qu’aucune alerte ne se déclenche, et des occasions de renouvellement étaient manquées.</div></div>
           <div class="prob"><span class="pn">4</span><div><b>Aucune place pour une mauvaise réponse dite avec aplomb.</b> Il s’agit de données juridiques et financières. Sur un partage ou un solde de récupération, un outil qui répond sans preuve devient un risque.</div></div>
         </div>
       </section>
@@ -210,7 +210,7 @@
           <div class="c"><span class="chip chip-blue">Développement des affaires</span><p>&laquo;&nbsp;Quels contrats arrivent à renouvellement, et lesquels valent la peine d’être relancés ?&nbsp;&raquo; Il n’y avait ni calendrier, ni pipeline, ni alertes.</p></div>
           <div class="c"><span class="chip chip-blue">Licences de synchro</span><p>Chiffrer un placement relève de la devinette sans historique : qu’avions-nous facturé pour des genres, des productions et des territoires comparables ?</p></div>
           <div class="c"><span class="chip chip-blue">Finances et redevances</span><p>Concilier un paiement veut dire rattacher les données Vistex aux clauses du contrat et à l’état de récupération qui le justifient.</p></div>
-          <div class="c"><span class="chip chip-blue">Direction</span><p>Aucune lecture en direct du rendement du portefeuille, de la productivité des équipes ni de l’endroit où se logent les risques : conformité, paiements en retard, ententes qui expirent.</p></div>
+          <div class="c"><span class="chip chip-blue">Direction</span><p>Aucune lecture en temps réel du rendement du portefeuille, de la productivité des équipes ni de l’endroit où se logent les risques : conformité, paiements en retard, ententes qui expirent.</p></div>
           <div class="c"><span class="chip chip-green">Le fil commun</span><p>Chez les cinq, le besoin était le même : une réponse rapide qu’ils pouvaient assumer, tirée de plusieurs systèmes à la fois.</p></div>
         </div>
       </section>
@@ -218,14 +218,14 @@
       <section class="case-sec" id="insight">
         <div class="sec-kicker">Le constat</div>
         <h2>Le difficile, c’était de raisonner d’un système à l’autre, <em>et de le prouver.</em></h2>
-        <p>Un test a recadré tout le projet. Prenez une question simple comme &laquo;&nbsp;quand ce contrat expire-t-il ?&nbsp;&raquo;. N’importe quel outil documentaire y répond et cite la clause. La question qui fait tourner l’entreprise au quotidien est plus dure.</p>
+        <p>Un test a recadré tout le projet. Prenez une question simple comme &laquo;&nbsp;quand ce contrat expire-t-il&nbsp;?&nbsp;&raquo; N’importe quel outil documentaire y répond et cite la clause. La question qui fait tourner l’entreprise au quotidien est plus dure.</p>
         <div class="quote"><p>&laquo;&nbsp;Combien devons-nous à cet artiste en ce moment ?&nbsp;&raquo; Y répondre veut dire croiser les clauses de récupération du contrat avec plusieurs trimestres de données Vistex, puis calculer le solde non récupéré. Aucun système ne détient ça. La réponse doit être raisonnée sur les trois, puis <b>prouvée</b>.</p><div class="who"><b>La requête qui a fixé la barre</b></div></div>
         <p>Le problème de design devenait donc : rendre fiables des réponses issues de plusieurs systèmes. Chaque chiffre rattaché à sa source, assorti d’un indice de confiance, et visible uniquement par les personnes autorisées. De là, quatre principes que j’ai spécifiés pour le comportement du système.</p>
         <div class="steps">
           <div class="step"><div class="sn">01</div><h4>Citer chaque chiffre</h4><p>Aucune réponse n’apparaît sans la clause de contrat, la période de redevances ou la ligne de grand livre exacte dont elle vient. L’ancrage se fait au niveau de la clause, pas du résumé de document, pour que chaque nombre soit vérifiable.</p></div>
           <div class="step"><div class="sn">02</div><h4>Chiffrer la confiance</h4><p>Le système dit à quel point il est sûr et ce qu’il n’a pas pu concilier, pour qu’une personne sache quand vérifier avant d’agir. Le seuil de confiance est une décision de produit que j’ai tranchée.</p></div>
           <div class="step"><div class="sn">03</div><h4>Respecter qui voit quoi</h4><p>Des permissions par rôle et une piste de vérification, parce que les données de redevances et de contrats ne sont pas pour tout le monde, et que les réponses sensibles laissent une trace.</p></div>
-          <div class="step"><div class="sn">04</div><h4>Répondre en langage courant</h4><p>L’équipe pense en ententes et en paiements, pas en requêtes : les questions et les réponses restent en langage de tous les jours. Une personne confirme avant que quoi que ce soit soit enregistré.</p></div>
+          <div class="step"><div class="sn">04</div><h4>Répondre en langage courant</h4><p>L’équipe pense en ententes et en paiements, pas en requêtes : les questions et les réponses restent en langage de tous les jours. Une personne confirme avant tout enregistrement.</p></div>
         </div>
       </section>
 
@@ -238,18 +238,18 @@
             <tr><th>Option</th><th>Raisonnement inter-systèmes</th><th>Citations et confiance</th><th>Adéquation et coût pour une petite équipe</th><th>Verdict</th></tr>
           </thead>
           <tbody>
-            <tr><td class="opt">Microsoft 365 Copilot</td><td>Solide une fois les données regroupées dans le graphe Microsoft</td><td>Bon, en progression</td><td>Le meilleur équilibre : s’intègre à l’outillage existant, coût par siège prévisible</td><td class="v v-rec">Recommandé &middot; entreprise</td></tr>
+            <tr><td class="opt">Microsoft 365 Copilot</td><td>Solide une fois les données regroupées dans le graphe Microsoft</td><td>Bon, en progression</td><td>Le meilleur équilibre : s’intègre à l’outillage existant, coût par utilisateur prévisible</td><td class="v v-rec">Recommandé &middot; entreprise</td></tr>
             <tr><td class="opt">Pile Claude sur mesure</td><td>La plus poussée : croisement et logique de récupération conçus pour le besoin</td><td>Citations et confiance intégrées dès le premier jour</td><td>Développement plus lourd, spécialisé pour l’industrie musicale</td><td class="v v-rec">Recommandé &middot; haut de gamme</td></tr>
             <tr><td class="opt">Agents conversationnels génériques / outils ponctuels</td><td>Superficiels ; incapables d’atteindre ou de concilier les systèmes sources</td><td>Ils résument sans indiquer la provenance</td><td>Peu coûteux, mais risqués sur des données juridiques et financières</td><td class="v v-out">Écartés</td></tr>
           </tbody>
         </table>
-        <p style="font-size:calc(13px * var(--type-scale));color:var(--ink-3);line-height:1.6">Aussi pesés : l’effort de regroupement et de migration de plus de 85 000 documents, la volatilité des tarifs d’API, et la façon dont chaque option gère les permissions et la vérification sur des données de redevances sensibles.</p>
+        <p style="font-size:calc(13px * var(--type-scale));color:var(--ink-3);line-height:1.6">Autres facteurs pesés : l’effort de regroupement et de migration de plus de 85 000 documents, la volatilité des tarifs d’API, et la façon dont chaque option gère les permissions et la vérification sur des données de redevances sensibles.</p>
       </section>
 
       <section class="case-sec" id="product">
         <div class="sec-kicker">Le produit</div>
         <h2>Un seul endroit où demander, trois façons <em>de recevoir la réponse.</em></h2>
-        <p class="lead">Le produit est une couche de données centralisée et gérée par permissions, coiffée d’une interface en langage courant. Au-delà de la question et de la réponse directes, le même moteur alimente un tableau de bord d’affaires en direct et un calendrier des contrats toujours actif.</p>
+        <p class="lead">Le produit est une couche de données centralisée et gérée par permissions, coiffée d’une interface en langage courant. Au-delà de la question et de la réponse directes, le même moteur alimente un tableau de bord d’affaires en temps réel et un calendrier des contrats toujours actif.</p>
 
         <div class="engine">
           <svg viewBox="0 0 720 420" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Fonctionnement du moteur : une question en langage courant déclenche une recherche dans trois systèmes, un croisement, une rédaction avec citations, puis un indice de confiance. Une confiance élevée donne une réponse sourcée en libre-service ; une confiance faible est signalée à vérifier et acheminée à un spécialiste.">
@@ -305,7 +305,7 @@
             <text x="482" y="396" font-size="10.5" fill="#33415A">et achemine à un spécialiste</text>
           </svg>
         </div>
-        <p style="margin-top:18px"><b>Le moteur.</b> Chaque réponse est un processus de récupération d’information (RAG) raisonné sur les trois systèmes, noté, puis livré avec ses citations ou signalé avec la liste exacte de ce qu’il n’a pas pu concilier. Une personne confirme avant toute écriture.</p>
+        <p style="margin-top:18px"><b>Le moteur.</b> Chaque réponse est un processus de génération augmentée par récupération (RAG) raisonné sur les trois systèmes, noté, puis livré avec ses citations ou signalé avec la liste exacte de ce qu’il n’a pas pu concilier. Une personne confirme avant toute écriture.</p>
 
         <div class="surf" aria-label="Tableau de bord de direction">
           <div class="surf-h"><span>Catalogue &middot; intelligence d’affaires</span><span>T4 2025</span></div>
@@ -329,7 +329,7 @@
             </div>
           </div>
         </div>
-        <div class="cap" style="margin-top:12px;font-size:calc(13.5px * var(--type-scale));color:var(--ink-3)"><b style="color:var(--ink)">Surface 1. Le tableau de bord de direction.</b> Revenus du portefeuille, contrats actifs, exposition à la récupération et compte en direct des renouvellements à venir. La lecture de l’entreprise que la direction n’avait jamais eue.</div>
+        <div class="cap" style="margin-top:12px;font-size:calc(13.5px * var(--type-scale));color:var(--ink-3)"><b style="color:var(--ink)">Surface 1. Le tableau de bord de direction.</b> Revenus du portefeuille, contrats actifs, exposition à la récupération et un décompte en temps réel des renouvellements à venir. La lecture de l’entreprise que la direction n’avait jamais eue.</div>
 
         <div class="surf" aria-label="Calendrier des contrats" style="margin-top:26px">
           <div class="surf-h"><span>Calendrier des contrats &middot; alertes de renouvellement automatiques</span></div>
@@ -350,7 +350,7 @@
           <div class="c"><span class="chip chip-blue">Développement des affaires</span><div class="ct">Attraper chaque renouvellement à temps</div><p>Un calendrier des contrats avec alertes automatiques à 30, 60 et 90 jours, et un pipeline de renouvellements avec l’état des négociations et les prévisions de revenus.</p></div>
           <div class="c"><span class="chip chip-blue">Licences de synchro</span><div class="ct">Chiffrer à partir du vrai historique</div><p>Comparer les devis passés par genre, production, territoire et budget, avec des repères de prix et le taux de conversion des devis en placements.</p></div>
           <div class="c"><span class="chip chip-blue">Finances et redevances</span><div class="ct">Concilier vite, avec les preuves</div><p>Les paiements en souffrance et l’état de récupération d’un coup d’œil, et une conciliation des redevances qui rattache les données Vistex aux clauses du contrat.</p></div>
-          <div class="c"><span class="chip chip-blue">Direction</span><div class="ct">Une vue en direct de toute l’entreprise</div><p>Rendement du portefeuille, productivité des équipes et tendances de revenus, avec une vue des risques : conformité, retards de paiement, renouvellements exposés.</p></div>
+          <div class="c"><span class="chip chip-blue">Direction</span><div class="ct">Une vue en temps réel de toute l’entreprise</div><p>Rendement du portefeuille, productivité des équipes et tendances de revenus, avec une vue des risques : conformité, retards de paiement, renouvellements exposés.</p></div>
           <div class="c"><span class="chip chip-green">Tout le monde</span><div class="ct">Fini de demander à un collègue d’aller voir</div><p>Des réponses en langage courant, sourcées et assorties d’un indice de confiance, avec des accès par rôle et une piste de vérification sur les données sensibles.</p></div>
         </div>
       </section>
@@ -364,7 +364,7 @@
           <div class="ic"><div class="iv">0</div><div class="il">Renouvellement manqué une fois les alertes à 30, 60 et 90 jours automatisées</div></div>
           <div class="ic"><div class="iv">Bâtir</div><div class="il">Le prototype validé et l’analyse de rentabilité ont donné le feu vert à la mise en œuvre</div></div>
         </div>
-        <div class="quote"><p>&laquo;&nbsp;Pour la première fois, je peux répondre moi-même à &laquo;&nbsp;combien on leur doit ?&nbsp;&raquo;, et montrer exactement d’où sort le chiffre.&nbsp;&raquo;</p><div class="who"><b>Responsable des redevances</b> &middot; séance de prototypage</div></div>
+        <div class="quote"><p>&laquo;&nbsp;Pour la première fois, je peux répondre moi-même à &ldquo;combien on leur doit&nbsp;?&rdquo;, et montrer exactement d’où sort le chiffre.&nbsp;&raquo;</p><div class="who"><b>Responsable des redevances</b> &middot; séance de prototypage</div></div>
         <div class="callout"><p><b>Ce que je ferais avec plus de temps :</b> rendre le seuil de confiance réglable par équipe (les finances tolèrent moins d’ambiguïté que la direction artistique), pousser la boucle de conciliation pour que chaque correction humaine affine la réponse suivante, et prototyper un mode proactif où le tableau de bord fait remonter les jalons de récupération et les risques de renouvellement avant que quiconque y pense.</p></div>
       </section>
 
