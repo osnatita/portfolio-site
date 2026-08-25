@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AI bot (beta), Ita Skoblinski</title>
-<meta name="description" content="Itabot — a chatbot trained on Ita Skoblinski's portfolio. Ask about her projects, AI work, accessibility approach, and availability." />
+<title>Bot IA (bêta), Ita Skoblinski</title>
+<meta name="description" content="Itabot, un agent conversationnel entraîné sur le portfolio d'Ita Skoblinski. Posez-lui des questions sur ses projets, son travail avec l'IA, son approche de l'accessibilité et ses disponibilités." />
 <meta name="theme-color" content="#1D4ED8" />
-<link rel="stylesheet" href="assets/site.css" />
-<link rel="alternate" hreflang="en" href="ai-bot.html" />
-<link rel="alternate" hreflang="fr" href="fr/ai-bot.html" />
-<link rel="stylesheet" href="assets/case.css" />
-<link rel="stylesheet" href="assets/lang.css" />
+<link rel="stylesheet" href="../assets/site.css" />
+<link rel="alternate" hreflang="en" href="../ai-bot.html" />
+<link rel="alternate" hreflang="fr" href="ai-bot.html" />
+<link rel="stylesheet" href="../assets/case.css" />
+<link rel="stylesheet" href="../assets/lang.css" />
 <style>
   .bot-wrap { max-width: var(--maxw); margin: 0 auto; padding: calc(40px * var(--density)) 48px calc(56px * var(--density)); }
   .bot-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
@@ -45,21 +45,21 @@
 </script>
 </head>
 <body>
-<a href="#main" class="skip-link">Skip to content</a>
+<a href="#main" class="skip-link">Aller au contenu</a>
 
 <header class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="brand" aria-label="Ita Skoblinski, home">
+    <a href="index.html" class="brand" aria-label="Ita Skoblinski, accueil">
       <span class="name">Ita Skoblinski</span>
-      <span class="role hide-sm">Senior Product Designer</span>
+      <span class="role hide-sm">Designer de produit senior</span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="index.html#work" class="hide-sm">Work</a>
-      <a href="how-i-work-with-ai.html" class="hide-sm">How I work with AI</a>
+    <nav class="nav-links" aria-label="Principale">
+      <a href="index.html#work" class="hide-sm">Projets</a>
+      <a href="how-i-work-with-ai.html" class="hide-sm">Ma façon de travailler avec l'IA</a>
       <a href="mailto:sosnat@gmail.com" class="nav-cta">Contact</a>
-      <span class="lang-switch" role="group" aria-label="Language">
-        <a hreflang="en" class="is-active" aria-current="true" href="ai-bot.html">EN</a>
-        <a hreflang="fr" lang="fr" href="fr/ai-bot.html">FR</a>
+      <span class="lang-switch" role="group" aria-label="Langue">
+        <a hreflang="en" lang="en" href="../ai-bot.html">EN</a>
+        <a hreflang="fr" class="is-active" aria-current="true" href="ai-bot.html">FR</a>
       </span>
     </nav>
   </div>
@@ -67,22 +67,22 @@
 
 <main id="main" class="bot-wrap">
   <div class="bot-kicker">
-    <span class="bot-badge">AI bot · beta</span>
+    <span class="bot-badge">Bot IA · bêta</span>
   </div>
-  <h1>Ask me anything <em>about Ita's work.</em></h1>
-  <p class="bot-sub">Itabot is a chatbot trained on this portfolio — built by Ita as a working example of designing with AI. Ask about her projects, AI work, accessibility approach, or availability. It's early, so it won't get everything right.</p>
+  <h1>Posez-moi vos questions <em>sur le travail d'Ita.</em></h1>
+  <p class="bot-sub">Itabot est un agent conversationnel entraîné sur ce portfolio. Ita l'a construit comme démonstration concrète du design avec l'IA. Posez-lui des questions sur ses projets, son travail avec l'IA, son approche de l'accessibilité ou ses disponibilités. C'est encore tôt : il ne répondra pas juste à tous les coups.</p>
 
   <div class="bot-frame">
     <div class="bot-bar">
       <span class="bot-dot"></span><span class="bot-dot"></span><span class="bot-dot"></span>
-      <span class="bot-url">itabot · ask about Ita Skoblinski</span>
-      <a class="bot-open" href="https://v0-itabot-portfolio-deployment.vercel.app/" target="_blank" rel="noopener">Open in new tab &#8599;</a>
+      <span class="bot-url">itabot · questions sur Ita Skoblinski</span>
+      <a class="bot-open" href="https://v0-itabot-portfolio-deployment.vercel.app/" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet &#8599;</a>
     </div>
-    <iframe class="bot-iframe" src="https://v0-itabot-portfolio-deployment.vercel.app/" title="Itabot — ask about Ita Skoblinski's work" loading="lazy"></iframe>
+    <iframe class="bot-iframe" src="https://v0-itabot-portfolio-deployment.vercel.app/" title="Itabot, questions sur le travail d'Ita Skoblinski" loading="lazy"></iframe>
   </div>
-  <p class="bot-note">Itabot runs as a separate beta service. If it doesn't load, you can <a href="https://v0-itabot-portfolio-deployment.vercel.app/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">open it in a new tab</a>.</p>
+  <p class="bot-note">Itabot fonctionne comme un service bêta distinct. S'il ne se charge pas, vous pouvez l'<a href="https://v0-itabot-portfolio-deployment.vercel.app/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">ouvrir dans un nouvel onglet</a>.</p>
 </main>
 
-<script src="assets/case-shell.js"></script>
+<script src="../assets/case-shell.js"></script>
 </body>
 </html>
