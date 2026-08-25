@@ -1,5 +1,15 @@
 # Ita Skoblinski portfolio — Netlify config
-# Drag-and-drop deploy: upload this folder at https://app.netlify.com/drop
+# Deploys from GitHub (osnatita/portfolio-site) to the "portfolioevolved" site:
+# pushing to main publishes, and a pull request gets its own deploy preview.
+
+# Serve the French 404 for misses under /fr/. Netlify does not pick up a
+# subdirectory 404.html on its own, and without this rule /fr/anything-missing
+# falls back to the English page at the root.
+# The rule is not forced, so real files under /fr/ still win over it.
+[[redirects]]
+  from = "/fr/*"
+  to = "/fr/404.html"
+  status = 404
 
 # Preserve the old /portfolio URL after moving the homepage to root
 [[redirects]]
