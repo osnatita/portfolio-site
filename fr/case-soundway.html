@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Soundway Records, Ita Skoblinski</title>
+<link rel="stylesheet" href="../assets/site.css" />
+<link rel="alternate" hreflang="en" href="../case-soundway.html" />
+<link rel="alternate" hreflang="fr" href="case-soundway.html" />
+<link rel="stylesheet" href="../assets/case.css" />
+<link rel="stylesheet" href="../assets/lang.css" />
+<script>
+  (function () {
+    try {
+      var t = JSON.parse(localStorage.getItem('jr:tweaks') || '{}');
+      var r = document.documentElement;
+      if (t.typeScale) r.style.setProperty('--type-scale', t.typeScale);
+      var dmap = { compact: 0.82, regular: 1, comfy: 1.22 };
+      if (t.density && dmap[t.density]) r.style.setProperty('--density', dmap[t.density]);
+      if (t.showMetrics === false) r.setAttribute('data-no-metrics', '1');
+      var pal = { sapphire:['#1B3A8F','#142A63'], indigo:['#4338CA','#312E81'], teal:['#0E7490','#115E59'], violet:['#6D28D9','#4C1D95'], emerald:['#146B47','#0E4E34'] };
+      var a = localStorage.getItem('ita:accent');
+      if (a && pal[a]) { r.style.setProperty('--accent', pal[a][0]); r.style.setProperty('--accent-strong', pal[a][1]); }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* Wireframe sizing: single column, framed, height-capped banners */
+  .case-fig img { background:#fff; box-shadow:0 4px 24px rgba(14,26,43,.07); object-fit:cover; object-position:top; max-height:540px; border-radius:12px; }
+  .case-figs { grid-template-columns:1fr; gap:24px; }
+</style>
+</head>
+<body>
+<script>if (document.documentElement.getAttribute('data-no-metrics')) document.body.classList.add('no-metrics');</script>
+<a href="#main" class="skip-link">Aller au contenu</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Ita Skoblinski, accueil">
+      <span class="name">Ita Skoblinski</span>
+      <span class="role hide-sm">Designer de produit senior</span>
+    </a>
+    <nav class="nav-links" aria-label="Principale">
+      <a href="index.html#work" class="hide-sm">Tous les projets</a>
+      <a href="index.html#about" class="hide-sm">&Agrave; propos</a>
+      <a href="ai-bot.html" class="hide-sm">Bot&nbsp;IA <span style="font-size:.6em;font-weight:700;letter-spacing:.08em;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;vertical-align:2px">B&Ecirc;TA</span></a>
+      <a href="mailto:sosnat@gmail.com" class="nav-cta">Contact</a>
+      <span class="lang-switch" role="group" aria-label="Langue">
+        <a hreflang="en" lang="en" href="../case-soundway.html">EN</a>
+        <a hreflang="fr" class="is-active" aria-current="true" href="case-soundway.html">FR</a>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <header class="case-hero">
+    <div class="case-kicker">
+      <a class="crumb" href="index.html#work">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        Projets choisis
+      </a>
+      <span class="pill">Soundway Records · Marque et recherche UX</span>
+    </div>
+    <h1>Refermer l’écart entre <em>l’identité et la perception</em></h1>
+    <p class="sub">Un label indépendant, avec un vaste catalogue d’archives et des nouveautés ambitieuses, perdait du terrain face aux algorithmes. J’ai mené la phase de découverte pour comprendre pourquoi, et quoi faire ensuite.</p>
+    <p class="bottomline"><b>En résumé :</b> une stratégie de découverte et une direction de marque qui relient l’écoute en continu, la vente et le contenu éditorial, tirées de 11 entretiens avec des auditeurs.</p>
+    <div class="case-meta">
+      <div class="m"><div class="mk">Rôle</div><div class="mv">Chercheuse UX et stratège</div></div>
+      <div class="m"><div class="mk">Durée</div><div class="mv">8 semaines · févr. 2026</div></div>
+      <div class="m"><div class="mk">Méthodes</div><div class="mv">Entretiens · terrain · analytique</div></div>
+      <div class="m"><div class="mk">Participants</div><div class="mv">11 entretiens · 4 groupes</div></div>
+    </div>
+  </header>
+
+  <div class="case-cover" data-screen-label="Soundway / live prototype">
+    <div style="border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 26px 64px -30px rgba(14,26,43,.45)">
+      <div style="display:flex;align-items:center;gap:7px;padding:11px 16px;background:var(--paper-2);border-bottom:1px solid var(--line)">
+        <span style="width:11px;height:11px;border-radius:50%;background:#FF5F56;flex:none"></span>
+        <span style="width:11px;height:11px;border-radius:50%;background:#FFBD2E;flex:none"></span>
+        <span style="width:11px;height:11px;border-radius:50%;background:#27C93F;flex:none"></span>
+        <span style="flex:1;font-size:11.5px;color:var(--ink-3);margin-left:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">soundway-records.html · prototype de maquette filaire interactive</span>
+        <a href="../soundway-records.html" target="_blank" rel="noopener" style="margin-left:auto;font-size:11.5px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap">Ouvrir dans un nouvel onglet &#8599;</a>
+      </div>
+      <iframe src="../soundway-records.html" title="Prototype de maquette filaire interactive de Soundway Records" loading="lazy" style="width:100%;height:640px;border:0;display:block;background:#fff"></iframe>
+    </div>
+    <div class="cap">Le site repensé sous forme de prototype fonctionnel : faites défiler la maquette et cliquez dedans, ou ouvrez-la en plein écran. Dix pages avec extraits audio, filtres, panier et mode sombre.</div>
+  </div>
+
+  <div class="case-shell">
+    <aside class="case-nav" aria-label="Sections">
+      <ol>
+        <li><a href="#background"><span class="n">01</span> Contexte</a></li>
+        <li><a href="#research"><span class="n">02</span> Recherche</a></li>
+        <li><a href="#findings"><span class="n">03</span> Constats</a></li>
+        <li><a href="#direction"><span class="n">04</span> Direction</a></li>
+        <li><a href="#recommendations"><span class="n">05</span> Recomm.</a></li>
+        <li><a href="#outcomes"><span class="n">06</span> Résultats</a></li>
+      </ol>
+      <div class="nav-cv"><a class="crumb" href="../soundway-records.html" target="_blank" rel="noopener" style="font-weight:600;color:var(--accent)">Ouvrir le prototype →</a></div>
+    </aside>
+    <div class="case-body">
+      <section class="case-sec" id="background">
+        <div class="sec-kicker">Contexte</div>
+        <h2>Un label avec <em>deux personnalités.</em></h2>
+        <p class="lead">Soundway déterre depuis des décennies des musiques oubliées d’Afrique de l’Ouest, d’Amérique latine et d’Asie du Sud-Est, tout en publiant des nouveautés ambitieuses.</p>
+        <p>Mais à l’interne, l’équipe sentait que quelque chose clochait : l’identité d’archiviste dominait la perception extérieure, pendant que les nouveautés peinaient à percer. Personne n’avait examiné cet écart de façon systématique. C’est là que le mandat a commencé.</p>
+        <div class="callout"><p>&laquo;&nbsp;On sait qui on est. Mais quand on regarde la façon dont les gens parlent de nous en ligne, on dirait qu’ils ne voient que la moitié de ce qu’on fait.&nbsp;&raquo;<br><span style="color:var(--ink-3);font-weight:500">Partie prenante chez Soundway, entretien interne</span></p></div>
+      </section>
+
+      <section class="case-sec" id="research">
+        <div class="sec-kicker">Dispositif de recherche</div>
+        <h2>Parler à tous ceux qui <em>touchent à la musique.</em></h2>
+        <p>Pour comprendre l’écart, il me fallait des points de vue de tout l’écosystème : pas seulement les fans, mais aussi les gens qui distribuent et vendent la musique physique, et les plateformes où se fait la découverte. Onze entretiens en profondeur répartis sur quatre groupes, plus une visite de terrain en magasin.</p>
+        <div class="cardgrid">
+          <div class="c"><div class="ct">Acheteurs en magasin</div><div class="role">3 entretiens · disquaires indépendants</div><p class="q">&laquo;&nbsp;Les rééditions de Soundway se vendent pratiquement toutes seules, mais leurs nouveautés, je ne sais pas toujours comment les présenter.&nbsp;&raquo;</p><div class="need"><b>Besoin principal</b>Un récit qu’ils peuvent vendre au comptoir</div></div>
+          <div class="c"><div class="ct">Prescripteurs et influenceurs</div><div class="role">3 entretiens · blogues, radio, listes d’écoute</div><p class="q">&laquo;&nbsp;Une crédibilité folle dans certains cercles. Mais si vous n’y êtes pas déjà, il n’y a aucun pont pour un nouvel auditeur.&nbsp;&raquo;</p><div class="need"><b>Besoin principal</b>Être des partenaires, pas juste une source de recommandations</div></div>
+          <div class="c"><div class="ct">Auditeurs de la génération Z</div><div class="role">3 entretiens · nés dans l’écoute en continu</div><p class="q">&laquo;&nbsp;Je les ai découverts par un échantillon sur TikTok. Le site avait l’air d’un truc de collectionneurs, pas pour moi.&nbsp;&raquo;</p><div class="need"><b>Besoin principal</b>Une porte d’entrée qui corresponde à leur point d’arrivée</div></div>
+          <div class="c"><div class="ct">Parties prenantes internes</div><div class="role">2 entretiens · fondateurs et direction artistique</div><p class="q">&laquo;&nbsp;On veut être reconnus pour la découverte dans les deux sens : les perles oubliées et les artistes de demain.&nbsp;&raquo;</p><div class="need"><b>Besoin principal</b>Une expression publique à la hauteur de la vision interne</div></div>
+        </div>
+        <div class="case-fig"><img src="../assets/soundway/stories.png" alt="Maquette filaire de l’index des récits" loading="lazy" /><figcaption>La section Stories a révélé un problème net : le contenu éditorial existait, mais aucun chemin n’aidait les nouveaux auditeurs à le trouver. Des onglets de filtre par type sont devenus une recommandation centrale.</figcaption></div>
+      </section>
+
+      <section class="case-sec" id="findings">
+        <div class="sec-kicker">Constats principaux</div>
+        <h2>Six constantes dans <em>toutes les conversations.</em></h2>
+        <p>Malgré des groupes très différents, les mêmes thèmes revenaient. L’écart n’avait rien de mystérieux : il était systématique.</p>
+        <div class="cardgrid">
+          <div class="c"><span class="chip chip-red">Constat 01 · critique</span><div class="ct">L’identité d’archiviste éclipse tout le reste</div><p>Tous les participants externes associaient d’abord Soundway aux rééditions. Les nouveautés vivaient dans un angle mort, souvent ignorées même des fans engagés.</p></div>
+          <div class="c"><span class="chip chip-blue">Constat 02</span><div class="ct">Les points de contact numériques ne relient pas les deux identités</div><p>Le site, les réseaux sociaux et l’écoute en continu étaient bâtis autour de l’esthétique d’archives. Les nouveautés étaient là, mais en invitées plutôt qu’en têtes d’affiche.</p></div>
+          <div class="c"><span class="chip chip-blue">Constat 03</span><div class="ct">Les acheteurs ont besoin d’un argumentaire, pas d’un catalogue</div><p>Les magasins commandaient les rééditions sans hésiter, l’histoire étant claire. Pour les nouveautés, les acheteurs n’avaient rien d’équivalent : ils commandaient et exposaient moins.</p></div>
+          <div class="c"><span class="chip chip-blue">Constat 04</span><div class="ct">La génération Z découvrait par l’algorithme, puis frappait un mur</div><p>Les auditeurs arrivaient par des échantillons, TikTok et des listes d’écoute, tombaient sur une esthétique destinée à un autre public, et décrochaient.</p></div>
+          <div class="c"><span class="chip chip-blue">Constat 05</span><div class="ct">Les prescripteurs voient le label comme une source de recommandations</div><p>Les curateurs respectaient le goût de Soundway, mais n’étaient pas au courant des nouveautés. Les approches se faisaient au moment de la sortie, pas avant.</p></div>
+          <div class="c"><span class="chip chip-blue">Constat 06</span><div class="ct">La vision interne devance son expression publique</div><p>Les parties prenantes formulaient un double mandat très clair : les perles oubliées ET les artistes de demain. Le site n’en racontait que la moitié.</p></div>
+        </div>
+        <div class="case-fig"><img src="../assets/soundway/store.png" alt="Maquette filaire de la boutique avec filtres" loading="lazy" /><figcaption>Sans filtre entre nouveautés et archives, les gens arrivés par l’algorithme ne pouvaient pas distinguer le contemporain de l’historique. Le système Format / Genre / Époque / Région dans la colonne de gauche répond aux constats 01 et 04.</figcaption></div>
+      </section>
+
+      <section class="case-sec" id="direction">
+        <div class="sec-kicker">Audit visuel et direction de design</div>
+        <h2>Deux esthétiques <em>pour un seul visage.</em></h2>
+        <p>J’ai audité le langage visuel sur le site, les réseaux sociaux, les pochettes et les relations de presse. Le constat revenait partout : les rééditions avaient une esthétique définie et convaincante, et les nouveautés passaient par la même lentille, ce qui créait de la friction.</p>
+        <div class="cardgrid">
+          <div class="c"><span class="chip chip-amber">Bien définie</span><div class="ct">L’esthétique d’archives</div><p>Photos chaudes, sépia ; textures usées ; notes de pochette soignées ; vocabulaire de collectionneur. <b>Force :</b> elle communique tout de suite l’autorité et le soin.</p></div>
+          <div class="c"><span class="chip chip-blue">Mal définie</span><div class="ct">L’esthétique des nouveautés</div><p>Le même traitement d’archives appliqué partout ; les nouveaux artistes présentés en format &laquo;&nbsp;catalogue&nbsp;&raquo;, sans signal distinct. <b>Manque :</b> les nouveautés ressemblent à des ajouts à une archive, pas à des événements.</p></div>
+        </div>
+        <div class="case-figs">
+        <div class="case-fig"><img src="../assets/soundway/artist.png" alt="Maquette filaire de la page artiste" loading="lazy" /><figcaption>Les pages artistes s’ouvrent désormais sur la sortie la plus récente : le nouveau travail arrive en premier, avant la discographie historique.</figcaption></div>
+        <div class="case-fig"><img src="../assets/soundway/album.png" alt="Maquette filaire de la page album" loading="lazy" /><figcaption>La page album relie le commerce à l’éditorial : les &laquo;&nbsp;récits liés&nbsp;&raquo; placés sous le parcours d’achat ouvrent un chemin vers l’univers de la musique.</figcaption></div>
+        <div class="case-fig"><img src="../assets/soundway/story_page.png" alt="Maquette filaire d’un article" loading="lazy" /><figcaption>Chaque récit se termine par un encadré &laquo;&nbsp;sortie liée&nbsp;&raquo;, un pont direct de l’éditorial vers la boutique, qui voyage avec chaque article partagé.</figcaption></div>
+        <div class="case-fig"><img src="../assets/soundway/artists.png" alt="Maquette filaire de l’index des artistes" loading="lazy" /><figcaption>Les noms d’archives et les contemporains partagent une même grille, la correction structurelle la plus simple à l’écart de perception : tout le catalogue sur un pied d’égalité.</figcaption></div>
+        </div>
+        <div class="case-fig"><img src="../assets/soundway/colombia.png" alt="Maquette filaire éditoriale du Colombia Project" loading="lazy" /><figcaption>La page du Colombia Project montre le double langage visuel à l’œuvre : la profondeur des archives et l’énergie contemporaine dans une même expérience éditoriale, avec récit, musique, gens, géographie et un bouton d’achat de la collection, sans que rien ne se contredise.</figcaption></div>
+      </section>
+
+      <section class="case-sec" id="recommendations">
+        <div class="sec-kicker">Recommandations stratégiques</div>
+        <h2>Cinq choses à <em>faire autrement.</em></h2>
+        <p>Ordonnées selon l’effet et l’effort, pensées pour combler l’écart sans démonter ce qui fonctionne. Il ne s’agit pas de refaire la marque, mais de laisser à Soundway la place de se montrer en entier.</p>
+        <div class="steps">
+          <div class="step"><div class="sn">01</div><h4>Un registre visuel distinct pour les nouveautés</h4><p>Un système complémentaire, pas une refonte de marque : typographie plus affirmée, couleurs plus contrastées, photos qui respirent le vivant. Deux systèmes cohabitent, chacun fidèle à son contenu.</p><div class="so">Marque</div></div>
+          <div class="step"><div class="sn">02</div><h4>Reconstruire le site autour des deux moitiés du catalogue</h4><p>Donner autant de place aux nouveautés qu’aux archives, avec des chemins pour les auditeurs de passage comme pour les collectionneurs de longue date, et un repérage clair entre les deux mondes.</p><div class="so">Numérique</div></div>
+          <div class="step"><div class="sn">03</div><h4>Donner aux disquaires de quoi raconter</h4><p>Des fiches simples et partageables pour chaque nouveauté : qui, pourquoi, et ce qui la rattache à l’histoire du label, pour que le personnel en magasin ait quelque chose à dire.</p><div class="so">Vente</div></div>
+          <div class="step"><div class="sn">04</div><h4>Cultiver les prescripteurs avant la sortie</h4><p>Passer d’une approche transactionnelle à une relation suivie, avec écoutes en primeur et mise en contexte, pour créer des alliés plutôt que des passages de presse isolés.</p><div class="so">Stratégie</div></div>
+          <div class="step"><div class="sn">05</div><h4>Une page d’arrivée pour les auditeurs nés dans l’écoute en continu</h4><p>Des portes d’entrée courtes, sensorielles, pensées pour le mobile, à la hauteur de l’énergie qui a amené la génération Z jusque-là, sans braquer les fans de longue date.</p><div class="so">Numérique</div></div>
+        </div>
+      </section>
+
+      <section class="case-sec" id="outcomes">
+        <div class="sec-kicker">Résultats</div>
+        <h2>Ce que cette recherche <em>a débloqué.</em></h2>
+        <p>La recherche a donné une image stratégique nette là où il n’y avait qu’une impression de décalage. Le rapport et les maquettes servent de base à la refonte du site du label.</p>
+        <div class="impact-row">
+          <div class="ic"><div class="iv">11</div><div class="il">entretiens qualitatifs auprès de disquaires, de prescripteurs, d’auditeurs et de parties prenantes</div></div>
+          <div class="ic"><div class="iv">5</div><div class="il">recommandations stratégiques retenues dans le cycle de planification 2026 du label</div></div>
+          <div class="ic"><div class="iv">9</div><div class="il">écrans de maquette filaire qui traduisent la recherche en direction de design concrète</div></div>
+        </div>
+        <div class="callout"><p>&laquo;&nbsp;Cette recherche nous a donné des mots pour quelque chose qu’on ressentait sans pouvoir le nommer. L’idée de la double identité a changé notre façon d’aborder les 12 prochains mois.&nbsp;&raquo;<br><span style="color:var(--ink-3);font-weight:500">Partie prenante chez Soundway, clôture du projet</span></p></div>
+        <p style="margin-top:8px"><b>Un prototype navigable</b> du site repensé, avec 10 pages, des extraits audio, des filtres, un panier et un mode sombre, est accessible depuis la barre latérale.</p>
+      </section>
+    </div>
+  </div>
+
+  <nav class="case-next">
+    <a href="case-trolley-portal.html">
+      <div><div class="nk">Cas suivant</div><div class="nt">Portail des bénéficiaires Trolley</div></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
+  </nav>
+</main>
+
+</body>
+</html>

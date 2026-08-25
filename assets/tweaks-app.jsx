@@ -8,6 +8,20 @@
   };
   const DENSITY = { compact: 0.82, regular: 1, comfy: 1.22 };
 
+  const COPY = {
+    en: { title: 'Tweaks', content: 'Content', showMetrics: 'Show metrics',
+          typography: 'Typography', typeScale: 'Type scale', density: 'Density',
+          densityOptions: ['compact', 'regular', 'comfy'] },
+    fr: { title: 'Réglages', content: 'Contenu', showMetrics: 'Afficher les chiffres',
+          typography: 'Typographie', typeScale: 'Taille du texte', density: 'Densité',
+          densityOptions: ['compacte', 'normale', 'aérée'] }
+  };
+  const L = COPY[(document.documentElement.lang || 'en').slice(0, 2)] || COPY.en;
+  /* the stored value stays English so the setting survives a language switch */
+  const DENSITY_KEYS = ['compact', 'regular', 'comfy'];
+  const toLabel = (k) => L.densityOptions[DENSITY_KEYS.indexOf(k)] || k;
+  const toKey = (label) => DENSITY_KEYS[L.densityOptions.indexOf(label)] || label;
+
   function App() {
     const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
     React.useEffect(() => {
@@ -18,12 +32,12 @@
       try { localStorage.setItem('jr:tweaks', JSON.stringify(t)); } catch (e) {}
     }, [t]);
     return (
-      React.createElement(TweaksPanel, { title: 'Tweaks' },
-        React.createElement(TweakSection, { label: 'Content' }),
-        React.createElement(TweakToggle, { label: 'Show metrics', value: t.showMetrics, onChange: (v) => setTweak('showMetrics', v) }),
-        React.createElement(TweakSection, { label: 'Typography' }),
-        React.createElement(TweakSlider, { label: 'Type scale', value: t.typeScale, min: 0.9, max: 1.15, step: 0.01, onChange: (v) => setTweak('typeScale', v) }),
-        React.createElement(TweakRadio, { label: 'Density', value: t.density, options: ['compact', 'regular', 'comfy'], onChange: (v) => setTweak('density', v) })
+      React.createElement(TweaksPanel, { title: L.title },
+        React.createElement(TweakSection, { label: L.content }),
+        React.createElement(TweakToggle, { label: L.showMetrics, value: t.showMetrics, onChange: (v) => setTweak('showMetrics', v) }),
+        React.createElement(TweakSection, { label: L.typography }),
+        React.createElement(TweakSlider, { label: L.typeScale, value: t.typeScale, min: 0.9, max: 1.15, step: 0.01, onChange: (v) => setTweak('typeScale', v) }),
+        React.createElement(TweakRadio, { label: L.density, value: toLabel(t.density), options: L.densityOptions, onChange: (v) => setTweak('density', toKey(v)) })
       )
     );
   }

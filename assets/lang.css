@@ -1,0 +1,59 @@
+/* Language switch (EN / FR) — sits in the nav on every page.
+   Default colours suit the light nav in site.css.
+   Add .lang-switch--dark for the navy nav in home.css. */
+
+.lang-switch {
+  display: inline-flex;
+  align-items: stretch;
+  flex: none;
+  border: 1px solid var(--ls-border, #D8DFEA);
+  border-radius: 999px;
+  overflow: hidden;
+  line-height: 1;
+  font-size: calc(12.5px * var(--type-scale, 1));
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+.lang-switch a {
+  padding: 6px 11px;
+  color: var(--ls-ink, #52627A);
+  background: transparent;
+  text-decoration: none;
+  border-radius: 0;
+  transition: background .15s ease, color .15s ease;
+}
+
+.lang-switch a + a { border-left: 1px solid var(--ls-border, #D8DFEA); }
+
+.lang-switch a:hover {
+  background: var(--ls-hover-bg, #EEF2F8);
+  color: var(--ls-hover-ink, #0F172A);
+}
+
+.lang-switch a.is-active {
+  background: var(--ls-on-bg, #1D4ED8);
+  color: var(--ls-on-ink, #fff);
+  cursor: default;
+}
+
+.lang-switch a:focus-visible {
+  outline: 2px solid var(--ls-on-bg, #1D4ED8);
+  outline-offset: 2px;
+}
+
+/* navy nav */
+.lang-switch--dark {
+  --ls-border: rgba(255,255,255,.26);
+  --ls-ink: #C7D2E4;
+  --ls-hover-bg: rgba(255,255,255,.12);
+  --ls-hover-ink: #fff;
+  --ls-on-bg: #fff;
+  --ls-on-ink: #0A1020;
+}
+
+/* keep the switch visible when the nav links collapse on phones */
+@media (max-width: 720px) {
+  .lang-switch { font-size: 12px; }
+  .lang-switch a { padding: 6px 9px; }
+}

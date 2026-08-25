@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ma façon de travailler avec l'IA, Ita Skoblinski, designer de produit IA</title>
+<meta name="description" content="How Ita Skoblinski designs AI products. Two shipped end to end: an agentic RAG decision-support system with grounded citations and human-in-the-loop review, and a clinical conversational AI environment. Plus how AI runs through prototyping, research synthesis, and building. AI as one tool in the box, not the box." />
+<meta name="theme-color" content="#1D4ED8" />
+<link rel="stylesheet" href="../assets/site.css" />
+<link rel="alternate" hreflang="en" href="../how-i-work-with-ai.html" />
+<link rel="alternate" hreflang="fr" href="how-i-work-with-ai.html" />
+<link rel="stylesheet" href="../assets/case.css" />
+<link rel="stylesheet" href="../assets/lang.css" />
+<style>
+  .prod { margin-top: 30px; }
+  .prod-h { font-family: var(--display); font-weight: 700; font-size: calc(20px * var(--type-scale)); line-height: 1.25; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 6px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+  .prod-h .pn { color: var(--accent); }
+  .prod-tag { font-size: calc(11.5px * var(--type-scale)); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); background: var(--paper-2); border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; }
+  .prod-out { font-weight: 600; color: var(--ink); }
+  .prod-out a { color: var(--accent); text-decoration: none; font-weight: 700; white-space: nowrap; }
+  .prod-out a:hover { text-decoration: underline; }
+
+  /* shared width container for blocks between hero and case-shell */
+  .pre-shell { max-width: var(--maxw); margin: 0 auto; padding: 0 48px; }
+  @media (max-width: 720px) { .pre-shell { padding: 0 22px; } }
+
+  /* TL;DR summary */
+  .tldr { margin: 22px 0 4px; padding: 15px 18px; background: var(--paper-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 12px; }
+  .tldr .lab { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
+  .tldr p { margin: 0; font-size: calc(15px * var(--type-scale)); line-height: 1.55; color: var(--ink); }
+
+  /* compact inline process flow (click to expand) */
+  .pflow-wrap { margin: 30px 0 4px; }
+  .pflow { display: block; width: 100%; text-align: left; cursor: pointer; font: inherit; color: inherit; background: var(--paper-2); border: 1px solid var(--line); border-radius: 14px; padding: 15px 18px; transition: border-color .18s, box-shadow .18s; }
+  .pflow:hover { border-color: var(--accent); box-shadow: 0 12px 32px -20px rgba(14,26,43,.45); }
+  .pflow:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .pflow-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .pflow-kicker { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .pflow-expand { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--ink-3); }
+  .pflow-expand svg { width: 13px; height: 13px; }
+  .pflow:hover .pflow-expand { color: var(--accent); }
+  .pflow-track { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 8px; }
+  .pf-node { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .pf-dot { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+  .pf-dot.disc { background: #C2772F; } .pf-dot.des { background: #2BB3B0; }
+  .pf-dot.end { background: var(--paper); border: 2px solid #D43F38; width: 9px; height: 9px; }
+  .pf-dot.val { background: var(--paper); border: 2px solid #B7791F; width: 9px; height: 9px; }
+  .pf-sep { color: var(--ink-3); font-weight: 400; }
+
+  /* full-screen process map modal */
+  .pmv[hidden] { display: none; }
+  .pmv { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .pmv-backdrop { position: absolute; inset: 0; background: rgba(8,16,28,.55); }
+  .pmv-panel { position: relative; z-index: 1; background: var(--paper); border-radius: 16px; max-width: 760px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 40px 100px -30px rgba(8,16,28,.6); }
+  .pmv-close { position: absolute; top: 10px; right: 12px; z-index: 2; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); color: var(--ink-2); font-size: 20px; line-height: 1; cursor: pointer; }
+  .pmv-close:hover { color: var(--ink); border-color: var(--accent); }
+  .pmv-scroll { overflow-y: auto; padding: 26px 28px 24px; }
+  .pm-h { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: -.02em; margin: 0 0 2px; color: var(--ink); }
+  .pm-h .x { color: var(--accent); }
+  .pm-sub { font-size: 13.5px; line-height: 1.5; color: var(--ink-2); margin: 0 0 16px; }
+  .pm-legend { display: flex; gap: 13px; flex-wrap: wrap; margin: 0 0 16px; }
+  .pm-key { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--ink-2); }
+  .pm-kd { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .pm-kd.me { background: var(--ink); } .pm-kd.ai { background: #2563EB; }
+  .pm-kd.disc { background: #C2772F; } .pm-kd.des { background: #2BB3B0; }
+  .pm-kd.val { background: var(--paper); border: 2px solid #B7791F; width: 7px; height: 7px; }
+  .pm-kd.end { background: var(--paper); border: 2px solid #D43F38; width: 7px; height: 7px; }
+  .pm-row { display: flex; gap: 14px; align-items: stretch; }
+  .pm-rail { position: relative; width: 38px; flex: none; display: flex; justify-content: center; }
+  .pm-rail::before { content: ""; position: absolute; top: 0; bottom: 0; width: 2px; background: var(--line); }
+  .pm-row.last .pm-rail::before { bottom: auto; height: 20px; }
+  .pm-num { position: relative; z-index: 1; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 700; color: #fff; margin-top: 2px; box-shadow: 0 0 0 4px var(--paper); }
+  .pm-num.disc { background: #C2772F; } .pm-num.des { background: #2BB3B0; }
+  .pm-num.end { background: var(--paper); color: #D43F38; border: 2px solid #D43F38; }
+  .pm-num.val { background: var(--paper); color: #B7791F; border: 2px solid #B7791F; }
+  .pm-card { flex: 1; border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; }
+  .pm-name { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--ink); display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .pm-acts { font-size: 11px; font-weight: 500; color: var(--ink-3); }
+  .pm-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pm-col { border-radius: 8px; padding: 7px 9px; }
+  .pm-col.me { background: var(--paper-2); } .pm-col.ai { background: var(--paper-3); }
+  .pm-lab { display: block; font-size: 9px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 3px; }
+  .pm-col.me .pm-lab { color: var(--ink); } .pm-col.ai .pm-lab { color: var(--accent); }
+  .pm-col p { margin: 0; font-size: 12px; line-height: 1.4; color: var(--ink); }
+  .pm-loop { margin-left: 38px; padding: 6px 0; }
+  .pm-loop span { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; color: #B7791F; border: 1px solid #B7791F; border-radius: 999px; padding: 2px 10px; }
+  .pm-loop.back span { border-style: dashed; }
+  .pm-foot { margin: 14px 0 0 52px; font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.5; }
+  @media (max-width: 560px) { .pm-cols { grid-template-columns: 1fr; } }
+</style>
+<script>
+  (function () {
+    try {
+      var t = JSON.parse(localStorage.getItem('jr:tweaks') || '{}');
+      var r = document.documentElement;
+      if (t.typeScale) r.style.setProperty('--type-scale', t.typeScale);
+      var dmap = { compact: 0.82, regular: 1, comfy: 1.22 };
+      if (t.density && dmap[t.density]) r.style.setProperty('--density', dmap[t.density]);
+      if (t.showMetrics === false) r.setAttribute('data-no-metrics', '1');
+      var pal = { sapphire:['#1B3A8F','#142A63'], indigo:['#4338CA','#312E81'], teal:['#0E7490','#115E59'], violet:['#6D28D9','#4C1D95'], emerald:['#146B47','#0E4E34'] };
+      var a = localStorage.getItem('ita:accent');
+      if (a && pal[a]) { r.style.setProperty('--accent', pal[a][0]); r.style.setProperty('--accent-strong', pal[a][1]); }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<script>if (document.documentElement.getAttribute('data-no-metrics')) document.body.classList.add('no-metrics');</script>
+<a href="#main" class="skip-link">Aller au contenu</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Ita Skoblinski, accueil">
+      <span class="name">Ita Skoblinski</span>
+      <span class="role hide-sm">Designer de produit senior</span>
+    </a>
+    <nav class="nav-links" aria-label="Principale">
+      <a href="index.html#work" class="hide-sm">Projets</a>
+      <a href="index.html#about" class="hide-sm">&Agrave; propos</a>
+      <a href="ai-bot.html" class="hide-sm">Bot&nbsp;IA <span style="font-size:.6em;font-weight:700;letter-spacing:.08em;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;vertical-align:2px">B&Ecirc;TA</span></a>
+      <a href="mailto:sosnat@gmail.com" class="nav-cta">Contact</a>
+      <span class="lang-switch" role="group" aria-label="Langue">
+        <a hreflang="en" lang="en" href="../how-i-work-with-ai.html">EN</a>
+        <a hreflang="fr" class="is-active" aria-current="true" href="how-i-work-with-ai.html">FR</a>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <header class="case-hero">
+    <div class="case-kicker">
+      <a class="crumb" href="index.html#about">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        Retour à l’accueil
+      </a>
+      <span class="pill">Approche &middot; IA</span>
+    </div>
+    <h1>Ma façon de travailler avec l’<em>IA</em>.</h1>
+    <p class="sub">L’essentiel de mon travail porte sur des systèmes à fort enjeu, ceux où les gens agissent selon ce que l’interface leur dit : paiements, identité, soins cliniques. L’IA est la couche la plus récente que j’y ai intégrée, et elle change le problème. Elle est rapide et utile, et elle ajoute des modes de défaillance qu’on n’avait pas à prévoir avant. Ce que je conçois, c’est la couche du milieu : là où le système s’explique, là où les gens peuvent le vérifier, et là où une mauvaise réponse est interceptée avant de faire des dégâts.</p>
+    <p class="bottomline"><b>D’entrée de jeu :</b> j’ai livré deux produits d’IA de bout en bout, et l’IA traverse maintenant ma façon de prototyper, de synthétiser la recherche et de construire. Ce qui n’a pas changé, c’est le jugement en dessous : dix ans de design de produit, la recherche, les méthodes, les systèmes. Un outil dans le coffre, pas le coffre.</p>
+  </header>
+
+  <div class="pre-shell">
+  <div class="tldr">
+    <div class="lab">En bref</div>
+    <p>Je conçois des produits d’IA pour des contextes à fort enjeu : paiements, identité, soins cliniques. Deux livrés de bout en bout. Là-dessus, le difficile c’est la confiance, alors je la bâtis en trois couches : l’explication, la vérification et l’intervention. Partout ailleurs, l’IA accélère ma façon de prototyper, de faire de la recherche et de construire. Le jugement par-dessus, lui, reste dix ans de design.</p>
+  </div>
+
+  <section class="pflow-wrap" aria-label="Aperçu du processus">
+    <button type="button" class="pflow" id="pflowBtn" aria-haspopup="dialog">
+      <span class="pflow-top">
+        <span class="pflow-kicker">Mon processus &middot; l’IA à chaque étape</span>
+        <span class="pflow-expand">Agrandir
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        </span>
+      </span>
+      <span class="pflow-track">
+        <span class="pf-node"><i class="pf-dot end"></i>Concept</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot disc"></i>Découvrir</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot disc"></i>Recherche</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot disc"></i>Planifier</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot des"></i>Design</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot val"></i>Valider</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot end"></i>Construire</span><span class="pf-sep">&rsaquo;</span>
+        <span class="pf-node"><i class="pf-dot val"></i>Valider</span>
+      </span>
+    </button>
+  </section>
+  </div>
+
+  <div class="case-shell">
+    <aside class="case-nav" aria-label="Sections">
+      <ol>
+        <li><a href="#products"><span class="n">01</span> Deux produits d’IA</a></li>
+        <li><a href="#prototype"><span class="n">02</span> Prototypage</a></li>
+        <li><a href="#systems"><span class="n">03</span> Systèmes de design</a></li>
+        <li><a href="#synthesis"><span class="n">04</span> Synthèse</a></li>
+        <li><a href="#tools"><span class="n">05</span> Outils maison</a></li>
+        <li><a href="#itabot"><span class="n">06</span> Bot ITA</a></li>
+      </ol>
+    </aside>
+    <div class="case-body">
+
+      <section class="case-sec" id="products">
+        <div class="sec-kicker">Concevoir pour l’IA</div>
+        <h2>Quand l’IA <em>est le produit.</em></h2>
+        <p class="lead">Une bonne part de mon travail actuel, c’est l’IA comme produit, pas seulement comme assistant. J’en ai livré deux, de bout en bout.</p>
+        <p>Les deux reposent sur des données à fort enjeu : le problème de design difficile n’est pas l’interface, c’est la confiance. Le risque d’une mauvaise réponse assénée avec aplomb est réel, sur des chiffres qui vont servir à agir. Je le traite en trois couches. <b>L’explication :</b> le système montre son raisonnement et l’origine de sa réponse. <b>La vérification :</b> on peut confronter cette réponse à la source avant de s’y fier. <b>L’intervention :</b> quand quelque chose cloche, il existe un moyen clair de l’attraper avant que ça coûte quoi que ce soit. Les mêmes trois couches sur les deux produits, quelle que soit la surface.</p>
+
+        <div class="prod">
+          <h3 class="prod-h"><span class="pn">01</span> Un système d’aide à la décision RAG agentique <span class="prod-tag">Ask the Catalog &middot; édition musicale</span></h3>
+          <p>Un éditeur musical avait cinquante ans de droits d’auteur enfouis dans trois systèmes qui ne se parlaient pas. J’ai mené la recherche et le design de bout en bout d’un outil qui répond à une question de droits en langage courant et montre la clause de contrat exacte d’où vient la réponse. Dessous, ça tourne sur de la génération augmentée par récupération (RAG) avec un flux de recherche agentique. L’outil couvre les vérifications factuelles et les décisions qui s’y appuient, comme des totaux de vérification défendables et les licences de synchro. Un contrôle de confiance décide quand le système répond seul et quand il achemine à un spécialiste, et une personne approuve avant toute écriture au dossier.</p>
+          <p class="prod-out">Une question de droits courante est passée d’environ 30 minutes réparties sur quatre systèmes à moins de 2. Chaque réponse renvoie à sa clause source, et l’entreprise a approuvé le développement complet après le projet pilote. <a href="case-ask-the-catalog.html">Lire l’étude de cas complète &rarr;</a></p>
+          <div class="callout"><p>Un moteur de données fiable couplé à un modèle qui peut dériver, c’est un problème d’un genre bien précis, et des points de contrôle humains en sont d’habitude la réponse. Ici, il fallait réconcilier des métadonnées contradictoires avec une personne dans la boucle, et ce motif se transpose à peu près à tout produit d’IA où il y a des conséquences.</p></div>
+        </div>
+
+        <div class="prod">
+          <h3 class="prod-h"><span class="pn">02</span> Un environnement d’IA conversationnelle clinique <span class="prod-tag">Femtech &middot; non public</span></h3>
+          <p>Un cadre d’IA conversationnelle bâti avec des professionnels de la santé et destiné à un usage clinique. J’ai mené la recherche UX, puis conçu l’environnement autour de la conversation : le dialogue, la voix, et la façon dont le comportement du modèle est entraîné et évalué, le tout établi avec l’équipe clinique. Ce qu’une personne dit reconfigure les données saisies et met à jour le tableau de bord en direct : la conversation est la couche de saisie, pas une fenêtre de clavardage greffée sur le côté.</p>
+          <p>La conversation seule n’était pas la réponse. Le clavardage libre est un mauvais réglage par défaut quand les gens doivent agir : je l’ai donc doublé de parcours guidés pour les moments où quelqu’un a besoin d’une action précise, pas d’un champ vide. C’est à initiative partagée, par choix : on avance à partir d’un plan structuré et on s’appuie sur la conversation quand quelque chose est ambigu, au lieu d’en faire le seul chemin.</p>
+          <p>La discipline, c’était de décider où l’IA n’avait <em>pas</em> sa place. La couche conversationnelle devait gagner la sienne, au service du produit et en lien avec les autres fonctions plutôt qu’en parallèle. Savoir où la retenir, c’est ça le travail de design ; et sur un produit clinique, où les gens agissent selon ce que dit le système, c’est la sécurité qui fixe la barre.</p>
+        </div>
+      </section>
+
+      <section class="case-sec" id="prototype">
+        <div class="sec-kicker">Prototypage</div>
+        <h2>D’un mandat à <em>un prototype qui marche.</em></h2>
+        <p class="lead">La première chose que je remets, c’est souvent une maquette brute mais fonctionnelle, pas un concept figé que chacun lit à sa façon.</p>
+        <p>Je passe vite d’un mandat à une preuve de concept fonctionnelle, avec Claude Code, V0, Figma Make ou Lovable selon les besoins du projet, puis je la mets devant l’équipe pour qu’on réagisse tous à la même chose, plutôt qu’à la même idée décrite de cinq façons. Ça écrase la distance entre &laquo;&nbsp;voici ce que j’ai en tête&nbsp;&raquo; et &laquo;&nbsp;voici l’effet que ça fait de s’en servir&nbsp;&raquo;.</p>
+        <p>Ce n’est pas une règle, ça dépend du projet. Pour les gros systèmes complexes, je reviens au dessin et à Figma pour planifier la structure d’abord. L’outillage bouge chaque semaine : je reste souple sur l’outil et ferme sur la méthode, et je me tiens à jour en lisant des fils Reddit et en regardant ce que les gens livrent vraiment, sans attendre l’article bien léché.</p>
+      </section>
+
+      <section class="case-sec" id="systems">
+        <div class="sec-kicker">Systèmes de design</div>
+        <h2>Un système de design, c’est <em>de la documentation, pas une planche d’autocollants.</em></h2>
+        <p>Je le construis en deux couches. Une couche destinée aux développeurs, calée sur leur dépôt et sur Storybook, pour qu’ils aient une spécification exacte. Et une couche d’usage, plus proche de la façon dont gov.uk documente la sienne, avec des consignes claires sur quand employer un motif et quand s’en abstenir : quand un message de validation en ligne s’impose et quand c’est plutôt une bannière en haut de page, par exemple, pour que deux équipes ne règlent pas le même problème de deux façons. C’est cette couche d’usage qui empêche un système de dériver, parce que la plupart des écarts viennent de gens qui ne savent pas comment appliquer quelque chose, pas d’un composant manquant. Je structure les deux pour que ça tienne sans que j’aie à être dans toutes les conversations.</p>
+        <p>Quand la documentation est solide à ce point, l’IA me permet de concevoir directement dans l’environnement et même d’y livrer. C’est une des raisons pour lesquelles je tiens à bâtir le système tôt plutôt qu’à le traiter comme du ménage de fin : c’est un bon système qui fait tenir le prototypage rapide dont je parlais plus haut.</p>
+      </section>
+
+      <section class="case-sec" id="synthesis">
+        <div class="sec-kicker">Recherche et synthèse</div>
+        <h2>Là où je fais encore <em>le travail de terrain.</em></h2>
+        <p>J’ai mené récemment une vingtaine d’entretiens et je me suis beaucoup servie de l’IA pour les synthétiser et les organiser. Le point important : elle ne fait pas le terrain à ma place. C’est moi qui le fais. Ce qu’elle me donne, c’est une structure et un document propre sur lequel bâtir, et je le reprends section par section plutôt que de me fier au premier jet.</p>
+        <p>Une fois les morceaux en place, je lui fais rassembler mes documents séparés en un seul ensemble cohérent, même allure, pour qu’un client reçoive un objet unique plutôt qu’un tas de notes. Parfois, ça devient un petit site que je monte pour lui.</p>
+      </section>
+
+      <section class="case-sec" id="tools">
+        <div class="sec-kicker">Développement</div>
+        <h2>Je construis <em>les outils dont je me sers.</em></h2>
+        <p>Mon tableau de bord de projets, celui par lequel passe tout mon travail, je l’ai construit avec Claude Code. Mon portfolio est du HTML fait à la main que je génère et déploie directement sur Netlify, sans Squarespace, et quand je veux changer quelque chose, je régénère le tout à partir de zéro. J’ai même construit un agent conversationnel pour le portfolio, le bot ITA, pour qu’on puisse lui poser des questions sur mon travail.</p>
+        <p>Je ne montre pas ça pour étaler les outils. C’est la preuve que je préfère comprendre un système en le construisant plutôt qu’en l’admirant de l’extérieur. Lire les vrais dépôts et bâtir mes propres outils, ça veut dire concevoir face à des contraintes réelles plutôt qu’hypothétiques, et travailler en vraie partenaire des développeurs au lieu de leur lancer des maquettes par-dessus le mur.</p>
+        <div class="callout"><p>Voilà la version courte. L’IA traverse aujourd’hui presque toutes les étapes de mon travail, du chiffrage d’un projet à la livraison d’un prototype, mais le jugement en dessous, c’est toujours les dix ans de design. Je peux reprendre n’importe lequel de ces points en direct et vous montrer les vrais écrans.</p></div>
+      </section>
+
+      <section class="case-sec" id="itabot">
+        <div class="sec-kicker">Essayez-le</div>
+        <h2>Voici le <em>bot ITA.</em></h2>
+        <p>L’agent conversationnel dont je parlais, intégré ci-dessous. Il s’appuie sur ce portfolio : posez-lui des questions sur mes projets, mon travail avec l’IA, mon approche de l’accessibilité ou mes disponibilités. C’est un petit exemple concret de ma façon de voir l’IA : cadré sur ce qu’il connaît et rattaché à une vraie source. Encore en bêta, donc il ne répondra pas juste à tous les coups.</p>
+        <div style="border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 26px 64px -30px rgba(14,26,43,.45);margin-top:14px">
+          <div style="display:flex;align-items:center;gap:7px;padding:11px 16px;background:var(--paper-2);border-bottom:1px solid var(--line)">
+            <span style="width:11px;height:11px;border-radius:50%;background:#FF5F56;flex:none"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:#FFBD2E;flex:none"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:#27C93F;flex:none"></span>
+            <span style="flex:1;font-size:11.5px;color:var(--ink-3);margin-left:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">itabot · questions sur Ita Skoblinski</span>
+            <a href="ai-bot.html" style="margin-left:auto;font-size:11.5px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap">Page complète &#8599;</a>
+          </div>
+          <iframe src="https://v0-itabot-portfolio-deployment.vercel.app/" title="Itabot, questions sur le travail d’Ita Skoblinski" loading="lazy" style="width:100%;height:640px;border:0;display:block;background:#fff"></iframe>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <nav class="case-next">
+    <a href="index.html#work">
+      <div><div class="nk">Le voir en pratique</div><div class="nt">Projets choisis</div></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
+  </nav>
+</main>
+
+<div class="pmv" id="pmv" hidden>
+  <div class="pmv-backdrop" data-close></div>
+  <div class="pmv-panel" role="dialog" aria-modal="true" aria-label="Le processus de design de produit, et la place de l’IA">
+    <button type="button" class="pmv-close" data-close aria-label="Fermer">&times;</button>
+    <div class="pmv-scroll">
+      <h2 class="pm-h">Design <span class="x">&times;</span> IA</h2>
+      <p class="pm-sub">Comment je mène le design de produit de bout en bout, et où l’IA intervient à chaque étape. Je pilote chaque étape ; l’IA est l’outil en dessous.</p>
+      <div class="pm-legend">
+        <span class="pm-key"><i class="pm-kd me"></i>Ce que je fais</span>
+        <span class="pm-key"><i class="pm-kd ai"></i>Ce que fait l’IA</span>
+        <span class="pm-key"><i class="pm-kd disc"></i>Découverte</span>
+        <span class="pm-key"><i class="pm-kd des"></i>Design</span>
+        <span class="pm-key"><i class="pm-kd val"></i>Validation</span>
+        <span class="pm-key"><i class="pm-kd end"></i>Extrémités</span>
+      </div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num end">01</span></div><div class="pm-card">
+        <div class="pm-name">Concept <span class="pm-acts">Mandat &middot; concept &middot; exigences</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">Je fais</span><p>Je pose le concept et le cadrage stratégique</p></div><div class="pm-col ai"><span class="pm-lab">L’IA fait</span><p>Rédige les documents de mandat, de concept et d’exigences</p></div></div>
+      </div></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num disc">02</span></div><div class="pm-card">
+        <div class="pm-name">Découvrir <span class="pm-acts">Entretiens &middot; analytique</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">Je fais</span><p>Je décide du cadrage, je mène les entretiens, j’oriente l’analytique</p></div><div class="pm-col ai"><span class="pm-lab">L’IA fait</span><p>Transcrit et synthétise les entretiens, appuie l’analytique, rédige les exigences</p></div></div>
+      </div></div>
+      <div class="pm-loop"><span>&#8635; Validation</span></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num disc">03</span></div><div class="pm-card">
+        <div class="pm-name">Recherche <span class="pm-acts">Profils &middot; cartographie de parcours</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">Je fais</span><p>Je décide quelle recherche mener, j’anime les ateliers, je tranche sur le sens</p></div><div class="pm-col ai"><span class="pm-lab">L’IA fait</span><p>Rédige les profils et les cartes de parcours</p></div></div>
+      </div></div>
+      <div class="pm-loop"><span>&#8635; Rétroaction</span></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num disc">04</span></div><div class="pm-card">
+        <div class="pm-name">Planifier <span class="pm-acts">Tri par cartes &middot; architecture d’information</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">Je fais</span><p>Je suis responsable de la structure. Les systèmes complexes se planifient encore à la main dans Figma</p></div><div class="pm-col ai"><span class="pm-lab">L’IA fait</span><p>Teste des options d’architecture d’information et propose des regroupements</p></div></div>
+      </div></div>
+      <div class="pm-loop"><span>&#8635; Rétroaction</span></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num des">05</span></div><div class="pm-card">
+        <div class="pm-name">Design <span class="pm-acts">UX et UI &middot; maquettes filaires &middot; prototypes</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">Je fais</span><p>Je tranche les décisions d’interaction et de visuel. Nouveau produit ? Je crée le système de design</p></div><div class="pm-col ai"><span class="pm-lab">L’IA fait</span><p>Prototype à partir du dépôt qui contient l’interface, explore les cas limites, monte les écrans à partir du système</p></div></div>
+      </div></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num val">06</span></div><div class="pm-card">
+        <div class="pm-name">Valider <span class="pm-acts">Tests d’utilisabilité (prototype)</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">Je fais</span><p>Je fais passer les tests d’utilisabilité sur le prototype</p></div><div class="pm-col ai"><span class="pm-lab">L’IA fait</span><p>Rédige les scénarios de test, synthétise les résultats</p></div></div>
+      </div></div>
+
+      <div class="pm-row"><div class="pm-rail"><span class="pm-num end">07</span></div><div class="pm-card">
+        <div class="pm-name">Construire <span class="pm-acts">Livrer</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">Je fais</span><p>Je comprends en construisant, je fais équipe avec les développeurs</p></div><div class="pm-col ai"><span class="pm-lab">L’IA fait</span><p>Génère et déploie (Claude Code vers Netlify), fabrique l’outillage</p></div></div>
+      </div></div>
+
+      <div class="pm-row last"><div class="pm-rail"><span class="pm-num val">08</span></div><div class="pm-card">
+        <div class="pm-name">Valider <span class="pm-acts">Utilisabilité &middot; A/B &middot; analytique &middot; en production</span></div>
+        <div class="pm-cols"><div class="pm-col me"><span class="pm-lab">Je fais</span><p>Je mène les tests d’utilisabilité et A/B, je mets en place les boucles de rétroaction analytique</p></div><div class="pm-col ai"><span class="pm-lab">L’IA fait</span><p>Synthétise les retours de tests, d’A/B et d’analytique pour l’itération suivante</p></div></div>
+      </div></div>
+      <div class="pm-loop back"><span>&#8635; Boucle de rétroaction analytique et A/B &rarr; retour au design</span></div>
+
+      <p class="pm-foot">L’IA est un outil dans le coffre, pas le coffre. Le jugement par-dessus, c’est les dix ans de design.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('pflowBtn');
+    var modal = document.getElementById('pmv');
+    if (!btn || !modal) return;
+    var lastFocus = null;
+    function open() {
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var c = modal.querySelector('.pmv-close');
+      if (c) c.focus();
+    }
+    function close() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }
+    btn.addEventListener('click', open);
+    modal.addEventListener('click', function (e) {
+      if (e.target.hasAttribute('data-close')) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) close();
+    });
+  })();
+</script>
+
+</body>
+</html>
