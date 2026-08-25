@@ -42,7 +42,7 @@
       <a href="mailto:sosnat@gmail.com" class="nav-cta">Contact</a>
       <span class="lang-switch" role="group" aria-label="Langue">
         <a hreflang="en" lang="en" href="../case-trolley-design-system.html">EN</a>
-        <a hreflang="fr" class="is-active" aria-current="true" href="case-trolley-design-system.html">FR</a>
+        <a hreflang="fr" class="is-active" aria-current="page" href="case-trolley-design-system.html">FR</a>
       </span>
     </nav>
   </div>
@@ -59,12 +59,12 @@
     </div>
     <h1>Étendre et reconstruire <em>la couche des réglages</em></h1>
     <p class="sub">J’ai hérité d’un système de design marchand qui fonctionnait et je l’ai étendu en profondeur : une nouvelle architecture de réglages, un système de fenêtres modales bâti à partir de zéro, et deux surfaces de conformité qui n’avaient aucun langage visuel.</p>
-    <p class="bottomline"><b>En résumé :</b> environ 40 % d’escalades en moins sur les réglages, et plus de 20 fenêtres modales ponctuelles remplacées par 4 variantes documentées.</p>
+    <p class="bottomline"><b>En résumé :</b> environ 40 % de demandes escaladées en moins sur les réglages, et plus de 20 fenêtres modales ponctuelles remplacées par 4 variantes documentées.</p>
     <div class="case-meta">
       <div class="m"><div class="mk">Rôle</div><div class="mv">Designer de produit senior</div></div>
       <div class="m"><div class="mk">Point de départ</div><div class="mv">Hérité, largement étendu</div></div>
       <div class="m"><div class="mk">Nouvelles surfaces</div><div class="mv">Fiscalité, DAC7, Trust, modales</div></div>
-      <div class="m"><div class="mk">Fichier source</div><div class="mv">Figma · 74 pages · 799 cadres</div></div>
+      <div class="m"><div class="mk">Fichier source</div><div class="mv">Figma · 74 pages · 799 frames</div></div>
     </div>
   </header>
 
@@ -81,7 +81,7 @@
         <li><a href="#product"><span class="n">01</span> Le produit</a></li>
         <li><a href="#tax"><span class="n">02</span> Réglages fiscaux</a></li>
         <li><a href="#trust"><span class="n">03</span> Trust</a></li>
-        <li><a href="#modals"><span class="n">04</span> Modale 2.0</a></li>
+        <li><a href="#modals"><span class="n">04</span> Modal 2.0</a></li>
         <li><a href="#webhooks"><span class="n">05</span> Webhooks</a></li>
         <li><a href="#plans"><span class="n">06</span> Forfaits</a></li>
         <li><a href="#prototype"><span class="n">07</span> Prototype</a></li>
@@ -99,9 +99,9 @@
       <section class="case-sec" id="tax">
         <div class="sec-kicker">Réglages de conformité fiscale</div>
         <h2>La page des réglages fiscaux, <em>avant et après</em></h2>
-        <p>La page d’origine était un seul formulaire déroulant : boutons radio serrés, murs de texte, toutes les options affichées d’un coup, qu’elles s’appliquent ou non. Je l’ai repensée à partir de la façon dont les marchands raisonnent réellement en matière de fiscalité.</p>
+        <p>La page d’origine était un seul formulaire à défilement : boutons radio serrés, murs de texte, toutes les options affichées d’un coup, qu’elles s’appliquent ou non. Je l’ai repensée à partir de la façon dont les marchands raisonnent réellement en matière de fiscalité.</p>
         <div class="steps">
-          <div class="step"><div class="sn">01</div><h4>Des sections plutôt qu’un long défilement</h4><p>La page d’origine empilait tout à la verticale sans regroupement : objet du paiement, type de formulaire, action d’approbation, comportement de retenue, traitement des échecs de numéro fiscal, le tout dans une seule longue colonne. Je l’ai découpée en sections étiquetées pour que les marchands règlent un sujet à la fois.</p></div>
+          <div class="step"><div class="sn">01</div><h4>Des sections plutôt qu’un long défilement</h4><p>La page d’origine empilait tout à la verticale sans regroupement : objet du paiement, type de formulaire, action d’approbation, comportement de retenue, traitement des échecs de numéro d’identification fiscale, le tout dans une seule longue colonne. Je l’ai découpée en sections étiquetées pour que les marchands règlent un sujet à la fois.</p></div>
           <div class="step"><div class="sn">02</div><h4>La juridiction comme modèle mental pour DAC7</h4><p>DAC7 est une directive européenne, mais les mêmes marchands ont souvent des obligations au Royaume-Uni, au Canada, en Australie et en Nouvelle-Zélande. J’ai fait de la juridiction le principe d’organisation principal, pour que les obligations de déclaration se regroupent selon leur territoire d’application.</p></div>
         </div>
         <div class="case-figs">
@@ -113,7 +113,7 @@
       <section class="case-sec" id="trust">
         <div class="sec-kicker">Réglages Trust</div>
         <h2>Les réglages Trust, <em>partis de rien</em></h2>
-        <p>Trust n’avait aucun design existant. Les marchands avaient besoin de contrôler la vérification des bénéficiaires : particulier ou entreprise, délais d’expiration, et quels états de refus permettent une nouvelle tentative. L’espace de configuration était vaste, donc la structure devait le garder lisible.</p>
+        <p>Trust n’avait aucun design. Les marchands avaient besoin de contrôler la vérification des bénéficiaires : particulier ou entreprise, délais d’expiration, et quels états de refus permettent une nouvelle tentative. L’espace de configuration était vaste, donc la structure devait le garder lisible.</p>
         <div class="steps">
           <div class="step"><div class="sn">03</div><h4>Une carte, une décision</h4><p>Chaque contrôle de vérification a sa propre carte, avec une étiquette, une description en langage courant et un interrupteur. Rien n’est enterré dans une infobulle. &laquo;&nbsp;Autoriser la vérification répétée&nbsp;&raquo; déploie des contrôles par état seulement quand c’est pertinent : la complexité se révèle progressivement.</p></div>
         </div>
@@ -121,12 +121,12 @@
       </section>
 
       <section class="case-sec" id="modals">
-        <div class="sec-kicker">Modale 2.0</div>
+        <div class="sec-kicker">Modal 2.0</div>
         <h2>Un système de fenêtres modales, <em>bâti à partir de l’anatomie</em></h2>
-        <p>Avant Modale 2.0, chaque fenêtre du tableau de bord était légèrement différente : tailles, espacements et position des boutons variaient. J’ai bâti le système à partir de l’anatomie : en-tête, corps, pied, puis les variantes (confirmation, notification, standard), avec des espacements, des tailles et des largeurs définis.</p>
+        <p>Avant Modal 2.0, chaque fenêtre du tableau de bord était légèrement différente : tailles, espacements et position des boutons variaient. J’ai bâti le système à partir de l’anatomie : en-tête, corps, pied, puis les variantes (confirmation, notification, standard), avec des espacements, des tailles et des largeurs définis.</p>
         <div class="case-figs">
-        <div class="case-fig"><img src="../assets/cases/ds-8.png" alt="Anatomie et variantes de Modale 2.0" loading="lazy" /><figcaption>La spécification Modale 2.0 : l’anatomie et trois variantes (confirmation, notification, standard), chacune avec des emplacements de corps prédéfinis, pour que les équipes composent au lieu de réinventer.</figcaption></div>
-        <div class="case-fig"><img src="../assets/cases/ds-9.png" alt="Espacements et tailles de Modale 2.0" loading="lazy" /><figcaption>Espacements, tailles et largeurs définis par variante, chaque mesure sur une grille de 8 px, pour que n’importe quelle fenêtre du produit suive les mêmes règles.</figcaption></div>
+        <div class="case-fig"><img src="../assets/cases/ds-8.png" alt="Anatomie et variantes de Modal 2.0" loading="lazy" /><figcaption>La spécification Modal 2.0 : l’anatomie et trois variantes (confirmation, notification, standard), chacune avec des emplacements de corps prédéfinis, pour que les équipes composent au lieu de réinventer.</figcaption></div>
+        <div class="case-fig"><img src="../assets/cases/ds-9.png" alt="Espacements et tailles de Modal 2.0" loading="lazy" /><figcaption>Espacements, tailles et largeurs définis par variante, chaque mesure sur une grille de 8 px, pour que n’importe quelle fenêtre du produit suive les mêmes règles.</figcaption></div>
         </div>
       </section>
 
@@ -140,8 +140,8 @@
       <section class="case-sec" id="plans">
         <div class="sec-kicker">Forfaits d’abonnement</div>
         <h2>Les forfaits d’abonnement comme <em>configuration</em></h2>
-        <p>L’ancienne page d’abonnement était un tableau de prix statique à trois colonnes. La refonte en a fait une configuration : Pay, Tax, Sync et Trust comme modules indépendants, chacun avec son prix, chacun activable, avec un sous-total qui se met à jour en direct.</p>
-        <div class="case-fig"><img src="../assets/cases/ds-12.png" alt="Forfaits d’abonnement" loading="lazy" /><figcaption>Pay, Tax, Sync et Trust comme modules indépendants. On active ou désactive chacun ; le sous-total se met à jour en direct. Le prix devient quelque chose que les marchands assemblent, pas seulement qu’ils lisent.</figcaption></div>
+        <p>L’ancienne page d’abonnement était un tableau de prix statique à trois colonnes. La refonte en a fait une configuration : Pay, Tax, Sync et Trust comme modules indépendants, chacun avec son prix, chacun activable, avec un sous-total qui se met à jour en temps réel.</p>
+        <div class="case-fig"><img src="../assets/cases/ds-12.png" alt="Forfaits d’abonnement" loading="lazy" /><figcaption>Pay, Tax, Sync et Trust comme modules indépendants. On active ou désactive chacun ; le sous-total se met à jour en temps réel. Le prix devient quelque chose que les marchands assemblent, pas seulement qu’ils lisent.</figcaption></div>
       </section>
 
       <section class="case-sec" id="prototype">
@@ -163,8 +163,8 @@
         <h2>Ce que le système y a gagné</h2>
         <div class="impact-row">
           <div class="ic"><div class="iv">3 surfaces</div><div class="il">Conformité fiscale, fiscalité UE (DAC7) et Trust : trois surfaces de réglages entièrement nouvelles, intégrées au système</div></div>
-          <div class="ic"><div class="iv">Modale 2.0</div><div class="il">un seul système de fenêtres modales à la place des cas particuliers accumulés dans le produit</div></div>
-          <div class="ic"><div class="iv">799 cadres</div><div class="il">Le fichier source Figma tenu à jour sur 74 pages et 799 cadres du début à la fin</div></div>
+          <div class="ic"><div class="iv">Modal 2.0</div><div class="il">un seul système de fenêtres modales à la place des cas particuliers accumulés dans le produit</div></div>
+          <div class="ic"><div class="iv">799 frames</div><div class="il">Le fichier source Figma tenu à jour sur 74 pages et 799 frames du début à la fin</div></div>
         </div>
         <p>Le fil conducteur : étendre un système hérité jusque dans ses recoins les plus désordonnés et les plus risqués, la conformité et les réglages, sans casser ce qui marchait déjà. Chaque nouvelle surface se lit comme une partie du même produit, pas comme une pièce rapportée.</p>
       </section>
