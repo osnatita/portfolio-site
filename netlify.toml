@@ -11,6 +11,27 @@
   to = "/fr/404.html"
   status = 404
 
+# Each language of a localised landing page gets its own shareable URL.
+# These are rewrites (status 200), not redirects: Netlify serves the same file
+# and the address bar keeps /en, which is how the page knows which language to
+# show. /terramadre2026/ is Italian, /terramadre2026/en is English.
+[[redirects]]
+  from = "/TerraMadre2026/en"
+  to = "/TerraMadre2026/index.html"
+  status = 200
+[[redirects]]
+  from = "/TerraMadre2026/en/"
+  to = "/TerraMadre2026/index.html"
+  status = 200
+[[redirects]]
+  from = "/terramadre2026/en"
+  to = "/TerraMadre2026/index.html"
+  status = 200
+[[redirects]]
+  from = "/terramadre2026/en/"
+  to = "/TerraMadre2026/index.html"
+  status = 200
+
 # Localised landing pages live at a capitalised path (e.g. /TerraMadre2026).
 # Netlify matches paths case-sensitively, so catch the lowercase spelling too.
 [[redirects]]

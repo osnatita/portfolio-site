@@ -6,6 +6,8 @@
 <title data-title-it="Ita Skoblinski · Giornalista e scrittrice" data-title-en="Ita Skoblinski · Journalist &amp; writer">Ita Skoblinski · Giornalista e scrittrice</title>
 <meta name="description" content="Ita Skoblinski scrive di cibo, cultura e politica. Giornalista e scrittrice, Montréal. A Terra Madre Salone del Gusto 2026, Torino, con accredito stampa." />
 <meta name="robots" content="noindex, nofollow" />
+<link rel="alternate" hreflang="it" href="https://itaskoblinski.com/terramadre2026/" />
+<link rel="alternate" hreflang="en" href="https://itaskoblinski.com/terramadre2026/en" />
 
 <!-- ============================================================
      LOCALISED LANDING PAGE. Reusable template.
@@ -18,10 +20,16 @@
        3. nothing else. The language switch works on its own
 
      How the two languages work: every piece of copy exists twice,
-     once in [data-lang="it"] and once in [data-lang="en"]. The
-     switch at the top hides one set and shows the other, and
-     remembers the choice. Default is Italian; to default to
-     English instead, change DEFAULT_LANG at the bottom.
+     once in [data-lang="it"] and once in [data-lang="en"]. One file
+     serves both, at two URLs:
+        /terramadre2026/     Italian
+        /terramadre2026/en   English
+     The /en path is a Netlify rewrite to this same file (see
+     netlify.toml), so the address bar keeps the clean URL and the
+     script below reads the language off the path. That means a link
+     you paste always opens in the language you were reading.
+     For the next event, copy the folder and add two more rewrite
+     rules with the new name.
      ============================================================ -->
 
 <style>
@@ -53,15 +61,15 @@ a{color:inherit}
 
 /* ---- language switch ---- */
 .langbar{display:flex; justify-content:flex-end; gap:0; padding:28px 0 0}
-.langbar button{
+.langbar a{
   font-family:var(--sans); font-size:11px; font-weight:600;
-  letter-spacing:.16em; text-transform:uppercase;
-  background:none; color:var(--ink-3); cursor:pointer;
-  border:1px solid var(--line-2); padding:7px 11px; margin-left:-1px;
+  letter-spacing:.16em; text-transform:uppercase; text-decoration:none;
+  color:var(--ink-3); border:1px solid var(--line-2);
+  padding:7px 11px; margin-left:-1px;
 }
-.langbar button[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
-.langbar button:hover{color:var(--ink)}
-.langbar button[aria-pressed="true"]:hover{color:var(--paper)}
+.langbar a[aria-current="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.langbar a:hover{color:var(--ink)}
+.langbar a[aria-current="true"]:hover{color:var(--paper)}
 
 /* ---- header ---- */
 header{padding:52px 0 0; border-bottom:1px solid var(--line); padding-bottom:36px}
@@ -130,10 +138,10 @@ h1{margin:0; font-weight:300; font-size:clamp(2.6rem,9vw,4rem); line-height:1.02
 
 <div class="shell">
 
-  <div class="langbar" role="group" aria-label="Lingua / Language">
-    <button type="button" data-set-lang="it" aria-pressed="true">Italiano</button>
-    <button type="button" data-set-lang="en" aria-pressed="false">English</button>
-  </div>
+  <nav class="langbar" aria-label="Lingua / Language">
+    <a href="/terramadre2026/" data-lang-link="it" hreflang="it">Italiano</a>
+    <a href="/terramadre2026/en" data-lang-link="en" hreflang="en">English</a>
+  </nav>
 
   <!-- ============ HEADER ============ -->
   <header>
@@ -225,28 +233,20 @@ h1{margin:0; font-weight:300; font-size:clamp(2.6rem,9vw,4rem); line-height:1.02
 
 <script>
 (function () {
-  var DEFAULT_LANG = 'it';           // change to 'en' to open in English
-  var KEY = 'ita:lang';
+  // The URL is the single source of truth, so a link you paste always opens in
+  // the language you were looking at. /terramadre2026/ is Italian,
+  // /terramadre2026/en is English. No stored preference overrides the link.
+  var lang = /\/en\/?$/.test(location.pathname) ? 'en' : 'it';
 
-  function apply(lang) {
-    document.documentElement.lang = lang;
-    var t = document.querySelector('title[data-title-' + lang + ']');
-    if (t) document.title = t.getAttribute('data-title-' + lang);
-    document.querySelectorAll('[data-lang]').forEach(function (el) {
-      el.hidden = el.getAttribute('data-lang') !== lang;
-    });
-    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang));
-    });
-    try { localStorage.setItem(KEY, lang); } catch (e) {}
-  }
+  document.documentElement.lang = lang;
+  var t = document.querySelector('title[data-title-' + lang + ']');
+  if (t) document.title = t.getAttribute('data-title-' + lang);
 
-  var saved;
-  try { saved = localStorage.getItem(KEY); } catch (e) {}
-  apply(saved === 'en' || saved === 'it' ? saved : DEFAULT_LANG);
-
-  document.querySelectorAll('[data-set-lang]').forEach(function (b) {
-    b.addEventListener('click', function () { apply(b.getAttribute('data-set-lang')); });
+  document.querySelectorAll('[data-lang]').forEach(function (el) {
+    el.hidden = el.getAttribute('data-lang') !== lang;
+  });
+  document.querySelectorAll('[data-lang-link]').forEach(function (a) {
+    if (a.getAttribute('data-lang-link') === lang) a.setAttribute('aria-current', 'true');
   });
 })();
 </script>
