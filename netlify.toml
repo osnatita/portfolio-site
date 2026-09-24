@@ -11,6 +11,14 @@
   to = "/fr/404.html"
   status = 404
 
+# The design portfolio answers to /design as well as to the root, so the two
+# halves of the site can be named symmetrically (/design and /text). The root
+# stays canonical; nothing moved.
+[[redirects]]
+  from = "/design"
+  to = "/"
+  status = 301
+
 # Preserve the old /portfolio URL after moving the homepage to root
 [[redirects]]
   from = "/portfolio"

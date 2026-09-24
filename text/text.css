@@ -1,0 +1,350 @@
+/* ============================================================
+   itaskoblinski.com/text — the writing side of the house.
+   Deliberately unrelated to the /design portfolio: no blue, no
+   rounded corners, no cards, no shadows. Paper, ink, hairlines.
+   One serif (Newsreader) does all the reading; metadata is set
+   in letterspaced system sans so it stays out of the way.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..600;1,6..72,200..600&display=swap');
+
+:root {
+  --paper:   #ffffff;
+  --ink:     #111111;
+  --ink-2:   #454545;
+  --ink-3:   #6e6e6e;
+  --line:    #e4e4e4;
+  --line-2:  #c4c4c4;
+  --mark:    #111111;
+
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  --measure: 34rem;   /* reading column */
+  --page: 46rem;      /* index column */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:  #0d0d0d;
+    --ink:    #ededed;
+    --ink-2:  #b4b4b4;
+    --ink-3:  #8d8d8d;
+    --line:   #292929;
+    --line-2: #3d3d3d;
+    --mark:   #ededed;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  padding: 0 24px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.62;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; }
+::selection { background: var(--mark); color: var(--paper); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.skip {
+  position: absolute; left: 24px; top: -60px; z-index: 10;
+  background: var(--ink); color: var(--paper);
+  padding: 10px 14px; font-family: var(--sans); font-size: 13px;
+  text-decoration: none; transition: top .15s ease;
+}
+.skip:focus { top: 12px; }
+
+/* ---------- shared shell ---------- */
+
+.shell { max-width: var(--page); margin: 0 auto; }
+.shell--read { max-width: var(--measure); }
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  padding: 84px 0 0;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 40px;
+}
+.wordmark {
+  display: block;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-decoration: none;
+  margin-bottom: 40px;
+}
+.wordmark:hover { color: var(--ink); }
+
+.masthead h1 {
+  margin: 0;
+  font-weight: 300;
+  font-size: clamp(2.6rem, 9vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+.masthead h1 em {
+  font-style: italic;
+  font-weight: 300;
+}
+.standfirst {
+  margin: 26px 0 0;
+  max-width: 30rem;
+  font-size: 1.12rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.dek {
+  margin: 18px 0 0;
+  max-width: 30rem;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+/* ---------- index sections ---------- */
+
+.section { padding: 64px 0 0; }
+
+.section > h2 {
+  margin: 0 0 4px;
+  font-family: var(--sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.section > h2 .count {
+  font-weight: 400;
+  color: var(--ink-3);
+  letter-spacing: .12em;
+}
+.section > .section-note {
+  margin: 0 0 8px;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+
+/* ---------- entries ---------- */
+
+.entry {
+  display: block;
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+}
+.entry:first-of-type { border-top: 1px solid var(--line-2); }
+.entry:hover .entry-title { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+.entry-title a { text-decoration: none; }
+.entry-title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.42rem;
+  line-height: 1.24;
+  letter-spacing: -0.012em;
+}
+.entry-title-he {
+  display: block;
+  direction: rtl;
+  unicode-bidi: isolate;
+  margin-top: 7px;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+.entry-meta {
+  margin: 10px 0 0;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  letter-spacing: .02em;
+  color: var(--ink-3);
+}
+.entry-meta .sep { padding: 0 .5em; opacity: .55; }
+.entry-blurb {
+  margin: 12px 0 0;
+  font-size: 1.02rem;
+  line-height: 1.58;
+  color: var(--ink-2);
+}
+.entry-blurb em { font-style: italic; }
+
+.tag {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border: 1px solid var(--line-2);
+  color: var(--ink-3);
+  vertical-align: 2px;
+}
+
+.entry-links {
+  margin: 12px 0 0;
+  font-family: var(--sans);
+  font-size: 12.5px;
+}
+.entry-links a {
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-2);
+  padding-bottom: 1px;
+}
+.entry-links a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+.entry-links .sep { padding: 0 .7em; color: var(--ink-3); opacity: .55; }
+
+/* ---------- reading pages ---------- */
+
+.backlink {
+  display: inline-block;
+  margin-bottom: 40px;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-decoration: none;
+}
+.backlink:hover { color: var(--ink); }
+
+.translation-note {
+  margin: 0 0 44px;
+  padding: 16px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.translation-note strong {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.translation-note a { color: var(--ink); text-underline-offset: 2px; }
+
+.piece { padding-top: 72px; }
+.piece header { margin-bottom: 44px; }
+.piece h1 {
+  margin: 0;
+  font-weight: 300;
+  font-size: clamp(2rem, 5.6vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.022em;
+}
+.piece .title-he {
+  display: block;
+  direction: rtl;
+  unicode-bidi: isolate;
+  margin-top: 12px;
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: var(--ink-3);
+}
+.piece .byline {
+  margin: 20px 0 0;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  letter-spacing: .04em;
+  color: var(--ink-3);
+}
+
+.prose p { margin: 0 0 1.35em; }
+.prose p:last-child { margin-bottom: 0; }
+.prose h2 {
+  margin: 2.4em 0 .7em;
+  font-weight: 400;
+  font-size: 1.32rem;
+  letter-spacing: -0.01em;
+}
+.prose em { font-style: italic; }
+.prose .drop::first-letter { /* reserved */ }
+
+/* verse */
+.verse {
+  margin: 0 0 2.2em;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  white-space: pre-line;
+}
+.verse:last-child { margin-bottom: 0; }
+
+.epigraph {
+  margin: 0 0 2.2em;
+  padding-left: 1.1em;
+  border-left: 1px solid var(--line-2);
+  font-style: italic;
+  color: var(--ink-2);
+  font-size: 1.02rem;
+}
+
+.notes {
+  margin: 64px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+.notes h2 {
+  margin: 0 0 10px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.notes p { margin: 0 0 .8em; }
+.notes .he { direction: rtl; unicode-bidi: isolate; }
+
+/* ---------- footer ---------- */
+
+.foot {
+  margin-top: 88px;
+  padding: 28px 0 80px;
+  border-top: 1px solid var(--line);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+.foot p { margin: 0 0 .7em; max-width: 34rem; }
+.foot a { color: var(--ink-2); }
+.foot a:hover { color: var(--ink); }
+
+@media (max-width: 640px) {
+  body { font-size: 18px; padding: 0 20px; }
+  .masthead { padding-top: 56px; }
+  .section { padding-top: 52px; }
+  .piece { padding-top: 48px; }
+}
