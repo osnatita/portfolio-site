@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title data-title-it="Ita Skoblinski — Giornalista e scrittrice" data-title-en="Ita Skoblinski — Journalist &amp; writer">Ita Skoblinski — Giornalista e scrittrice</title>
+<meta name="description" content="Ita Skoblinski scrive di cibo, cultura e politica. Giornalista e scrittrice, Montréal." />
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- ============================================================
+     LOCALISED LANDING PAGE — reusable template.
+     Self-contained: no external files except the webfont.
+
+     To make the next one, copy this folder and rename it, then
+     change only these things:
+       1. <title> and <meta name="description">
+       2. the three <article class="work"> blocks
+       3. nothing else — the language switch works on its own
+
+     How the two languages work: every piece of copy exists twice,
+     once in [data-lang="it"] and once in [data-lang="en"]. The
+     switch at the top hides one set and shows the other, and
+     remembers the choice. Default is Italian; to default to
+     English instead, change DEFAULT_LANG at the bottom.
+     ============================================================ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..600;1,6..72,200..600&display=swap');
+
+:root{
+  --paper:#fff; --ink:#111; --ink-2:#454545; --ink-3:#6e6e6e;
+  --line:#e4e4e4; --line-2:#c4c4c4;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#0d0d0d; --ink:#ededed; --ink-2:#b4b4b4; --ink-3:#8d8d8d; --line:#292929; --line-2:#3d3d3d; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; padding:0 24px;
+  background:var(--paper); color:var(--ink);
+  font-family:var(--serif); font-size:19px; line-height:1.6;
+  font-optical-sizing:auto; -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+::selection{background:var(--ink); color:var(--paper)}
+:focus-visible{outline:2px solid var(--ink); outline-offset:3px}
+[hidden]{display:none !important}
+
+.shell{max-width:40rem; margin:0 auto; padding-bottom:96px}
+
+/* ---- language switch ---- */
+.langbar{display:flex; justify-content:flex-end; gap:0; padding:28px 0 0}
+.langbar button{
+  font-family:var(--sans); font-size:11px; font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase;
+  background:none; color:var(--ink-3); cursor:pointer;
+  border:1px solid var(--line-2); padding:7px 11px; margin-left:-1px;
+}
+.langbar button[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.langbar button:hover{color:var(--ink)}
+.langbar button[aria-pressed="true"]:hover{color:var(--paper)}
+
+/* ---- header ---- */
+header{padding:52px 0 0; border-bottom:1px solid var(--line); padding-bottom:36px}
+h1{margin:0; font-weight:300; font-size:clamp(2.6rem,9vw,4rem); line-height:1.02; letter-spacing:-.025em}
+.role{
+  margin:14px 0 0; font-family:var(--sans); font-size:12px;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3);
+}
+
+/* ---- contact ---- */
+.contact{margin:26px 0 0; font-family:var(--sans); font-size:13.5px; line-height:2.1}
+.contact a{
+  color:var(--ink-2); text-decoration:none;
+  border-bottom:1px solid var(--line-2); padding-bottom:1px;
+}
+.contact a:hover{color:var(--ink); border-bottom-color:var(--ink)}
+.contact .sep{padding:0 .85em; color:var(--ink-3); opacity:.5}
+
+/* ---- bio ---- */
+.bio{padding:44px 0 0}
+.bio p{margin:0 0 1.2em; font-size:1.16rem; line-height:1.56}
+.bio p:first-child{font-size:1.34rem; line-height:1.4; letter-spacing:-.012em}
+.bio p:last-child{margin-bottom:0}
+
+/* ---- selected work ---- */
+.works{padding:56px 0 0}
+.works > h2{
+  margin:0 0 4px; font-family:var(--sans); font-size:11.5px; font-weight:600;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--ink);
+}
+.work{padding:24px 0; border-top:1px solid var(--line)}
+.work:first-of-type{border-top:1px solid var(--line-2)}
+.work h3{margin:0; font-weight:400; font-size:1.34rem; line-height:1.24; letter-spacing:-.012em}
+.work h3 a{text-decoration:none}
+.work:hover h3 a{text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px}
+.work .meta{margin:9px 0 0; font-family:var(--sans); font-size:12.5px; color:var(--ink-3)}
+.work .meta .sep{padding:0 .5em; opacity:.55}
+.work .blurb{margin:11px 0 0; font-size:1.02rem; line-height:1.56; color:var(--ink-2)}
+
+.more{
+  margin:34px 0 0; font-family:var(--sans); font-size:12.5px;
+}
+.more a{color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--line-2); padding-bottom:1px}
+.more a:hover{color:var(--ink); border-bottom-color:var(--ink)}
+
+@media (max-width:640px){
+  body{font-size:18px; padding:0 20px}
+  header{padding-top:34px}
+  .contact{line-height:2.3}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <div class="langbar" role="group" aria-label="Lingua / Language">
+    <button type="button" data-set-lang="it" aria-pressed="true">Italiano</button>
+    <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <h1>Ita Skoblinski</h1>
+    <p class="role">
+      <span data-lang="it">Giornalista e scrittrice</span>
+      <span data-lang="en" hidden>Journalist &amp; writer</span>
+    </p>
+
+    <div class="contact">
+      <a href="mailto:sosnat@gmail.com">sosnat@gmail.com</a><br />
+      <a href="https://wa.me/15146608322" target="_blank" rel="noopener">
+        <span data-lang="it">Scrivimi su WhatsApp</span><span data-lang="en" hidden>Message me on WhatsApp</span>
+      </a><span class="sep">·</span><a href="https://instagram.com/osnatita" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </header>
+
+  <!-- ============ BIO ============ -->
+  <section class="bio">
+    <div data-lang="it">
+      <p>Scrivo di ciò che accade dove il cibo, la cultura e la politica si incontrano.</p>
+      <p>Il cibo è ciò che siamo. È il nostro consumo, la nostra cerimonia, il modo in cui ci organizziamo come società. Ed è anche piacere, gioia, e una delle poche cose che riesce ancora a far sedere le persone alla stessa tavola. Parlare di un'estremità di questo spettro senza l'altra significa abbandonare il pasto a metà.</p>
+      <p>Guardare il mondo da una prospettiva culinaria ci offre uno sguardo immediato e primordiale su chi siamo.</p>
+    </div>
+    <div data-lang="en" hidden>
+      <p>I write about where food, culture and politics meet.</p>
+      <p>Food is what we are. It is our consumption, our ceremony, the way we organise ourselves as a society. It is also pleasure, and joy, and one of the few things that still brings people to the same table. To talk about one end of that spectrum without the other is to abandon the meal halfway through.</p>
+      <p>Looking at the world from a culinary perspective gives us an immediate, primal glance at who we are.</p>
+    </div>
+  </section>
+
+  <!-- ============ SELECTED WORK ============ -->
+  <section class="works">
+    <h2>
+      <span data-lang="it">Una selezione</span>
+      <span data-lang="en" hidden>Selected pieces</span>
+    </h2>
+
+    <article class="work">
+      <h3><a href="/text/hole-in-the-bagel.html">
+        <span data-lang="it">Un buco nel bagel</span>
+        <span data-lang="en" hidden>A Hole in the Bagel</span>
+      </a></h3>
+      <p class="meta">Montréal<span class="sep">·</span>2016</p>
+      <p class="blurb">
+        <span data-lang="it">La storia di Montréal ebraica raccontata attraverso i suoi luoghi del cibo: due panetterie rivali che si contendono il bagel della città, una steakhouse vinta a poker nel 1938, un marchio di sottaceti fondato da una donna il cui marito era convinto che nessuno li avrebbe comprati. La tappa più commovente del percorso è un vicolo in cui non è rimasto assolutamente nulla.</span>
+        <span data-lang="en" hidden>The history of Jewish Montreal told through its food institutions: two rival bakeries competing over the city's bagel, a steakhouse won in a poker game in 1938, a pickle brand founded by a woman whose husband was sure nobody would buy them. The most moving stop on the route is a back alley with nothing left in it at all.</span>
+      </p>
+    </article>
+
+    <article class="work">
+      <h3><a href="https://www.haaretz.com/2009-05-11/ty-article/his-flock-in-the-holy-land/0000017f-ee45-d4a6-af7f-fec74b990000" target="_blank" rel="noopener">
+        <span data-lang="it">Il suo gregge in Terra Santa</span>
+        <span data-lang="en" hidden>His Flock in the Holy Land</span>
+      </a></h3>
+      <p class="meta">Haaretz<span class="sep">·</span>2009<span class="sep">·</span><span data-lang="it">con Yuval Ben-Ami</span><span data-lang="en" hidden>with Yuval Ben-Ami</span></p>
+      <p class="blurb">
+        <span data-lang="it">I cattolici in Israele erano poche migliaia, finché l'arrivo dei lavoratori migranti non ne ha aggiunti oltre ventimila. Il reportage si apre a Giaffa, nell'ora in cui la messa in arabo lascia i banchi a quella in inglese e le badanti filippine prendono i posti appena liberati.</span>
+        <span data-lang="en" hidden>Israel's Catholic congregation numbered a few thousand until migrant workers swelled it by more than twenty thousand. The piece opens in Jaffa, in the hour when the Arabic mass hands the pews over to the English one and Filipina caregivers slip into the emptied seats.</span>
+      </p>
+    </article>
+
+    <article class="work">
+      <h3><a href="/text/arctic-circle.html">
+        <span data-lang="it">Film dell'orrore e dipendenza dalla benzina</span>
+        <span data-lang="en" hidden>Horror Films and an Addiction to Gasoline</span>
+      </a></h3>
+      <p class="meta">Haaretz<span class="sep">·</span>2018<span class="sep">·</span><span data-lang="it">Yellowknife, Canada</span><span data-lang="en" hidden>Yellowknife, Canada</span></p>
+      <p class="blurb">
+        <span data-lang="it">Una settimana al 62° parallelo. Il conteggio, in un museo locale, delle lingue che restano al Canada; una tavola calda che serve bisonte e bue muschiato; e un uomo attaccato online per aver ucciso una balena — cioè per aver fatto ciò con cui la sua famiglia si nutre da sempre per un anno intero. Su chi decide che cosa sia legittimo mangiare.</span>
+        <span data-lang="en" hidden>A week at latitude 62. A local museum's count of the languages Canada has left; a diner serving bison and muskox; and a man attacked online for killing a whale — that is, for doing the thing that has always fed his family for a year. On who gets to decide what it is legitimate to eat.</span>
+      </p>
+    </article>
+
+    <p class="more">
+      <a href="/text/">
+        <span data-lang="it">Tutti gli articoli, i saggi e le poesie →</span>
+        <span data-lang="en" hidden>All articles, essays and poetry →</span>
+      </a>
+    </p>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var DEFAULT_LANG = 'it';           // change to 'en' to open in English
+  var KEY = 'ita:lang';
+
+  function apply(lang) {
+    document.documentElement.lang = lang;
+    var t = document.querySelector('title[data-title-' + lang + ']');
+    if (t) document.title = t.getAttribute('data-title-' + lang);
+    document.querySelectorAll('[data-lang]').forEach(function (el) {
+      el.hidden = el.getAttribute('data-lang') !== lang;
+    });
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang));
+    });
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+  }
+
+  var saved;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  apply(saved === 'en' || saved === 'it' ? saved : DEFAULT_LANG);
+
+  document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+
+</body>
+</html>

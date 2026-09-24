@@ -11,6 +11,13 @@
   to = "/fr/404.html"
   status = 404
 
+# Localised landing pages live at a capitalised path (e.g. /TerraMadre2026).
+# Netlify matches paths case-sensitively, so catch the lowercase spelling too.
+[[redirects]]
+  from = "/terramadre2026"
+  to = "/TerraMadre2026/"
+  status = 301
+
 # The design portfolio answers to /design as well as to the root, so the two
 # halves of the site can be named symmetrically (/design and /text). The root
 # stays canonical; nothing moved.
